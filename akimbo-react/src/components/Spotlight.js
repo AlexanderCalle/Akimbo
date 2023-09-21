@@ -42,7 +42,7 @@ const theme = {
           <button
             onClick={handlePrev}
             disabled={!loop && firstIndex}
-            className="!absolute z-20 top-2/4 left-4 -translate-y-2/4 rounded select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[48px] h-10 max-h-[48px] text-akimbo-light bg-akimbo-dark-900 grid place-items-center"
+            className="!absolute z-20 top-2/4 left-4 -translate-y-2/4 select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[48px] h-10 max-h-[48px] text-akimbo-light bg-akimbo-dark-900 grid place-items-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ const theme = {
         <button
           onClick={handleNext}
           disabled={!loop && lastIndex}
-          className="!absolute z-20 top-2/4 right-4 -translate-y-2/4 rounded select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[48px] h-10 max-h-[48px] text-akimbo-light bg-akimbo-dark-900 grid place-items-center"
+          className="!absolute z-20 top-2/4 right-4 -translate-y-2/4 select-none transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[48px] h-10 max-h-[48px] text-akimbo-light bg-akimbo-dark-900 grid place-items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -133,14 +133,14 @@ const Spotlight = () => {
 
   return (
     <ThemeProvider value={theme}>
-      <Carousel className="py-8">
+      <Carousel className="py-8 w-10/12 m-auto">
         {pageDescriptions.map((item) => (
           <section className="relative w-full h-full flex flex-col-reverse lg:flex-row items-center justify-center px-20">
             <div className="flex flex-col p-5 w-4/5 items-end gap-3 -mt-20 lg:-mr-20 z-10 bg-akimbo-light bg-opacity-80 backdrop-blur-sm">
               <h2 className="text-xl font-semibold">{item.PageName}</h2>
               <p className="text-end">{item.Description}</p>
               <Link
-                className="px-3 py-2 bg-akimbo-dark-900 text-akimbo-light rounded"
+                className="px-3 py-2 bg-akimbo-dark-900 text-akimbo-light"
                 to={item.LinkToPage}
               >
                 Go to page

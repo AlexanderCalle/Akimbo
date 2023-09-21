@@ -13,13 +13,13 @@ const Navbar = () => {
           <Link className="hover:underline" to="/">
             HOME
           </Link>
-          <Link className="hover:underline" to="/">
+          <Link className="hover:underline" to="/articles/articles">
             ARTICLES & ESSAYS
           </Link>
-          <Link className="hover:underline" to="/">
+          <Link className="hover:underline" to="/articles/reviews">
             REVIEWS
           </Link>
-          <Link className="hover:underline" to="/">
+          <Link className="hover:underline" to="/articles/featured">
             FEATURED // FURTHER READING
           </Link>
           <Link className="hover:underline" to="/">
@@ -30,7 +30,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-3">
-          <button className="flex gap-2 items-center px-3 py-2 bg-akimbo-dark-900 text-akimbo-light rounded-md">
+          <button className="flex gap-2 items-center px-3 py-2 bg-akimbo-dark-900 text-akimbo-light">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
