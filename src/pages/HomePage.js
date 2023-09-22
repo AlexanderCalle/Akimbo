@@ -8,13 +8,13 @@ const HomePage = () => {
     <MainLayout>
       <Spotlight />
       <RecentPosts />
-      <div className="w-10/12 m-auto flex gap-6 my-4">
-        <section className="w-3/6">
+      <div className="w-10/12 m-auto flex flex-col lg:flex-row items-center gap-6 my-4">
+        <section className="w-full lg:w-3/6 flex flex-col items-center lg:items-start">
           <h2 className="text-2xl font-medium underline mb-4">Podcast</h2>
           <h3 className="mb-2 text-xl font-medium">
             What is our podcast about
           </h3>
-          <p>
+          <p className="text-center lg:text-start">
             Donec dictum tristique porta. Etiam convallis lorem lobortis nulla
             molestie, nec tincidunt ex ullamcorper. Quisque ultrices lobortis
             elit sed euismod. Duis in ultrices dolor, ac rhoncus odio.
@@ -27,17 +27,17 @@ const HomePage = () => {
             dignissim ipsum.
           </p>
         </section>
-        <section className="w-3/6">
+        <section className="w-full lg:w-3/6 flex flex-col items-center lg:items-start">
           <h2 className="text-2xl font-medium underline mb-4">Over Akimbo</h2>
           <h3 className="mb-2 text-xl font-medium">What is our idea</h3>
-          <p>
+          <p className="text-center lg:text-start">
             Donec dictum tristique porta. Etiam convallis lorem lobortis nulla
             molestie, nec tincidunt ex ullamcorper. Quisque ultrices lobortis
             elit sed euismod. Duis in ultrices dolor, ac rhoncus odio.
             Suspendisse tempor sollicitudin dui sed lacinia.
           </p>
           <h3 className="my-2 text-xl font-medium">What can you find here</h3>
-          <p>
+          <p className="text-center lg:text-start">
             Donec dictum tristique porta. Etiam convallis lorem lobortis nulla
             molestie, nec tincidunt ex ullamcorper. Quisque ultrices lobortis
             elit sed euismod. Duis in ultrices dolor, ac rhoncus odio.

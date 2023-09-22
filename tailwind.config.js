@@ -15,6 +15,12 @@ module.exports = {
       "akimbo-dark-900": "#1E1E1E",
       "akimbo-dark-500": "#4A4A4A",
       "akimbo-light": "#F2F2F2",
+      "tag-red": "#C02A2A",
+      "tag-orange": "#C3700F",
+      "tag-yellow": "#DAC827",
+      "tag-blue": "#5468D2",
+      "tag-green": "#16AC1C",
+      "tag-purple": "#B81EBB",
     },
     fontFamily: {
       sans: ["Oswald", ...defaultTheme.fontFamily.sans],

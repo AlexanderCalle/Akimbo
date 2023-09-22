@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Carousel, ThemeProvider } from "@material-tailwind/react";
 import ArticlesEssaysImage from "../assets/ArtlicesAndEssays.jpg";
@@ -8,21 +8,21 @@ const pageDescriptions = [
     PageName: "Articles & Essays",
     Description:
       "On this page you can find all blog posts about articles we have written. \nThis can contain all kinds of topics.",
-    LinkToPage: "/articles",
+    LinkToPage: "/articles/articles",
     ImageUrl: ArticlesEssaysImage,
   },
   {
     PageName: "Reviews",
     Description:
       "On this page we post reviews of musea, books and so on.\nWe want to share our expercience of everything we do.",
-    LinkToPage: "/reviews",
+    LinkToPage: "/articles/reviews",
     ImageUrl: ArticlesEssaysImage,
   },
   {
     PageName: "Featured // Further reading",
     Description:
       "On this page you can find posts about what we are reading, ...\nIt is to give you some great recommendations.",
-    LinkToPage: "/featured",
+    LinkToPage: "/articles/featured",
     ImageUrl: ArticlesEssaysImage,
   },
   {
@@ -129,16 +129,14 @@ const theme = {
 };
 
 const Spotlight = () => {
-  const [itemInSpotlight, setItemInSpotlight] = useState(0);
-
   return (
     <ThemeProvider value={theme}>
       <Carousel className="py-8 w-10/12 m-auto">
         {pageDescriptions.map((item) => (
           <section className="relative w-full h-full flex flex-col-reverse lg:flex-row items-center justify-center px-20">
-            <div className="flex flex-col p-5 w-4/5 items-end gap-3 -mt-20 lg:-mr-20 z-10 bg-akimbo-light bg-opacity-80 backdrop-blur-sm">
+            <div className="flex flex-col p-5 w-4/5 items-center lg:items-end gap-3">
               <h2 className="text-xl font-semibold">{item.PageName}</h2>
-              <p className="text-end">{item.Description}</p>
+              <p className="text-center lg:text-end">{item.Description}</p>
               <Link
                 className="px-3 py-2 bg-akimbo-dark-900 text-akimbo-light"
                 to={item.LinkToPage}
@@ -149,7 +147,7 @@ const Spotlight = () => {
             <img
               className="w-full h-full lg:w-6/10 lg: object-cover"
               src={item.ImageUrl}
-              alt="Image of page"
+              alt="page"
             />
           </section>
         ))}
