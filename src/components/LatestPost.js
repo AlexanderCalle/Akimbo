@@ -7,8 +7,8 @@ const LatestPost = () => {
   const params = useParams();
 
   return (
-    <div className="w-10/12 mx-auto flex gap-6 ">
-      <div className="absolute my-48 mx-5 lg:mx-24 w-4/6 lg:w-2/6 h-auto p-5 flex flex-col gap-3 items-end bg-akimbo-light opacity-90 backdrop-blur-lg">
+    <div className="w-full md:w-10/12 mx-auto flex gap-6 ">
+      <div className="absolute z-10 my-48 mx-5 md:mx-24 w-4/6 md:w-3/6 lg:w-2/6 h-auto p-5 flex flex-col gap-3 items-end bg-akimbo-light opacity-90 backdrop-blur-lg">
         <div className="flex gap-2">
           <Tag TagName={"Architecture"} Color={"purple"} />
           <h3 className="text-lg font-medium">Latest: Title</h3>
@@ -27,6 +27,7 @@ const LatestPost = () => {
       </div>
       <img
         src={ArticlesEssaysImage}
+        alt="latest post"
         className="w-full h-[34rem] object-cover"
       />
     </div>

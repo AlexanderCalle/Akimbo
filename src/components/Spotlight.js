@@ -131,10 +131,10 @@ const theme = {
 const Spotlight = () => {
   return (
     <ThemeProvider value={theme}>
-      <Carousel className="py-8 w-10/12 m-auto">
+      <Carousel className="py-8 w-full sm:w-10/12 m-auto">
         {pageDescriptions.map((item) => (
-          <section className="relative w-full h-full flex flex-col-reverse lg:flex-row items-center justify-center px-20">
-            <div className="flex flex-col p-5 w-4/5 items-center lg:items-end gap-3">
+          <section className="relative w-full h-full flex flex-col-reverse 2xl:flex-row items-center justify-center px-20">
+            <div className="flex flex-col p-5 w-full sm:w-4/5 items-center lg:items-end gap-3">
               <h2 className="text-xl font-semibold">{item.PageName}</h2>
               <p className="text-center lg:text-end">{item.Description}</p>
               <Link
@@ -145,7 +145,7 @@ const Spotlight = () => {
               </Link>
             </div>
             <img
-              className="w-full h-full lg:w-6/10 lg: object-cover"
+              className="w-full h-full 2xl:w-6/10 object-cover"
               src={item.ImageUrl}
               alt="page"
             />

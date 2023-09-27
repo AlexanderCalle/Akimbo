@@ -3,7 +3,7 @@ import Tag from "./Tag";
 
 const RecentPosts = () => {
   return (
-    <div className="w-10/12 m-auto flex flex-col gap-2 my-4">
+    <div className="w-full md:w-10/12 m-auto flex flex-col gap-2 my-4">
       <h2 className="text-2xl self-center lg:self-start font-medium underline">
         Recent Posts
       </h2>

@@ -6,16 +6,16 @@ import Tag from "../components/Tag";
 const ArticlePage = () => {
   return (
     <MainLayout>
-      <div className="w-10/12 mx-auto flex flex-col items-center gap-6">
+      <div className="w-full lg:w-10/12 mx-auto flex flex-col items-center gap-6">
         <img
           src={ArticlesEssaysImage}
           alt="article"
           className="w-full h-96 object-cover"
         />
-        <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 md:ml-16 -mt-12">
+        <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 lg:ml-16 -mt-12">
           Title
         </h2>
-        <div className="w-4/6 -mt-10 flex flex-col gap-4">
+        <div className="w-5/6 md:w-4/6 -mt-5 md:-mt-10 flex flex-col gap-4">
           <Tag TagName={"Architecture"} Color={"Orange"} />
           <p className="text-sm font-light text-akimbo-dark-500">
             Aug 28, 2023, created by An-katrien Callebaut

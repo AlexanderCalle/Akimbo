@@ -90,13 +90,13 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="my-8 uppercase hover:underline">
-              <Link to="/">Articles & essays</Link>
+              <Link to="/articles/articles">Articles & essays</Link>
             </li>
             <li className="my-8 uppercase hover:underline">
-              <Link to="/">Reviews</Link>
+              <Link to="/articles/reviews">Reviews</Link>
             </li>
             <li className="my-8 uppercase hover:underline">
-              <Link to="/">Featured // Further reading</Link>
+              <Link to="/articles/featured">Featured // Further reading</Link>
             </li>
             <li className="my-8 uppercase hover:underline">
               <Link to="/">Podcast</Link>

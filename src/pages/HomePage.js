@@ -8,7 +8,7 @@ const HomePage = () => {
     <MainLayout>
       <Spotlight />
       <RecentPosts />
-      <div className="w-10/12 m-auto flex flex-col lg:flex-row items-center gap-6 my-4">
+      <div className="w-full md:w-10/12 m-auto flex flex-col lg:flex-row items-center gap-6 my-4">
         <section className="w-full lg:w-3/6 flex flex-col items-center lg:items-start">
           <h2 className="text-2xl font-medium underline mb-4">Podcast</h2>
           <h3 className="mb-2 text-xl font-medium">

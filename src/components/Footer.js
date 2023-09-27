@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="flex justify-between bg-akimbo-dark-900 text-akimbo-light p-5">
+    <div className="flex flex-col md:flex-row gap-4 justify-between bg-akimbo-dark-900 text-akimbo-light p-5">
       <div className="flex flex-col gap-2">
         <h3 className="font-bold">CONTACT</h3>
-        <div className="grid grid-cols-3">
+        <div className="grid md:grid-cols-3">
           <h5 className="w-auto">EMAIL:</h5>
           <a className="col-span-2" href="mailto:callebautak@hotmail.com">
             callebautak@hotmail.com
@@ -30,7 +30,7 @@ const Footer = () => {
           <p>INSTAGRAM</p>
         </button>
       </div>
-      <div className=" flex flex-col items-end lg:items-center place-content-center">
+      <div className=" flex flex-col items-start md:items-end lg:items-center place-content-center">
         <h2 className="font-bold text-2xl">AKIMBO</h2>
         <p>An ABC of Art, Books & Culture</p>
       </div>
