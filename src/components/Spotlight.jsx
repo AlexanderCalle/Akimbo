@@ -112,7 +112,7 @@ const theme = {
         carousel: {
           position: "relative",
           width: "w-full",
-          height: "h-max-[800px] lg:h-[600px]",
+          height: "h-max-[600px] lg:h-[500px]",
           overflowX: "overflow-x-hidden",
           display: "flex",
         },
@@ -131,7 +131,7 @@ const theme = {
 const Spotlight = () => {
   return (
     <ThemeProvider value={theme}>
-      <Carousel className="py-8 w-full sm:w-10/12 m-auto">
+      <Carousel className="py-8 w-full sm:w-10/12 m-auto ">
         {pageDescriptions.map((item) => (
           <section className="relative w-full h-full flex flex-col-reverse 2xl:flex-row items-center justify-center px-20">
             <div className="flex flex-col p-5 w-full sm:w-4/5 items-center lg:items-end gap-3">
