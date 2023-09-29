@@ -1,5 +1,4 @@
 import React from "react";
-import Tag from "./Tag";
 
 const RecentPosts = () => {
   return (
@@ -11,7 +10,11 @@ const RecentPosts = () => {
         <section className="w-full h-[34rem] lg:h-80 flex flex-col-reverse lg:flex-row gap-4 items-center justify-center">
           <article className="w-full lg:w-4/6 h-2/5 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-end gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm">
             <div className="flex gap-2">
-              <Tag TagName={"Architecture"} Color={"#B81EBB"} />
+              <p
+                className={`bg-[#B81EBB]  text-[#B81EBB] w-fit px-3 py-1 text-sm bg-opacity-10 `}
+              >
+                Books
+              </p>
               <h3 className="text-lg font-medium">Article title</h3>
             </div>
             <p className=" w-full overflow-hidden text-ellipsis text-center lg:text-end">
@@ -38,7 +41,11 @@ const RecentPosts = () => {
         <section className="w-full h-[34rem] lg:h-80 flex flex-col-reverse lg:flex-row-reverse gap-4 items-center justify-center">
           <article className="w-full lg:w-4/6 h-2/5 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-end gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm">
             <div className="flex gap-2">
-              <Tag TagName={"Art"} Color={"blue"} />
+              <p
+                className={`bg-[#B81EBB]  text-[#B81EBB] w-fit px-3 py-1 text-sm bg-opacity-10 `}
+              >
+                Books
+              </p>
               <h3 className="text-lg font-medium">Article title</h3>
             </div>
             <p className=" w-full overflow-hidden text-ellipsis text-center lg:text-end">
@@ -65,7 +72,11 @@ const RecentPosts = () => {
         <section className="w-full h-[34rem] lg:h-80 flex flex-col-reverse lg:flex-row gap-4 items-center justify-center">
           <article className="w-full lg:w-4/6 h-2/5 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-end gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm">
             <div className="flex gap-2">
-              <Tag TagName={"Books"} Color={"green"} />
+              <p
+                className={`bg-[#B81EBB]  text-[#B81EBB] w-fit px-3 py-1 text-sm bg-opacity-10 `}
+              >
+                Books
+              </p>
               <h3 className="text-lg font-medium">Article title</h3>
             </div>
             <p className=" w-full overflow-hidden text-ellipsis text-center lg:text-end">

@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import ArticlesEssaysImage from "../assets/ArtlicesAndEssays.jpg";
-import Tag from "./Tag";
 
 const LatestPost = () => {
   const params = useParams();
@@ -10,7 +9,11 @@ const LatestPost = () => {
     <div className="w-full md:w-10/12 mx-auto flex gap-6 ">
       <div className="absolute z-10 my-48 mx-5 md:mx-24 w-4/6 md:w-3/6 lg:w-2/6 h-auto p-5 flex flex-col gap-3 items-end bg-akimbo-light opacity-90 backdrop-blur-lg">
         <div className="flex gap-2">
-          <Tag TagName={"Architecture"} Color={"purple"} />
+          <p
+            className={`bg-tag-blue  text-tag-blue w-fit px-3 py-1 text-sm bg-opacity-10 `}
+          >
+            Art
+          </p>
           <h3 className="text-lg font-medium">Latest: Title</h3>
         </div>
         <p className="text-end">

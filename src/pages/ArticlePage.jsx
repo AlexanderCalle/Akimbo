@@ -1,7 +1,6 @@
 import React from "react";
 import MainLayout from "../layouts/MainLayout";
 import ArticlesEssaysImage from "../assets/ArtlicesAndEssays.jpg";
-import Tag from "../components/Tag";
 
 const ArticlePage = () => {
   return (
@@ -16,7 +15,11 @@ const ArticlePage = () => {
           Title
         </h2>
         <div className="w-5/6 md:w-4/6 -mt-5 md:-mt-10 flex flex-col gap-4">
-          <Tag TagName={"Architecture"} Color={"Orange"} />
+          <p
+            className={`bg-tag-red  text-tag-red w-fit px-3 py-1 text-sm bg-opacity-10 `}
+          >
+            Architecture
+          </p>
           <p className="text-sm font-light text-akimbo-dark-500">
             Aug 28, 2023, created by An-katrien Callebaut
           </p>
