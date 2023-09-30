@@ -24,7 +24,7 @@ const GetAuthor = async (userRef) => {
   const userSnap = await getDoc(userRef);
   const userData = userSnap.data();
 
-  return `${userData.firstname} ${userData.lastname}`
+  return userData;
 }
 
 export {GetUser, GetAuthor}

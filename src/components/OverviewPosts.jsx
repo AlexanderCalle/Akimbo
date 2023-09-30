@@ -5,23 +5,19 @@ const OverviewPosts = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    GetAllArticles().then((result) => {
+    GetAllArticles().then(async (result) => {
       setArticles(result);
       console.log(result);
     });
   }, []);
 
-  useEffect(() => {
-    console.log(articles);
-  }, [articles]);
-
   return (
     <>
-      {articles.map((article) => (
-        <section>
+      {articles.map((article, index) => (
+        <section key={index}>
           <h3>{article.title}</h3>
           <p>{article.desc}</p>
-          <p>{article.author.firstname}</p>
+          <p>{article.author}</p>
         </section>
       ))}
     </>
