@@ -1,11 +1,14 @@
 export class Article {
     title;
     content;
+    desc;
     author;
     category;
     tags;
     created_date;
     image;
+    image_title;
+    image_author;
 
     constructor(title, content, author, category, tags, image) {
         this.title = title;

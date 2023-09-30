@@ -1,12 +1,12 @@
 import React from "react";
-import { logout } from "../services/Authentication";
+import DashboardLayout from "../layouts/DashboardLayout";
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
-    <div>
-      Dashboard
-      <button onClick={logout}>sign out</button>
-    </div>
+    <DashboardLayout>
+      <Outlet />
+    </DashboardLayout>
   );
 };
 

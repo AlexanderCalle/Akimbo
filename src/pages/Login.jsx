@@ -17,7 +17,7 @@ const Login = () => {
     //   );
     // }
     // if (error) return <p>Something went wrong, refresh and try again</p>;
-    if (user) navigate("/dashboard");
+    if (user) navigate("/dashboard/overview");
   }, [user, loading, error, navigate]);
 
   return (
