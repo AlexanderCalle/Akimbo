@@ -4,7 +4,6 @@ import OverviewPosts from "../components/OverviewPosts";
 const Overview = () => {
   return (
     <>
-      <h2>Overview</h2>
       <Suspense fallback={<Loading />}>
         <OverviewPosts />
       </Suspense>
@@ -13,7 +12,7 @@ const Overview = () => {
 };
 
 function Loading() {
-  return <h2>🌀 Loading...</h2>;
+  return <h2>Loading...</h2>;
 }
 
 export default Overview;

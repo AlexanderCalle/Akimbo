@@ -24,7 +24,13 @@ const Login = () => {
     <div className="w-full h-screen flex flex-col items-center justify-center">
       <div className="bg-[#fff] p-8 flex flex-col items-center gap-4">
         <h2 className="text-2xl">Login</h2>
-        <div className="flex flex-col gap-3">
+        <form
+          className="flex flex-col gap-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            logIn(email, password);
+          }}
+        >
           <input
             className="w-60 border border-solid border-akimbo-dark-900 p-2"
             type="text"
@@ -43,14 +49,14 @@ const Login = () => {
           />
           <button
             className="bg-akimbo-dark-900 text-akimbo-light px-3 py-1"
-            onClick={() => logIn(email, password)}
+            type="submit"
           >
             Login
           </button>
           <Link className="hover:underline text-akimbo-dark-500 font-thin">
             Forgot password?
           </Link>
-        </div>
+        </form>
       </div>
     </div>
   );

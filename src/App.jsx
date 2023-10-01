@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Overview from "./pages/Overview";
+import Writing from "./pages/Writing";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           element={<PrivateRoute Component={Dashboard} />}
         >
           <Route path="overview" Component={Overview} />
+          <Route path="writing" Component={Writing} />
         </Route>
       </Routes>
     </Router>

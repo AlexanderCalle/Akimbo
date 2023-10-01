@@ -1,7 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./Firebase";
-import { GetAuthor } from "../services/Users";
-
 
 const GetAllArticles = async () => {
     const data = [];

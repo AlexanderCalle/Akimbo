@@ -9,7 +9,7 @@ const AllPosts = () => {
         </h2>
         <select
           id="countries"
-          class="bg-akimbo-dark-900 text-akimbo-light px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+          className="bg-akimbo-dark-900 text-akimbo-light px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
         >
           <option selected>Filter by tags</option>
           <option value="Architecture">Architecture</option>
