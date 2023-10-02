@@ -4,7 +4,7 @@ import { GetAllTags } from "../services/Tags";
 import { GetAllCategories } from "../services/Categories";
 import Select from "react-select";
 import { PostArticle } from "../services/Articles";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Writing = () => {
   const [title, setTitle] = useState("");

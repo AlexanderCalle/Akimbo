@@ -1,4 +1,4 @@
-import { Timestamp, addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -43,7 +43,15 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
     } catch(err) {
         throw new Error(`Something went wrong uploading file: ${err.message}`)
     }
-
 }
 
-export {GetAllArticles, PostArticle}
+const DeleteArticle = async (articleId) => {
+    try {
+        await deleteDoc(doc(db, "articles", articleId));
+        return "succes"
+    } catch (err) {
+        throw new Error("Something went wrong: " + err.message)
+    }
+}
+
+export {GetAllArticles, PostArticle, DeleteArticle}
