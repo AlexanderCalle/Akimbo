@@ -6,7 +6,7 @@ const Editor = ({ content, setContent, placeholder }) => {
   return (
     <div>
       <ReactQuill
-        className="border border-solid h-max-96"
+        className="border border-solid bg-[#fff] h-max-96"
         theme={"snow"}
         onChange={setContent}
         value={content}

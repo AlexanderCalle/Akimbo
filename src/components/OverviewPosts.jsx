@@ -12,7 +12,7 @@ const OverviewPosts = () => {
   }, []);
 
   return (
-    <div className="grid grid-col-1 md:grid-col-2 lg:grid-cols-3">
+    <div className="grid grid-col-1 md:grid-col-2 lg:grid-cols-3 gap-2">
       {articles.map((article, index) => (
         <section
           key={index}
@@ -70,7 +70,7 @@ const OverviewPosts = () => {
               </svg>
             </div>
           </div>
-          <p>{article.desc}</p>
+          <p>{article.description}</p>
           <p className="font-light">Created by {article.author}</p>
         </section>
       ))}
