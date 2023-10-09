@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Overview from "./pages/Overview";
 import Writing from "./pages/Writing";
+import UpdatePost from "./pages/UpdatePost";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         >
           <Route path="overview" Component={Overview} />
           <Route path="writing" Component={Writing} />
+          <Route path="update/:id" Component={UpdatePost} />
         </Route>
       </Routes>
     </Router>

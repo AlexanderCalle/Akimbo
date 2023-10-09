@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDoc, getDocs } from "firebase/firestore"
 import { db } from "./Firebase"
 
 const GetAllTags = async () => {
@@ -13,4 +13,11 @@ const GetAllTags = async () => {
     return data;
 }
 
-export {GetAllTags}
+const getTag = async (docRef) => {
+    const doc = await getDoc(docRef);
+
+    const tag = {value: docRef, label: doc.data().name, ...doc.data()}
+    return tag;
+}
+
+export {GetAllTags, getTag}

@@ -36,6 +36,7 @@ Editor.modules = {
     ],
     ["link"],
     ["clean"],
+    // ["image"],
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:

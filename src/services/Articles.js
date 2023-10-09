@@ -1,4 +1,4 @@
-import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -14,6 +14,13 @@ const GetAllArticles = async () => {
     })
 
     return data;
+}
+
+const GetArticleWithId = async (articleId) => {
+    const docRef = doc(db, "articles", articleId);
+    const snapshot = await getDoc(docRef);
+
+    return snapshot.data();
 }
 
 const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor}) => {
@@ -45,6 +52,34 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
     }
 }
 
+const UpdateArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, docId}) => {
+    // TODO update article in firebase
+    try {
+        
+        let data = {
+            title,
+            content,
+            description,
+            author,
+            cat,
+            tags,
+            imageTitle,
+            imageAuthor,
+        }
+        if(image != null) {
+            const storageRef = ref(storage, "articlesImages/" + image.name)
+            const snapshot = await uploadBytes(storageRef, image)
+            data = {...data, image: await getDownloadURL(snapshot.ref)}
+        }
+        
+        await updateDoc(doc(db, "articles", docId), data)
+    
+    } catch(err) {
+        console.log(err);
+        throw new Error(`Something went wrong uploading file: ${err.message}`)
+    }
+}
+
 const DeleteArticle = async (articleId) => {
     try {
         await deleteDoc(doc(db, "articles", articleId));
@@ -54,4 +89,4 @@ const DeleteArticle = async (articleId) => {
     }
 }
 
-export {GetAllArticles, PostArticle, DeleteArticle}
+export {GetAllArticles, GetArticleWithId, PostArticle, UpdateArticle, DeleteArticle}

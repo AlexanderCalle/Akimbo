@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { DeleteArticle, GetAllArticles } from "../services/Articles";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const OverviewPosts = () => {
   const [articles, setArticles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [articleToDelete, setArticleToDelete] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     GetAllArticles().then(async (result) => {
@@ -20,6 +24,7 @@ const OverviewPosts = () => {
         );
         setArticles(newArticles);
         setShowModal(false);
+        toast.success("Article deleted");
       })
       .catch((err) => {
         alert(err);
@@ -57,7 +62,11 @@ const OverviewPosts = () => {
                   />
                 </svg>
               </button>
-              <button>
+              <button
+                onClick={() => {
+                  navigate("/dashboard/update/" + article.id);
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -74,8 +83,6 @@ const OverviewPosts = () => {
                 </svg>
               </button>
               <button
-                data-modal-target="defaultModal"
-                data-modal-toggle="defaultModal"
                 onClick={() => {
                   setArticleToDelete(article);
                   setShowModal(true);
