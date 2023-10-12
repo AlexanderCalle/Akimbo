@@ -85,9 +85,6 @@ const UpdatePost = () => {
     );
   }
 
-  // if (tagsDef.length < 1) {
-  //   return <p>Loading...</p>;
-  // } else
   return (
     <div className="w-4/6 mx-auto flex flex-col gap-5">
       <h2 className="text-2xl underline font-semibold">Post article</h2>

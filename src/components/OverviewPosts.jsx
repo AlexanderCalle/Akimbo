@@ -41,7 +41,11 @@ const OverviewPosts = () => {
           <div className="flex justify-between">
             <h3 className="text-2xl font-medium">{article.title}</h3>
             <div className="flex items-center">
-              <button>
+              <button
+                onClick={() => {
+                  navigate(`/dashboard/preview/${article.id}`);
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

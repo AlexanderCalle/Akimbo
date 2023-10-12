@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import Overview from "./pages/Overview";
 import Writing from "./pages/Writing";
 import UpdatePost from "./pages/UpdatePost";
+import { PreviewArticle } from "./pages/PreviewArticle";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           element={<PrivateRoute Component={Dashboard} />}
         >
           <Route path="overview" Component={Overview} />
+          <Route path="preview/:id" Component={PreviewArticle} />
           <Route path="writing" Component={Writing} />
           <Route path="update/:id" Component={UpdatePost} />
         </Route>
