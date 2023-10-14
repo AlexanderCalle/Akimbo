@@ -12,7 +12,6 @@ export const PreviewArticle = () => {
   useEffect(() => {
     GetArticleWithId(params.id).then((result) => {
       setArticle(result);
-      console.log(result.created_date);
       const setDef = async (tagsSel) => {
         await tagsSel.forEach(async (tag) => {
           const tagResult = await getTag(tag);
@@ -75,10 +74,7 @@ export const PreviewArticle = () => {
           dangerouslySetInnerHTML={{ __html: article.content }}
         ></p>
 
-        <p className="text-tag-blue text-sm font-light">
-          An-katrien Callebaut
-          <br />A Master in Art History
-        </p>
+        <p className="text-tag-blue text-sm font-light">{article.author}</p>
       </div>
     </div>
   );

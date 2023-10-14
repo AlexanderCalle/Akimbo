@@ -1,4 +1,4 @@
-import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -53,7 +53,6 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
 }
 
 const UpdateArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, docId}) => {
-    // TODO update article in firebase
     try {
         
         let data = {
@@ -89,4 +88,40 @@ const DeleteArticle = async (articleId) => {
     }
 }
 
-export {GetAllArticles, GetArticleWithId, PostArticle, UpdateArticle, DeleteArticle}
+const GetMostRecentPosts = async () => {
+    try {
+        const data = [];
+    
+        const qeurySnapshot = await getDocs(collection(db, "articles"));
+    
+        qeurySnapshot.forEach(async (doc) => {
+            const docData = doc.data();
+            let article = {id: doc.id, ...docData}
+            data.push(article)
+        })
+       return data.sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3)
+
+        
+    } catch(err) {
+        throw new Error("Something went wrong fetching data.")
+    }
+}
+
+const GetAllPostsFromCat = async (category) => {
+    try {
+        const data = [];
+        const qeurySnapshot = await getDocs(collection(db, "articles"));
+    
+        qeurySnapshot.forEach(async (doc) => {
+            const docData = doc.data();
+            let article = {id: doc.id, ...docData}
+            data.push(article)
+        })
+         return data.filter(article => article.cat === category).sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3)
+         
+     } catch(err) {
+         throw new Error("Something went wrong fetching data.")
+     }
+}
+
+export {GetAllArticles, GetArticleWithId, PostArticle, UpdateArticle, DeleteArticle, GetMostRecentPosts, GetAllPostsFromCat}

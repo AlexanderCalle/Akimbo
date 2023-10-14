@@ -13,13 +13,16 @@ const Navbar = () => {
           <Link className="hover:underline" to="/">
             HOME
           </Link>
-          <Link className="hover:underline" to="/articles/articles">
+          <Link className="hover:underline" to="/articles/Articles & essays">
             ARTICLES & ESSAYS
           </Link>
-          <Link className="hover:underline" to="/articles/reviews">
+          <Link className="hover:underline" to="/articles/Reviews">
             REVIEWS
           </Link>
-          <Link className="hover:underline" to="/articles/featured">
+          <Link
+            className="hover:underline"
+            to="/articles/Featured %2F%2F Further reading"
+          >
             FEATURED // FURTHER READING
           </Link>
           {/* <Link className="hover:underline" to="/">
@@ -30,7 +33,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-3">
-          <button className="flex gap-2 items-center px-3 py-2 bg-akimbo-dark-900 text-akimbo-light">
+          {/* <button className="flex gap-2 items-center px-3 py-2 bg-akimbo-dark-900 text-akimbo-light">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,7 +49,7 @@ const Navbar = () => {
               />
             </svg>
             <p>SEARCH</p>
-          </button>
+          </button> */}
           <button
             className="text-akimbo-dark-900 lg:hidden"
             onClick={() => setIsNavOpen((prev) => !prev)}
@@ -90,13 +93,15 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="my-8 uppercase hover:underline">
-              <Link to="/articles/articles">Articles & essays</Link>
+              <Link to="/articles/Articles & essays">Articles & essays</Link>
             </li>
             <li className="my-8 uppercase hover:underline">
-              <Link to="/articles/reviews">Reviews</Link>
+              <Link to="/articles/Reviews">Reviews</Link>
             </li>
             <li className="my-8 uppercase hover:underline">
-              <Link to="/articles/featured">Featured // Further reading</Link>
+              <Link to="/articles/Featured %2F%2F Further reading">
+                Featured // Further reading
+              </Link>
             </li>
             <li className="my-8 uppercase hover:underline">
               <Link to="/">Podcast</Link>

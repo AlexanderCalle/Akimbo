@@ -8,30 +8,30 @@ const pageDescriptions = [
     PageName: "Articles & Essays",
     Description:
       "On this page you can find all blog posts about articles we have written. \nThis can contain all kinds of topics.",
-    LinkToPage: "/articles/articles",
+    LinkToPage: "/articles/Articles & essays",
     ImageUrl: ArticlesEssaysImage,
   },
   {
     PageName: "Reviews",
     Description:
       "On this page we post reviews of musea, books and so on.\nWe want to share our expercience of everything we do.",
-    LinkToPage: "/articles/reviews",
+    LinkToPage: "/articles/Reviews",
     ImageUrl: ArticlesEssaysImage,
   },
   {
     PageName: "Featured // Further reading",
     Description:
       "On this page you can find posts about what we are reading, ...\nIt is to give you some great recommendations.",
-    LinkToPage: "/articles/featured",
+    LinkToPage: "/articles/Featured %2F%2F Further reading",
     ImageUrl: ArticlesEssaysImage,
   },
-  {
-    PageName: "Podcast",
-    Description:
-      "This is the link to our podcast.\nWe discuss here all kind of topics that pop into our head.",
-    LinkToPage: "/podcast",
-    ImageUrl: ArticlesEssaysImage,
-  },
+  // {
+  //   PageName: "Podcast",
+  //   Description:
+  //     "This is the link to our podcast.\nWe discuss here all kind of topics that pop into our head.",
+  //   LinkToPage: "/podcast",
+  //   ImageUrl: ArticlesEssaysImage,
+  // },
 ];
 
 const theme = {
