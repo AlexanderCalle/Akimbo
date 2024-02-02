@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetMostRecentPosts } from "../services/Articles";
 import ArticleSection from "./ArticleSection";
+import RecentPost from "./RecentPost";
 
 const RecentPosts = () => {
   const [loading, setLoading] = useState(true);
@@ -44,9 +45,9 @@ const RecentPosts = () => {
       <h2 className="text-2xl self-center lg:self-start font-medium underline">
         Recent Posts
       </h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex gap-2 w-full flex-wrap justify-between">
         {article.map((article, idx) => (
-          <ArticleSection key={idx} article={article} idx={idx} />
+          <RecentPost key={idx} article={article} idx={idx} />
         ))}
       </div>
     </div>

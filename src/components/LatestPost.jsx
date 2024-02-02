@@ -23,7 +23,11 @@ const LatestPost = ({ article }) => {
         <div className="flex gap-2">
           {tags.map((tag) => (
             <p
-              className={`bg-[${tag.color}]  text-[${tag.color}] w-fit px-3 py-1 text-sm bg-opacity-10  `}
+              style={{
+                backgroundColor: tag.color + "10",
+                color: tag.color,
+              }}
+              className={`w-fit px-3 py-1 text-sm bg-opacity-10`}
             >
               {tag.name}
             </p>

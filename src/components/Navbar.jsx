@@ -7,20 +7,23 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=" flex flex-row justify-between p-5 items-center text-lg">
-        <h1 className="font-bold font-sans text-2xl">AKIMBO</h1>
+      <div className="w-full flex flex-row justify-between p-5 items-center text-lg">
+        <Link className="hover:underline active:underline" to="/">
+          <h1 className="font-bold font-sans text-2xl">AKIMBO</h1>
+        </Link>
+        
         <div className="hidden lg:flex gap-4 lg:visible">
-          <Link className="hover:underline" to="/">
+          <Link className="hover:underline active:underline" to="/">
             HOME
           </Link>
-          <Link className="hover:underline" to="/articles/Articles & essays">
+          <Link className="hover:underline active:underline" to="/articles/Articles & essays">
             ARTICLES & ESSAYS
           </Link>
-          <Link className="hover:underline" to="/articles/Reviews">
+          <Link className="hover:underline active:underline" to="/articles/Reviews">
             REVIEWS
           </Link>
           <Link
-            className="hover:underline"
+            className="hover:underline active:underline"
             to="/articles/Featured %2F%2F Further reading"
           >
             FEATURED // FURTHER READING
@@ -28,7 +31,7 @@ const Navbar = () => {
           {/* <Link className="hover:underline" to="/">
             PODCAST
           </Link> */}
-          <Link className="hover:underline" to="/aboutus">
+          <Link className="hover:underline active:underline" to="/aboutus">
             ABOUT US
           </Link>
         </div>

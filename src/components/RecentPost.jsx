@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getTag } from "../services/Tags";
 import { useNavigate } from "react-router-dom";
 
-const ArticleSection = ({ article, idx }) => {
+const RecentPost = ({ article, idx }) => {
   const [tags, setTags] = useState([]);
 
   const navigate = useNavigate();
@@ -19,16 +19,17 @@ const ArticleSection = ({ article, idx }) => {
 
   return (
     <section
-      className={`w-full h-[34rem] lg:h-80 flex flex-col-reverse lg:${
-        idx % 2 === 0 ? "flex-row" : "flex-row-reverse"
-      } gap-4 items-center justify-center`}
+      className={`w-full lg:w-96 h-96 lg:h-[50rem] flex flex-col gap-4 items-center justify-start`}
     >
+      <img
+        src={article.image}
+        alt={article.imageTitle}
+        className="w-full h-3/6 object-cover"
+      />
       <article
-        className={`w-full lg:w-4/6 h-2/5 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-${
-          idx % 2 === 0 ? "end" : "start"
-        } gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
+        className={`w-full flex flex-col p-2 z-10 items-center gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
       >
-        <div className={`flex ${idx % 2 !== 0 && "flex-row-reverse"} gap-2`}>
+        <div className={`flex gap-2`}>
           {tags.map((tag, idx) => (
             <p
               style={{
@@ -44,11 +45,8 @@ const ArticleSection = ({ article, idx }) => {
           <h3 className="text-lg font-medium">{article.title}</h3>
         </div>
         <p
-          className={`w-full h-2/3 overflow-hidden text-ellipsis text-center lg:text-${
-            idx % 2 === 0 ? "end" : "start"
-          }`}
-          dangerouslySetInnerHTML={{ __html: article.content }}
-        ></p>
+          className={`w-full h-2/3 overflow-hidden text-ellipsis text-center lg:text-center`}
+        >{article.description}</p>
         <button
           className="bg-akimbo-dark-900 px-3 py-2 text-akimbo-light"
           onClick={() => {
@@ -58,13 +56,8 @@ const ArticleSection = ({ article, idx }) => {
           See more
         </button>
       </article>
-      <img
-        src={article.image}
-        alt={article.imageTitle}
-        className="w-4/6 lg:w-2/6 h-full object-cover"
-      />
     </section>
   );
 };
 
-export default ArticleSection;
+export default RecentPost;

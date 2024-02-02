@@ -2,11 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="w-full flex flex-col items-start justify-between md:grid md:grid-cols-3 gap-8 bg-akimbo-dark-900 text-akimbo-light p-5">
+    <div className="max-w-full flex flex-col items-start justify-between md:grid md:grid-cols-3 bg-akimbo-dark-900 text-akimbo-light p-5">
       <div className="flex flex-col gap-2">
         <h3 className="font-bold">CONTACT</h3>
         <div className="flex flex-col md:flex-row gap-2 items-start">
-          <h5 className="w-fit">EMAIL:</h5>
           <div className="flex flex-col">
             <a className="col-span-2" href="mailto:callebautak@hotmail.com">
               callebautak@hotmail.com
