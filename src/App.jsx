@@ -14,7 +14,7 @@ import { PreviewArticle } from "./pages/PreviewArticle";
 
 const App = () => {
   return (
-    <Router>
+      <Router>
       <Routes>
         {/* public routes */}
         <Route index Component={HomePage} />

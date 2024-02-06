@@ -2,26 +2,17 @@ import React, { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { GetArticleWithId } from "../services/Articles";
 import { useParams } from "react-router-dom";
-import { getTag } from "../services/Tags";
 
 const ArticlePage = () => {
   const params = useParams();
 
   const [article, setArticle] = useState(null);
-  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     GetArticleWithId(params.articleId).then((result) => {
       setArticle(result);
-      const setDef = async (tagsSel) => {
-        await tagsSel.forEach(async (tag) => {
-          const tagResult = await getTag(tag);
-          setTags([...tags, tagResult]);
-        });
-        setLoading(false);
-      };
-      setDef(result.tags);
+      setLoading(false)
     });
   }, []);
 
@@ -65,10 +56,14 @@ const ArticlePage = () => {
         </h2>
         <div className="w-5/6 md:w-4/6 -mt-3 flex flex-col gap-4">
           <div className="flex gap-2">
-            {tags.map((tag, idx) => (
+            {article.tags.map((tag, idx) => (
               <p
                 key={idx}
-                className={`bg-[${tag.color}]  text-[${tag.color}] w-fit px-3 py-1 text-sm bg-opacity-10  `}
+                style={{
+                  backgroundColor: tag.color + "10",
+                  color: tag.color,
+                }}
+                className={`w-fit px-3 py-1 text-sm bg-opacity-10  `}
               >
                 {tag.name}
               </p>

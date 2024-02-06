@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { getTag } from "../services/Tags";
 import { useNavigate } from "react-router-dom";
 
 const RecentPost = ({ article, idx }) => {
-  const [tags, setTags] = useState([]);
-
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const setDef = async (tagsSel) => {
-      await tagsSel.forEach(async (tag) => {
-        const tagResult = await getTag(tag);
-        setTags([...tags, tagResult]);
-      });
-    };
-    setDef(article.tags);
-  }, [setTags, article.tags]);
 
   return (
     <section
@@ -30,7 +17,7 @@ const RecentPost = ({ article, idx }) => {
         className={`w-full flex flex-col p-2 z-10 items-center gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
       >
         <div className={`flex gap-2`}>
-          {tags.map((tag, idx) => (
+          {article.tags.map((tag, idx) => (
             <p
               style={{
                 backgroundColor: tag.color + "10",

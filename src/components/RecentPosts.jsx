@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { GetMostRecentPosts } from "../services/Articles";
-import ArticleSection from "./ArticleSection";
 import RecentPost from "./RecentPost";
 
 const RecentPosts = () => {

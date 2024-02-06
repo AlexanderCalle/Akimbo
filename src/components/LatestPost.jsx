@@ -1,33 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { getTag } from "../services/Tags";
+import { Link } from "react-router-dom";
 
 const LatestPost = ({ article }) => {
-  const [tags, setTags] = useState([]);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const setDef = async (tagsSel) => {
-      await tagsSel.forEach(async (tag) => {
-        const tagResult = await getTag(tag);
-        setTags([...tags, tagResult]);
-      });
-    };
-    setDef(article.tags);
-  }, []);
 
   return (
-    <div className="w-full md:w-10/12 mx-auto flex gap-6 ">
-      <div className="absolute z-10 my-48 mx-5 md:mx-24 w-4/6 md:w-3/6 lg:w-2/6 h-auto p-5 flex flex-col gap-3 items-end bg-akimbo-light opacity-90 backdrop-blur-lg">
+    <div className="w-full md:w-10/12 mx-auto flex gap-6 group">
+      <div className="opacity-0 group-hover:opacity-100 duration-300 flex absolute z-10 my-48 mx-5 md:mx-24 w-4/6 md:w-3/6 lg:w-2/6 h-auto p-5 flex-col gap-3 items-end bg-akimbo-light bg-opacity-70">
         <div className="flex gap-2">
-          {tags.map((tag) => (
+          {article.tags.map((tag, idx) => (
             <p
               style={{
                 backgroundColor: tag.color + "10",
                 color: tag.color,
               }}
               className={`w-fit px-3 py-1 text-sm bg-opacity-10`}
+              key={idx}
             >
               {tag.name}
             </p>

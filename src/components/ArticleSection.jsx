@@ -1,21 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { getTag } from "../services/Tags";
 import { useNavigate } from "react-router-dom";
 
 const ArticleSection = ({ article, idx }) => {
-  const [tags, setTags] = useState([]);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const setDef = async (tagsSel) => {
-      await tagsSel.forEach(async (tag) => {
-        const tagResult = await getTag(tag);
-        setTags([...tags, tagResult]);
-      });
-    };
-    setDef(article.tags);
-  }, [setTags, article.tags]);
 
   return (
     <section
@@ -29,7 +15,7 @@ const ArticleSection = ({ article, idx }) => {
         } gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
       >
         <div className={`flex ${idx % 2 !== 0 && "flex-row-reverse"} gap-2`}>
-          {tags.map((tag, idx) => (
+          {article.tags.map((tag, idx) => (
             <p
               style={{
                 backgroundColor: tag.color + "10",
@@ -47,7 +33,7 @@ const ArticleSection = ({ article, idx }) => {
           className={`w-full h-2/3 overflow-hidden text-ellipsis text-center lg:text-${
             idx % 2 === 0 ? "end" : "start"
           }`}
-          dangerouslySetInnerHTML={{ __html: article.content }}
+          dangerouslySetInnerHTML={{ __html: article.description }}
         ></p>
         <button
           className="bg-akimbo-dark-900 px-3 py-2 text-akimbo-light"

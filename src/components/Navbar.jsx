@@ -14,25 +14,25 @@ const Navbar = () => {
         
         <div className="hidden lg:flex gap-4 lg:visible">
           <Link className="hover:underline active:underline" to="/">
-            HOME
+            Home
           </Link>
           <Link className="hover:underline active:underline" to="/articles/Articles & essays">
-            ARTICLES & ESSAYS
+            Articles & Essays
           </Link>
           <Link className="hover:underline active:underline" to="/articles/Reviews">
-            REVIEWS
+            Reviews
           </Link>
           <Link
             className="hover:underline active:underline"
             to="/articles/Featured %2F%2F Further reading"
           >
-            FEATURED // FURTHER READING
+            Featured // Further reading
           </Link>
           {/* <Link className="hover:underline" to="/">
             PODCAST
           </Link> */}
           <Link className="hover:underline active:underline" to="/aboutus">
-            ABOUT US
+            About us
           </Link>
         </div>
         <div className="flex gap-3">
@@ -92,24 +92,24 @@ const Navbar = () => {
             </svg>
           </div>
           <ul className="flex flex-col items-center justify-between min-h-[250px] text-akimbo-dark-900 text-lg">
-            <li className="my-8 uppercase hover:underline">
+            <li className="my-8 hover:underline">
               <Link to="/">Home</Link>
             </li>
-            <li className="my-8 uppercase hover:underline">
+            <li className="my-8 hover:underline">
               <Link to="/articles/Articles & essays">Articles & essays</Link>
             </li>
-            <li className="my-8 uppercase hover:underline">
+            <li className="my-8 hover:underline">
               <Link to="/articles/Reviews">Reviews</Link>
             </li>
-            <li className="my-8 uppercase hover:underline">
+            <li className="my-8 hover:underline">
               <Link to="/articles/Featured %2F%2F Further reading">
                 Featured // Further reading
               </Link>
             </li>
-            <li className="my-8 uppercase hover:underline">
+            <li className="my-8 hover:underline">
               <Link to="/">Podcast</Link>
             </li>
-            <li className="my-8 uppercase hover:underline">
+            <li className="my-8 hover:underline">
               <Link to="/aboutus">About us</Link>
             </li>
           </ul>

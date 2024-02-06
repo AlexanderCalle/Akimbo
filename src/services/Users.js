@@ -1,9 +1,8 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "./Firebase";
+import toast from "react-hot-toast";
 
-
-// Get a list of cities from your database
 const GetUser = async () => {
     let userId;
     const auth = getAuth();
@@ -17,7 +16,6 @@ const GetUser = async () => {
 
     if(userSnap.exists()) return await userSnap.data();
     else return "No such user!"
-
 }
 
 const GetAuthor = async (userRef) => {
@@ -27,4 +25,22 @@ const GetAuthor = async (userRef) => {
   return userData;
 }
 
-export {GetUser, GetAuthor}
+const GetUsers = async () => {
+  try {
+    const data = [];
+    
+    const qeurySnapshot = await getDocs(collection(db, "users"));
+
+    qeurySnapshot.forEach((doc) => {
+      const docData = doc.data();
+      let user = {id: doc.id, ...docData}
+      data.push(user);
+    });
+
+    return data;
+  } catch (error) {
+    toast.error(error)
+  }
+}
+
+export {GetUser, GetAuthor, GetUsers}

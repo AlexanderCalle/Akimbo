@@ -1,17 +1,39 @@
 import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getTag } from "./Tags";
 
-const GetAllArticles = async () => {
-    const data = [];
-    
+const GetTagsArticle = async (article) => {
+    let tags = article.tags.map(async (tag) => {
+        let tagResult = await getTag(tag);
+        return tagResult;
+    });
+
+    tags = await Promise.all(tags)
+
+    return tags;
+}
+
+const getDocData = async (querySnap) => {
+    try {
+        let data = querySnap.docs.map(async (doc) => {
+            const docData = doc.data();
+            let article = {id: doc.id, ...docData}
+            article.tags = await GetTagsArticle(article);
+            return article
+        });
+        
+        data = await Promise.all(data);
+        return data
+    } catch (error) {
+        throw new Error("get docs", error)
+    }
+}
+
+const GetAllArticles = async () => {    
     const qeurySnapshot = await getDocs(collection(db, "articles"));
 
-    qeurySnapshot.forEach(async (doc) => {
-        const docData = doc.data();
-        let article = {id: doc.id, ...docData}
-        data.push(article)
-    })
+    const data = await getDocData(qeurySnapshot);
 
     return data;
 }
@@ -19,8 +41,12 @@ const GetAllArticles = async () => {
 const GetArticleWithId = async (articleId) => {
     const docRef = doc(db, "articles", articleId);
     const snapshot = await getDoc(docRef);
+    const docData = snapshot.data();
 
-    return snapshot.data();
+    let article = {id: doc.id, ...docData}
+    article.tags = await GetTagsArticle(article);
+    
+    return article
 }
 
 const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor}) => {
@@ -90,18 +116,9 @@ const DeleteArticle = async (articleId) => {
 
 const GetMostRecentPosts = async () => {
     try {
-        const data = [];
-    
         const qeurySnapshot = await getDocs(collection(db, "articles"));
-    
-        qeurySnapshot.forEach(async (doc) => {
-            const docData = doc.data();
-            let article = {id: doc.id, ...docData}
-            data.push(article)
-        })
-       return data.sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3)
-
-        
+        const data = await getDocData(qeurySnapshot);
+        return data.sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3) 
     } catch(err) {
         throw new Error("Something went wrong fetching data.")
     }
@@ -109,17 +126,21 @@ const GetMostRecentPosts = async () => {
 
 const GetAllPostsFromCat = async (category) => {
     try {
-        const data = [];
+        let data = [];
         const qeurySnapshot = await getDocs(collection(db, "articles"));
     
-        qeurySnapshot.forEach(async (doc) => {
-            const docData = doc.data();
-            let article = {id: doc.id, ...docData}
-            data.push(article)
-        })
-         return data.filter(article => article.cat === category).sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3)
-         
+        // await qeurySnapshot.forEach(async (doc) => {
+        //     const docData = doc.data();
+        //     let article = {id: doc.id, ...docData}
+        //     article.tags = await GetTagsArticle(article);
+        //     data.push(article) // BUG: push to array doesn't work
+        // });
+
+        data = await getDocData(qeurySnapshot);
+
+        return data.filter(article => article.cat === category).sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3)
      } catch(err) {
+        console.log(err);
          throw new Error("Something went wrong fetching data.")
      }
 }

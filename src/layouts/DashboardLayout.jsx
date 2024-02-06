@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardNavbar from "../components/DashboardNavbar";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = ({ children }) => {
   return (
