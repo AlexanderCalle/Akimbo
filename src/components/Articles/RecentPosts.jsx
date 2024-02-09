@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { GetMostRecentPosts } from "../services/Articles";
+import { GetMostRecentPosts } from "../../services/Articles";
 import RecentPost from "./RecentPost";
+import { GetMostRecentDairyItem } from "../../services/Posts";
+import toast from "react-hot-toast";
+
+export const TYPE_ARTICLE = "article"
+export const TYPE_DAIRY = "dairy"
 
 const RecentPosts = () => {
   const [loading, setLoading] = useState(true);
-  const [article, setArticle] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     GetMostRecentPosts().then((result) => {
-      setArticle(result);
+      result = result.map(item => {return {...item, type: TYPE_ARTICLE}})
+      
+      GetMostRecentDairyItem()
+      .then(dairyResult => {
+        dairyResult = dairyResult.map(item => {return {...item, type: TYPE_DAIRY}})
+
+        let allItems = [...result, ...dairyResult]
+
+        setItems(allItems.sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0,3));
+        setLoading(false);
+      })
+    }).catch(err => {
+      toast.error(err.message);
       setLoading(false);
     });
+
+    
   }, []);
 
   if (loading) {
@@ -45,7 +64,7 @@ const RecentPosts = () => {
         Recent Posts
       </h2>
       <div className="flex gap-2 w-full flex-wrap justify-between">
-        {article.map((article, idx) => (
+        {items.map((article, idx) => (
           <RecentPost key={idx} article={article} idx={idx} />
         ))}
       </div>

@@ -44,7 +44,7 @@ const AboutUsPage = () => {
 
   return (
     <MainLayout>
-      <div className="w-10/12 mx-auto flex flex-col gap-14 items-center">
+      <div className="w-10/12 mx-auto flex flex-col gap-14 items-center my-24">
         <div className="w-full lg:w-3/6 flex flex-col items-center gap-5">
           <h2 className="text-2xl font-medium underline">What is Akimbo</h2>
           <p className="text-center">

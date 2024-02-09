@@ -16,17 +16,17 @@ const Navbar = () => {
           <Link className="hover:underline active:underline" to="/">
             Home
           </Link>
-          <Link className="hover:underline active:underline" to="/articles/Articles & essays">
-            Articles & Essays
+          <Link className="hover:underline active:underline" to="/articles/Features">
+            Features
           </Link>
           <Link className="hover:underline active:underline" to="/articles/Reviews">
             Reviews
           </Link>
           <Link
             className="hover:underline active:underline"
-            to="/articles/Featured %2F%2F Further reading"
+            to="/dairy"
           >
-            Featured // Further reading
+            Dear Digital Dairy
           </Link>
           {/* <Link className="hover:underline" to="/">
             PODCAST
@@ -96,15 +96,10 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="my-8 hover:underline">
-              <Link to="/articles/Articles & essays">Articles & essays</Link>
+              <Link to="/articles/Features">Features</Link>
             </li>
             <li className="my-8 hover:underline">
               <Link to="/articles/Reviews">Reviews</Link>
-            </li>
-            <li className="my-8 hover:underline">
-              <Link to="/articles/Featured %2F%2F Further reading">
-                Featured // Further reading
-              </Link>
             </li>
             <li className="my-8 hover:underline">
               <Link to="/">Podcast</Link>

@@ -3,14 +3,14 @@ import ArticleSection from "./ArticleSection";
 
 const AllPosts = ({ articles }) => {
 
-  const [category, setCategory] = useState("");
+  const [tagType, setTagType] = useState("");
 
   const filteredArticles = useMemo(() => 
-    articles.filter(article => article.tags.find(e => e.name.includes(category)))
-  , [articles, category]);
+    articles.filter(article => article.tags.find(e => e.name.includes(tagType)))
+  , [articles, tagType]);
 
   const handleChange = (e) => {
-    setCategory(e.target.value);
+    setTagType(e.target.value);
   }
 
   return (
@@ -19,12 +19,13 @@ const AllPosts = ({ articles }) => {
         <h2 className="text-2xl self-center lg:self-start font-medium underline">
           All Posts
         </h2>
+        {/* TODO: turn into component and get tags from DB */}
         <select
           id="tags"
-          className="bg-akimbo-dark-900 text-akimbo-light px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+          className="w-32 bg-akimbo-light px-3 py-2 text-md border-2 border-akimbo-dark-900 focus:ring-akimbo-dark-500 focus:border-akimbo-dark-500 cursor-pointer"
           onChange={handleChange}
         >
-          <option disabled selected value>Filter by tags</option>
+          <option selected value="">Filter by tags</option>
           <option value="Architecture">Architecture</option>
           <option value="Art">Art</option>
           <option value="Books">Books</option>

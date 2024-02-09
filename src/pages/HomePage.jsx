@@ -1,5 +1,5 @@
 import React from "react";
-import RecentPosts from "../components/RecentPosts";
+import RecentPosts from "../components/Articles/RecentPosts";
 import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -15,11 +15,11 @@ const HomePage = () => {
       <HeroSection />
       <main className="flex-grow flex flex-col p-5" >
         <RecentPosts />
-        <div className="w-full md:w-10/12 m-auto flex flex-col lg:flex-row items-center gap-6 my-4">
-          <section className="w-full lg:w-3/6 flex flex-col items-center lg:items-start">
+        <div className="w-full md:w-10/12 m-auto flex flex-col lg:flex-row items-start lg:items-start justify-start gap-6 my-4">
+          <section className="w-full lg:w-3/6 flex flex-col items-start">
             <h2 className="text-2xl font-medium underline mb-4">Community</h2>
             <h3 className="mb-2 text-xl font-medium">Do you want to join?</h3>
-            <p className="mb-2 text-center lg:text-start">
+            <p className="mb-2 lg:text-start">
               Donec dictum tristique porta. Etiam convallis lorem lobortis nulla
               molestie, nec tincidunt ex ullamcorper. Quisque ultrices lobortis
               elit sed euismod. Duis in ultrices dolor, ac rhoncus odio.
@@ -31,17 +31,17 @@ const HomePage = () => {
               Contact us
             </button>
           </section>
-          <section className="w-full lg:w-3/6 flex flex-col items-center lg:items-start">
+          <section className="w-full lg:w-3/6 flex flex-col items-start">
             <h2 className="text-2xl font-medium underline mb-4">Over Akimbo</h2>
             <h3 className="mb-2 text-xl font-medium">What is our idea</h3>
-            <p className="text-center lg:text-start">
+            <p>
               Donec dictum tristique porta. Etiam convallis lorem lobortis nulla
               molestie, nec tincidunt ex ullamcorper. Quisque ultrices lobortis
               elit sed euismod. Duis in ultrices dolor, ac rhoncus odio.
               Suspendisse tempor sollicitudin dui sed lacinia.
             </p>
             <h3 className="my-2 text-xl font-medium">What can you find here</h3>
-            <p className="text-center lg:text-start">
+            <p>
               Donec dictum tristique porta. Etiam convallis lorem lobortis nulla
               molestie, nec tincidunt ex ullamcorper. Quisque ultrices lobortis
               elit sed euismod. Duis in ultrices dolor, ac rhoncus odio.

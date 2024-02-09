@@ -15,6 +15,7 @@ module.exports = {
     colors: {
       "akimbo-dark-900": "#1E1E1E",
       "akimbo-dark-500": "#4A4A4A",
+      "akimbo-dark-200": "#4A4A4A60",
       "akimbo-light": "#F2F2F2",
       "tag-red": "#C02A2A",
       "tag-orange": "#C3700F",

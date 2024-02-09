@@ -6,32 +6,36 @@ const ArticleSection = ({ article, idx }) => {
   return (
     <section
       className={`w-full h-[34rem] lg:h-80 flex flex-col-reverse lg:${
-        idx % 2 === 0 ? "flex-row" : "flex-row-reverse"
+        idx % 2 === 0 ? "flex-row-reverse" : "flex-row"
       } gap-4 items-center justify-center`}
     >
       <article
         className={`w-full lg:w-4/6 h-2/5 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-${
-          idx % 2 === 0 ? "end" : "start"
+          idx % 2 === 0 ? "start" : "end"
         } gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
       >
-        <div className={`flex ${idx % 2 !== 0 && "flex-row-reverse"} gap-2`}>
-          {article.tags.map((tag, idx) => (
-            <p
-              style={{
-                backgroundColor: tag.color + "10",
-                color: tag.color,
-              }}
-              key={idx}
-              className={`w-fit px-3 py-1 text-sm bg-opacity-10`}
-            >
-              {tag.name}
-            </p>
-          ))}
+        <div className={`flex flex-col gap-2`}>
+          <div className={`flex gap-2 self-${
+          idx % 2 === 0 ? "start" : "end"
+        }`}>
+            {article.tags.map((tag, idx) => (
+              <p
+                style={{
+                  backgroundColor: tag.color + "10",
+                  color: tag.color,
+                }}
+                key={idx}
+                className={`w-fit px-3 py-1 text-sm bg-opacity-10`}
+              >
+                {tag.name}
+              </p>
+            ))}
+          </div>
           <h3 className="text-lg font-medium">{article.title}</h3>
         </div>
         <p
           className={`w-full h-2/3 overflow-hidden text-ellipsis text-center lg:text-${
-            idx % 2 === 0 ? "end" : "start"
+            idx % 2 === 0 ? "start" : "end"
           }`}
           dangerouslySetInnerHTML={{ __html: article.description }}
         ></p>
@@ -41,7 +45,7 @@ const ArticleSection = ({ article, idx }) => {
             navigate(`/articles/${article.cat}/${article.id}`);
           }}
         >
-          See more
+          Further reading
         </button>
       </article>
       <img

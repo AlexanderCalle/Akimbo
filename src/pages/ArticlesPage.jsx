@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import LatestPost from "../components/LatestPost";
-import AllPosts from "../components/AllPosts";
+import LatestPost from "../components/Articles/LatestPost";
+import AllPosts from "../components/Articles/AllPosts";
 import { GetAllPostsFromCat } from "../services/Articles";
 
 const ArticlesPage = () => {

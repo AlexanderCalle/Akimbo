@@ -7,10 +7,16 @@ import ArticlePage from "./pages/ArticlePage";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./PrivateRoute";
-import Overview from "./pages/Overview";
 import Writing from "./pages/Writing";
 import UpdatePost from "./pages/UpdatePost";
 import { PreviewArticle } from "./pages/PreviewArticle";
+import OverviewPosts from "./pages/OverviewPosts";
+import NotFound from "./pages/NotFound";
+import DearDigitalDairyForm from "./pages/DearDigitalDairyForm";
+import PreviewDairyItem from "./pages/PreviewDairyItem";
+import UpdateDairyItem from "./pages/UpdateDairyItem";
+import DearDigitalDairy from "./pages/DearDigitalDairy";
+import DairyItemPage from "./pages/DairyItemPage";
 
 const App = () => {
   return (
@@ -21,17 +27,23 @@ const App = () => {
         <Route path="aboutus" Component={AboutUsPage} />
         <Route path="articles/:type" Component={ArticlesPage} />
         <Route path="articles/:type/:articleId" Component={ArticlePage} />
+        <Route path="dairy" Component={DearDigitalDairy} />
+        <Route path="dairy/:id" Component={DairyItemPage} />
         {/* Dashboard routes */}
         <Route path="login" Component={Login} />
         <Route
           path="dashboard"
           element={<PrivateRoute Component={Dashboard} />}
         >
-          <Route path="overview" Component={Overview} />
+          <Route path="overview" Component={OverviewPosts} />
           <Route path="preview/:id" Component={PreviewArticle} />
           <Route path="writing" Component={Writing} />
           <Route path="update/:id" Component={UpdatePost} />
+          <Route path="dairy" Component={DearDigitalDairyForm} />
+          <Route path="dairy/preview/:id" Component={PreviewDairyItem} />
+          <Route path="dairy/update/:id" Component={UpdateDairyItem} />
         </Route>
+        <Route path="*" Component={NotFound} />
       </Routes>
     </Router>
   );

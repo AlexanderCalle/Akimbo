@@ -11,7 +11,7 @@ const HeroSection = () => {
   const translate = useTransform(scrollYProgress, [0, 1], [200, 80]);
   const translateX = useTransform(scrollYProgress, [0, 1], [1350, -460]);
 
-  const scale = useTransform(scrollYProgress, [0,1], [1.5, .35]);
+  const scale = useTransform(scrollYProgress, [0,1], [1.5, .05]);
   const opacity = useTransform(scrollYProgress, [0.9,1], [100,0]);
   
   return (
@@ -21,15 +21,16 @@ const HeroSection = () => {
           translateY: translate,
           scale: scale,
           opacity: opacity          
-        }} className="absolute top-[400px] left-[400px] text-7xl font-black">AKIMBO</motion.h1>
+        }} className="absolute top-[200px] left-[180px] text-[200px] font-black">AKIMBO</motion.h1>
         <div className="mb-10 flex flex-col items-center gap-2">
           <p className="font-bold text-2xl">Discover</p>
           <button
             onClick={() => window.scrollTo({ top: window.innerHeight - 72, behavior: "smooth" })}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
-          <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72 1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z" clip-rule="evenodd" />
-        </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+            </svg>
+
         </button>
         </div>
     </div>

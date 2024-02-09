@@ -49,6 +49,16 @@ const GetArticleWithId = async (articleId) => {
     return article
 }
 
+const GetArticleWithIdUpdate = async (articleId) => {
+    const docRef = doc(db, "articles", articleId);
+    const snapshot = await getDoc(docRef);
+    const docData = snapshot.data();
+
+    let article = {id: doc.id, ...docData}
+    
+    return article
+}
+
 const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor}) => {
     try {
         const storageRef = ref(storage, "articlesImages/" + image.name)
@@ -106,12 +116,12 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
 }
 
 const DeleteArticle = async (articleId) => {
-    try {
-        await deleteDoc(doc(db, "articles", articleId));
-        return "succes"
-    } catch (err) {
-        throw new Error("Something went wrong: " + err.message)
-    }
+  try {
+      await deleteDoc(doc(db, "articles", articleId));
+      return "succes"
+  } catch (err) {
+      throw new Error("Something went wrong: " + err.message)
+  }
 }
 
 const GetMostRecentPosts = async () => {
@@ -128,21 +138,14 @@ const GetAllPostsFromCat = async (category) => {
     try {
         let data = [];
         const qeurySnapshot = await getDocs(collection(db, "articles"));
-    
-        // await qeurySnapshot.forEach(async (doc) => {
-        //     const docData = doc.data();
-        //     let article = {id: doc.id, ...docData}
-        //     article.tags = await GetTagsArticle(article);
-        //     data.push(article) // BUG: push to array doesn't work
-        // });
 
         data = await getDocData(qeurySnapshot);
 
-        return data.filter(article => article.cat === category).sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3)
+        return data.filter(article => article.cat === category).sort((a, b) => (a.created_date > b.created_date) ? -1 : 1)
      } catch(err) {
         console.log(err);
          throw new Error("Something went wrong fetching data.")
      }
 }
 
-export {GetAllArticles, GetArticleWithId, PostArticle, UpdateArticle, DeleteArticle, GetMostRecentPosts, GetAllPostsFromCat}
+export {GetAllArticles, GetArticleWithId, PostArticle, UpdateArticle, DeleteArticle, GetMostRecentPosts, GetAllPostsFromCat, GetArticleWithIdUpdate}

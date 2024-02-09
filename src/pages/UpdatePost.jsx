@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GetArticleWithId, UpdateArticle } from "../services/Articles";
+import { GetArticleWithIdUpdate, UpdateArticle } from "../services/Articles";
 import Editor from "../components/Editor";
 import Select from "react-select";
 import { GetAllTags, getTag } from "../services/Tags";
@@ -35,7 +35,7 @@ const UpdatePost = () => {
       setCategories(result);
     });
 
-    GetArticleWithId(params.id).then(async (result) => {
+    GetArticleWithIdUpdate(params.id).then(async (result) => {
       setTitle(result.title);
       setContent(result.content);
       setDescription(result.description);
@@ -45,19 +45,22 @@ const UpdatePost = () => {
       const setDef = async (tagsSel) => {
         await tagsSel.forEach(async (tag) => {
           const tagResult = await getTag(tag);
-          let newTags = { ...tagsDef, ...tagResult };
+          let newTags = [ ...tagsDef, tagResult ];
           setTagsDef(newTags);
         });
-        setTags(tags.filter((tag) => !tagsDef.includes(tag)));
+        setSelectedTags(tagsSel)
       };
-      setDef(result.tags);
+      await setDef(result.tags);
+      
       setImageAuthor(result.imageAuthor);
       setImageTitle(result.imageTitle);
     });
+
   }, [params.id]);
 
   async function handleSubmit() {
     const docId = params.id;
+
     toast.promise(
       UpdateArticle({
         title,
@@ -204,7 +207,7 @@ const UpdatePost = () => {
           type="submit"
           className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"
         >
-          Post article
+          Update article
         </button>
       </form>
     </div>

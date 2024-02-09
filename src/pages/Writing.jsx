@@ -123,8 +123,8 @@ const Writing = ({
           className="py-1 px-2 rounded-sm border bg-right border-akimbo-dark-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full"
         >
           <option selected>-- Select category --</option>
-          {categories.map((category) => (
-            <option value={category.name}>{category.name}</option>
+          {categories.map((category, idx) => (
+            <option key={idx} value={category.name}>{category.name}</option>
           ))}
         </select>
         <label htmlFor="tags">Tags</label>

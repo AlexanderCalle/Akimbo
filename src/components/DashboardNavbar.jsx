@@ -22,6 +22,9 @@ const DashboardNavbar = () => {
         </Link>
         <Link to={"/dashboard/writing"} className="hover:underline">
           Writing
+        </Link >
+        <Link to={"/dashboard/dairy"} className="hover:underline">
+          Dear Digital Dairy
         </Link>
         {userData.is_admin && (
           <>

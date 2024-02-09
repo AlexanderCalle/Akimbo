@@ -49,7 +49,7 @@ const ArticlePage = () => {
         <img
           src={article.image}
           alt="article"
-          className="w-full h-96 object-cover"
+          className="w-full h-[450px] object-cover"
         />
         <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 lg:ml-16 -mt-12">
           {article.title}
@@ -70,15 +70,13 @@ const ArticlePage = () => {
             ))}
           </div>
           <p className="text-sm font-light text-akimbo-dark-500">
-            {article.created_date.toDate().toDateString()}, created by
-            {" " + article.author}
+            {article.created_date.toDate().toDateString()}
           </p>
           <p
-            className=""
             dangerouslySetInnerHTML={{ __html: article.content }}
           ></p>
 
-          <p className="text-tag-blue text-sm font-light">{article.author}</p>
+          <p className="text-[#53131E] text-sm font-light mb-5">{article.author}</p>
         </div>
       </div>
     </MainLayout>
