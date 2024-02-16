@@ -4,8 +4,8 @@ import RecentPost from "./RecentPost";
 import { GetMostRecentDairyItem } from "../../services/Posts";
 import toast from "react-hot-toast";
 
-export const TYPE_ARTICLE = "article"
-export const TYPE_DAIRY = "dairy"
+export const TYPE_ARTICLE = "Article"
+export const TYPE_DAIRY = "Dairy"
 
 const RecentPosts = () => {
   const [loading, setLoading] = useState(true);

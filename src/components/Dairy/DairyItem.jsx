@@ -5,9 +5,7 @@ const DairyItem = ({item}) => {
   return (
     <a
         href={`/dairy/${item.id}`}
-        className={`h-fit p-1 relative flex flex-col gap-2 mb-4 before:content-[''] before:rounded-md before:absolute before:inset-0 break-inside-avoid-column ${
-            item.isInvert && "[&_*:not(image)]:invert"
-        }`}
+        className={`h-fit relative flex flex-col gap-2 mb-4 before:content-[''] before:rounded-md before:absolute before:inset-0 break-inside-avoid-column`}
         style={{backgroundColor: item.bg_color}}
     >
         {item.image !== "" &&  (
@@ -19,9 +17,13 @@ const DairyItem = ({item}) => {
                 />
             </div>
         )}
-        <h3 className='font-bold underline text-xl'>{item.title}</h3>
-        {item.description !== "" && <p>{item.description}</p>}
-        {item.author !== "" && <p className='text-sm font-light'>{item.author}</p>}
+        <div className={`p-2  ${
+            item.isInvert && "[&_*:not(image)]:invert"
+        }`}>
+            <h3 className='font-bold underline text-xl'>{item.title}</h3>
+            {item.description !== "" && <p>{item.description}</p>}
+            {item.author !== "" && <p className='text-sm font-light'>{item.author}</p>}
+        </div>
     </a>
   )
 }
