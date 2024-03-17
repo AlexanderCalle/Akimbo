@@ -4,7 +4,7 @@ const AboutProfile = ({idx, image, description, firstname, lastname, borderColor
   return (
         <div className={`${idx%2 !== 0 ? "lg:self-end lg:flex-row-reverse pl-2" : "lg:self-start lg:flex-row pr-2"} self-center w-3/4 lg:h-60 flex flex-col gap-5 items-center`}
          style={{
-            backgroundColor: borderColor+"70"
+            backgroundColor: borderColor+"60"
         }}
         >
             <img

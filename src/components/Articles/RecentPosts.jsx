@@ -5,7 +5,7 @@ import { GetMostRecentDairyItem } from "../../services/Posts";
 import toast from "react-hot-toast";
 
 export const TYPE_ARTICLE = "Article"
-export const TYPE_DAIRY = "Dairy"
+export const TYPE_DIARY = "Diary"
 
 const RecentPosts = () => {
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const RecentPosts = () => {
       
       GetMostRecentDairyItem()
       .then(dairyResult => {
-        dairyResult = dairyResult.map(item => {return {...item, type: TYPE_DAIRY}})
+        dairyResult = dairyResult.map(item => {return {...item, type: TYPE_DIARY}})
 
         let allItems = [...result, ...dairyResult]
 

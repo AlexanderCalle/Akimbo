@@ -27,8 +27,8 @@ const App = () => {
         <Route path="aboutus" Component={AboutUsPage} />
         <Route path="articles/:type" Component={ArticlesPage} />
         <Route path="articles/:type/:articleId" Component={ArticlePage} />
-        <Route path="dairy" Component={DearDigitalDairy} />
-        <Route path="dairy/:id" Component={DairyItemPage} />
+        <Route path="diary" Component={DearDigitalDairy} />
+        <Route path="diary/:id" Component={DairyItemPage} />
         {/* Dashboard routes */}
         <Route path="login" Component={Login} />
         <Route
@@ -39,9 +39,9 @@ const App = () => {
           <Route path="preview/:id" Component={PreviewArticle} />
           <Route path="writing" Component={Writing} />
           <Route path="update/:id" Component={UpdatePost} />
-          <Route path="dairy" Component={DearDigitalDairyForm} />
-          <Route path="dairy/preview/:id" Component={PreviewDairyItem} />
-          <Route path="dairy/update/:id" Component={UpdateDairyItem} />
+          <Route path="diary" Component={DearDigitalDairyForm} />
+          <Route path="diary/preview/:id" Component={PreviewDairyItem} />
+          <Route path="diary/update/:id" Component={UpdateDairyItem} />
         </Route>
         <Route path="*" Component={NotFound} />
       </Routes>

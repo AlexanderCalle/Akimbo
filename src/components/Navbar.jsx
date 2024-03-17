@@ -24,9 +24,9 @@ const Navbar = () => {
           </Link>
           <Link
             className="hover:underline active:underline"
-            to="/dairy"
+            to="/diary"
           >
-            Dear Digital Dairy
+            Dear Digital Diary
           </Link>
           {/* <Link className="hover:underline" to="/">
             PODCAST
@@ -102,7 +102,7 @@ const Navbar = () => {
               <Link to="/articles/Reviews">Reviews</Link>
             </li>
             <li className="my-8 hover:underline">
-              <Link to="/">Podcast</Link>
+              <Link to="/diary">Dear Digital Diary</Link>
             </li>
             <li className="my-8 hover:underline">
               <Link to="/aboutus">About us</Link>

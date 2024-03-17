@@ -48,23 +48,29 @@ const AboutUsPage = () => {
         <div className="w-full lg:w-3/6 flex flex-col items-center gap-5">
           <h2 className="text-2xl font-medium underline">What is Akimbo</h2>
           <p className="text-center">
-            Aliquam a dui vel justo fringilla euismod id id enim. Nunc non
-            semper tellus. Pellentesque vitae tellus non dui fermentum
-            hendrerit. In vel imperdiet mi. Aliquam erat volutpat. Cras dapibus
-            orci eu eros tempus efficitur. Nulla rhoncus arcu nec dictum
-            condimentum. Aenean sapien leo, maximus nec magna vel, gravida
-            auctor quam. Cras congue massa massa, id luctus elit ultricies at.
-            Maecenas in neque justo. Ut ac tincidunt lorem, non posuere metus.
-            Sed vulputate pellentesque lectus, id luctus turpis interdum vel.
-            Fusce aliquet condimentum arcu id elementum.
+          Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
+          <br /><br />
+          We are a small group of passionate readers, writers, critics, practitioners and artists based in Brussels who wanted to create an unpretentious, open space for young creatives to meet and exchange ideas. In the spirit of Virginia Woolf, we searched for ‘a room of one’s own’ after the working hours. Pub talks, text chains, coffee breaks and unhinged dinner parties craved for a common place..
+          Akimbo makes it possible to gather and publish texts and projects, making words and voices matter. We focus on contemporary complexities, riveting essays, aesthetic inspirations, the internal turmoil of 20-year-olds and other stories waiting to be told. 
+          <br /><br />
+          Akimbo is more than just an online publishing platform, it’s a vibrant community where <i>Art is theft, Art is armed robbery, Art is not pleasing your mother.</i> (Janet Malcolm)
+          <br /><br />
+          <h3 className="my-2 text-xl font-medium">Our Mission</h3> 
+          Topics are always approached from various disciplines within the arts and cultural studies, and placed in both historical and contemporary perspectives. <br />
+          <i>Lock up your libraries if you like; but there is no gate, no lock, no bolt that you can set upon the freedom of your mind. So long as you write what you wish to write, that is all that matters; and who cares whether it matters for ages or only for hours.</i> (Virginia Woolf)
+          <br /><br />
+          We are committed to opening up conversations on literature, contemporary art and popular culture, which should remain accessible to everybody regardless of their education and background. 
+          <br /><br />
+          Long live the unapologetic embrace of bad taste, grey zones, works in progress, web-weaving, and doodling. 
+          <br /><br />
+          Come in and take a seat. 
           </p>
         </div>
         <div className="w-full xl:w-8/12 flex flex-col items-center gap-5 mb-5 lg:items-stretch">
           <h2 className="text-2xl font-medium underline">Who are we</h2>
           {users.map((user, idx) => (
             <AboutProfile idx={idx} {...user} />
-          ))}
-          
+          ))} 
         </div>
       </div>
     </MainLayout>

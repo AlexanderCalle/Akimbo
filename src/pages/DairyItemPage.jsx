@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { GetDairyItemById } from "../services/Posts";
 import contrast from "../services/Contrast";
 
-const DairyItemPage = () => {
+const DiaryItemPage = () => {
 
     const params = useParams();
     const [item, setItem] = useState(null);
@@ -85,4 +85,4 @@ const DairyItemPage = () => {
   )
 }
 
-export default DairyItemPage
+export default DiaryItemPage

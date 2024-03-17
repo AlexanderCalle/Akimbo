@@ -1,10 +1,10 @@
 import React from 'react'
 
-const DairyItem = ({item}) => {
+const DiaryItem = ({item}) => {
 
   return (
     <a
-        href={`/dairy/${item.id}`}
+        href={`/diary/${item.id}`}
         className={`h-fit relative flex flex-col gap-2 mb-4 before:content-[''] before:rounded-md before:absolute before:inset-0 break-inside-avoid-column`}
         style={{backgroundColor: item.bg_color}}
     >
@@ -28,4 +28,4 @@ const DairyItem = ({item}) => {
   )
 }
 
-export default DairyItem
+export default DiaryItem

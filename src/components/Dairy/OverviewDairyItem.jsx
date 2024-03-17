@@ -1,16 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const OverviewDairyItem = ({article, onDelete}) => {
+const OverviewDiaryItem = ({article, onDelete}) => {
 
     const navigate = useNavigate();
 
     const handlePreview = () => {
-        navigate(`/dashboard/dairy/preview/${article.id}`);
+        navigate(`/dashboard/diary/preview/${article.id}`);
     }
 
     const handleUpdate = () => {
-        navigate("/dashboard/dairy/update/" + article.id);
+        navigate("/dashboard/diary/update/" + article.id);
     }
 
     const handleDelete = () => {
@@ -94,4 +94,4 @@ const OverviewDairyItem = ({article, onDelete}) => {
     )
 }
 
-export default OverviewDairyItem
+export default OverviewDiaryItem

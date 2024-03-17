@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import contrast from '../../services/Contrast';
 import DairyItem from './DairyItem';
 
-const DairyList = () => {
+const DiaryList = () => {
 
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -61,4 +61,4 @@ const DairyList = () => {
   )
 }
 
-export default DairyList
+export default DiaryList
