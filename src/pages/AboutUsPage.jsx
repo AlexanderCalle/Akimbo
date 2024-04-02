@@ -6,11 +6,17 @@ import AboutProfile from "../components/AboutProfile";
 const AboutUsPage = () => {
 
   const [users, setUsers] = useState([]);
+  const [usersWildverband, setUsersWildVerband] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     GetUsers().then(result => {
-      setUsers(result)
+
+      const wildverband = result.filter(user => user.rol === "wildverband");
+      console.log(wildverband);
+      setUsersWildVerband(wildverband)
+
+      setUsers(result.filter(user => user.rol !== "wildverband").sort((a, b) => a.rol === "editor-in-chief" ? -1 : 1))
       setLoading(false)
     })
   }, []);
@@ -50,7 +56,7 @@ const AboutUsPage = () => {
           <p className="text-center">
           Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
           <br /><br />
-          We are a small group of passionate readers, writers, critics, practitioners and artists based in Brussels who wanted to create an unpretentious, open space for young creatives to meet and exchange ideas. In the spirit of Virginia Woolf, we searched for ‘a room of one’s own’ after the working hours. Pub talks, text chains, coffee breaks and unhinged dinner parties craved for a common place..
+          We are a small group of passionate readers, writers, critics, practitioners and artists based in Brussels who wanted to create an unpretentious, open space for young creatives to meet and exchange ideas. In the spirit of Virginia Woolf, we searched for <i>a room of one’s own</i> after the working hours. Pub talks, text chains, coffee breaks and unhinged dinner parties craved for a common place..
           Akimbo makes it possible to gather and publish texts and projects, making words and voices matter. We focus on contemporary complexities, riveting essays, aesthetic inspirations, the internal turmoil of 20-year-olds and other stories waiting to be told. 
           <br /><br />
           Akimbo is more than just an online publishing platform, it’s a vibrant community where <i>Art is theft, Art is armed robbery, Art is not pleasing your mother.</i> (Janet Malcolm)
@@ -71,6 +77,11 @@ const AboutUsPage = () => {
           {users.map((user, idx) => (
             <AboutProfile idx={idx} {...user} />
           ))} 
+          {usersWildverband.map((user, idx) => (
+            <AboutProfile idx={idx} {...user} />
+          ))}
+          <h3 className="text-lg font-bold">Wildverband</h3>
+          <p>Wildverband is a modular and temporary collaboration between Leonie Overmeire and Anouk Meurice. Within this context, they explore the boundaries of architecture. The interplay arises from intuitive absurdities that they translate into spatial compositions. Their hunger for making is rooted in phenomenology and poetic thinking. Wildverband grew out of a love of brick and an aversion to regularity. Despite their background in architecture, they draw a lot of inspiration from performance and scenography.</p>
         </div>
       </div>
     </MainLayout>

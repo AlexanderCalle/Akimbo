@@ -21,7 +21,7 @@ const HomePage = () => {
             <p className="mb-2 lg:text-start">
               Akimbo is more than just an online publishing platform, it’s a vibrant community. Passionate readers, writers, critics, practitioners and artists, mostly based in Brussels, wanted to create an unpretentious, open space for young creatives to meet and exchange ideas.
             </p>
-            <h3 className="mb-2 text-xl font-medium">Do you want to join?</h3>
+            <h3 className="mb-2 text-lg font-medium">Want to join?</h3>
             <p className="mb-2 lg:text-start">
               We would love to meet other young, like-minded writers or practitioners.
               Send us an email with your idea or even a simple introduction. Hope to hear from you!
@@ -36,7 +36,7 @@ const HomePage = () => {
               Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
               We focus on contemporary complexities, riveting essays, aesthetic inspirations, the internal turmoil of 20-year-olds and other stories waiting to be told.
             </p>
-            <h3 className="my-2 text-xl font-medium">Our Mission</h3>
+            <h3 className="my-2 text-lg font-medium">Our Mission</h3>
             <p>
               Through an interdisciplinary and transhistorical approach we are committed to open up conversations on literature, contemporary art and popular culture, which should remain accessible to everybody regardless of their education and background. 
             </p>
