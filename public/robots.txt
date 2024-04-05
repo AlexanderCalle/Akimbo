@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://akimbo-mag.com/sitemap.xml
+Sitemap: https://www.akimbo-mag.com/sitemap.xml
