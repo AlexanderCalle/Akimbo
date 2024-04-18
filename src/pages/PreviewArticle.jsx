@@ -40,37 +40,43 @@ export const PreviewArticle = () => {
 
   return (
     <div className="w-full mx-auto flex flex-col items-center gap-6">
-      <img
-        src={article.image}
-        alt="article"
-        className="w-full h-96 object-cover"
-      />
-      <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 lg:ml-16 -mt-12">
-        {article.title}
-      </h2>
-      <div className="w-5/6 md:w-4/6 flex flex-col gap-4">
-        {article.tags.map((tag) => (
-          <p
-            className={`w-fit px-3 py-1 text-sm bg-opacity-10 `}
-            style={{
-              backgroundColor: tag.color + "10",
-              color: tag.color,
-            }}
-          >
-            {tag.name}
+      <div className="group w-full h-[450px] text-right">
+          <img
+            src={article.image}
+            alt={article.imageAuthor + ' - ' + article.imageTitle}
+            className="w-full h-full object-cover"
+          />
+          <span className="w-full font-light text-xs opacity-0 group-hover:opacity-100 text-right">{article.imageTitle}
+          <br />
+           {article.imageAuthor}</span>
+        </div>
+        <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 lg:ml-16 -mt-12">
+          {article.title}
+        </h2>
+        <div className="w-5/6 md:w-4/6 -mt-3 flex flex-col gap-4">
+          <div className="flex gap-2">
+            {article.tags.map((tag, idx) => (
+              <p
+                key={idx}
+                style={{
+                  backgroundColor: tag.color + "10",
+                  color: tag.color,
+                }}
+                className={`w-fit px-3 py-1 text-sm bg-opacity-10  `}
+              >
+                {tag.name}
+              </p>
+            ))}
+          </div>
+          <p className="text-sm font-light text-akimbo-dark-500">
+            {article.created_date.toDate().toDateString()}
           </p>
-        ))}
-        <p className="text-sm font-light text-akimbo-dark-500">
-          {article.created_date.toDate().toDateString()}, created by
-          {article.author}
-        </p>
-        <p
-          className=""
-          dangerouslySetInnerHTML={{ __html: article.content }}
-        ></p>
+          <p
+            dangerouslySetInnerHTML={{ __html: article.content }}
+          ></p>
 
-        <p className="text-tag-blue text-sm font-light">{article.author}</p>
-      </div>
+          <p className="text-[#53131E] text-sm font-light mb-5">{article.author}</p>
+        </div>
     </div>
   );
 };

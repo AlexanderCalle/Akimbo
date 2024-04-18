@@ -46,11 +46,16 @@ const ArticlePage = () => {
   return (
     <MainLayout>
       <div className="w-full lg:w-10/12 mx-auto flex flex-col items-center gap-6">
-        <img
-          src={article.image}
-          alt="article"
-          className="w-full h-[450px] object-cover"
-        />
+        <div className="group w-full h-[450px] text-right">
+          <img
+            src={article.image}
+            alt={article.imageAuthor + ' - ' + article.imageTitle}
+            className="w-full h-full object-cover"
+          />
+          <span className="w-full font-light text-xs opacity-0 group-hover:opacity-100 text-right">{article.imageTitle}
+          <br />
+           {article.imageAuthor}</span>
+        </div>
         <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 lg:ml-16 -mt-12">
           {article.title}
         </h2>
