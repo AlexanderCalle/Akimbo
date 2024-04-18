@@ -1,5 +1,13 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
 
 const HeroSection = () => {
   const targetRef = useRef(null);
@@ -8,20 +16,54 @@ const HeroSection = () => {
     offset: ["center end", "end center"]
   });
 
-  const translate = useTransform(scrollYProgress, [0, 1], [200, 80]);
-  const translateX = useTransform(scrollYProgress, [0, 1], [1350, -460]);
+  const { scrollY } = useScroll()
 
-  const scale = useTransform(scrollYProgress, [0,1], [1.5, .05]);
-  const opacity = useTransform(scrollYProgress, [0.9,1], [100,0]);
+  const initialValue = getWindowDimensions().height/4
+  const finalValue = 0
+
+  const initValueX = getWindowDimensions().width;
+  const finalValueX = -getWindowDimensions().width;
+
+  const speed = 1
+  const scrollDistance = (initialValue - finalValue) / speed
+
+  const startY = 0 // scroll position when transition starts
+  const endY = startY + scrollDistance
+
+  const startX = 0;
+  const endX = 1;
+
+  const translate = useTransform(
+    scrollY,
+    [startY, endY, endY],
+    [initialValue, finalValue, finalValue],
+    {
+        clamp: false,
+    }
+  )
+
+  const translateX = useTransform(
+    scrollYProgress,
+    [startX, endX, endX],
+    [initValueX, finalValueX, finalValueX],
+    {
+        clamp: false,
+    }
+  )
+  const scale = useTransform(scrollYProgress, [0.2, .8], [1, .05]);
+  const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
   
+
+  useEffect(() => console.log(translateX), [translateX])
+
   return (
-    <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat p-5 flex items-end justify-center" ref={targetRef}>
+    <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
         <motion.h1 style={{
-          translateX: translateX,
-          translateY: translate,
+          x: translateX,
+          y: translate,
           scale: scale,
           opacity: opacity          
-        }} className="absolute top-[200px] left-[180px] text-[200px] font-black">AKIMBO</motion.h1>
+        }} className="absolute top-28 text-[200px] font-black">AKIMBO</motion.h1>
         <div className="mb-10 flex flex-col items-center gap-2">
           <p className="font-bold text-2xl">Discover</p>
           <button

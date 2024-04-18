@@ -26,9 +26,9 @@ const HomePage = () => {
               We would love to meet other young, like-minded writers or practitioners.
               Send us an email with your idea or even a simple introduction. Hope to hear from you!
             </p>
-            <button className="bg-akimbo-dark-900 px-3 py-2 text-akimbo-light">
+            <a className="bg-akimbo-dark-900 px-3 py-2 text-akimbo-light" href="mailto:akimbo-mag@outlook.com">
               Contact us
-            </button>
+            </a>
           </section>
           <section className="w-full lg:w-3/6 flex flex-col items-start">
             <h2 className="text-2xl font-medium underline mb-4">About Akimbo</h2>
