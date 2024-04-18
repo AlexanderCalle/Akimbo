@@ -9,7 +9,6 @@ function getWindowDimensions() {
   };
 }
 
-
 const HeroSection = () => {
   const targetRef = useRef(null);
   const {scrollYProgress} = useScroll({

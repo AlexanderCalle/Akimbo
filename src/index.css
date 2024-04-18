@@ -47,3 +47,20 @@ ol {
 .ql-align-right {
   text-align: right;
 }
+
+.dropdown-menu {
+  max-height: 146px;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 0px;
+}
+
+.caret {
+  float: right;
+  margin-top: 2%;
+}
+
+#menu1 {
+  width: 160px; 
+  text-align: left;
+}

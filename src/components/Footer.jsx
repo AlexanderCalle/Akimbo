@@ -7,14 +7,8 @@ const Footer = () => {
         <h3 className="font-bold">CONTACT</h3>
         <div className="flex flex-col md:flex-row gap-2 items-start">
           <div className="flex flex-col">
-            <a className="col-span-2" href="mailto:callebautak@hotmail.com">
-              callebautak@hotmail.com
-            </a>
-            <a
-              className="col-start-2 col-span-2"
-              href="mailto:kenis.eleonoor@gmail.com"
-            >
-              kenis.eleonoor@gmail.com
+            <a className="col-span-2" href="mailto:akimbo-mag@outlook.com">
+              akimbo-mag@outlook.com
             </a>
           </div>
         </div>

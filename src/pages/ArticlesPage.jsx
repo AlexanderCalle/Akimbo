@@ -4,18 +4,26 @@ import MainLayout from "../layouts/MainLayout";
 import LatestPost from "../components/Articles/LatestPost";
 import AllPosts from "../components/Articles/AllPosts";
 import { GetAllPostsFromCat } from "../services/Articles";
+import { GetAllTags } from "../services/Tags";
 
 const ArticlesPage = () => {
   const params = useParams();
 
   const [articles, setArticles] = useState([]);
+  const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     GetAllPostsFromCat(params.type).then((result) => {
       setArticles(result);
-      setLoading(false);
+      
     });
+
+    GetAllTags().then(result => {
+      setTags(result)
+    })
+
+    setLoading(false);
   }, [params.type]);
 
   if (loading) {
@@ -50,7 +58,7 @@ const ArticlesPage = () => {
       {articles.length !== 0 ? (
         <>
           <LatestPost article={articles[0]} />
-          <AllPosts articles={articles} />
+          <AllPosts articles={articles} tags={tags} />
         </>
       ) : (
         <p className="text-center">There are no yet posts available :(</p>

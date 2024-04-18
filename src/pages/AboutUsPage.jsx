@@ -13,7 +13,6 @@ const AboutUsPage = () => {
     GetUsers().then(result => {
 
       const wildverband = result.filter(user => user.rol === "wildverband");
-      console.log(wildverband);
       setUsersWildVerband(wildverband)
 
       setUsers(result.filter(user => user.rol !== "wildverband").sort((a, b) => a.rol === "editor-in-chief" ? -1 : 1))
@@ -56,7 +55,7 @@ const AboutUsPage = () => {
           <p className="text-center">
           Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
           <br /><br />
-          We are a small group of passionate readers, writers, critics, practitioners and artists based in Brussels who wanted to create an unpretentious, open space for young creatives to meet and exchange ideas. In the spirit of Virginia Woolf, we searched for <i>a room of one’s own</i> after the working hours. Pub talks, text chains, coffee breaks and unhinged dinner parties craved for a common place..
+          We are a small group of passionate readers, writers, critics, practitioners and artists based in Brussels who wanted to create a humble, open space for young creatives to meet and exchange ideas. In the spirit of Virginia Woolf, we searched for <i>a room of one’s own</i> after the working hours. Pub talks, text chains, coffee breaks and unhinged dinner parties craved for a common place..
           Akimbo makes it possible to gather and publish texts and projects, making words and voices matter. We focus on contemporary complexities, riveting essays, aesthetic inspirations, the internal turmoil of 20-year-olds and other stories waiting to be told. 
           <br /><br />
           Akimbo is more than just an online publishing platform, it’s a vibrant community where <i>Art is theft, Art is armed robbery, Art is not pleasing your mother.</i> (Janet Malcolm)
