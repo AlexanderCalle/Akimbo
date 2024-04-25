@@ -68,12 +68,6 @@ const DiaryItemPage = () => {
             <div className="w-5/6 md:w-4/6 flex flex-col gap-4 p-2" style={{backgroundColor: item.bg_color}}>
                 <p className={`text-sm font-light text-akimbo-dark-900 ${isInverted && "invert"}`}>
                     {item.created_date.toDate().toDateString()}
-                    {item.author !== "" && (
-                        <>    
-                            , created by
-                            {" " +item.author}
-                        </>
-                    )}
                 </p>
                 <p
                 className={`${isInverted && "[&_*:not(image)]:invert"}`}

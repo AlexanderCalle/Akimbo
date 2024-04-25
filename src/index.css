@@ -25,6 +25,11 @@ ol {
   padding: 0 30px;
 }
 
+ul {
+  list-style-type: disc;
+  padding: 0 30px;
+}
+
 .ql-size-small {
   font-size: 0.75em;
 }

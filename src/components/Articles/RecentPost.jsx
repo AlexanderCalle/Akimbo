@@ -40,12 +40,12 @@ const RecentPost = ({ article, idx }) => {
           <h3 className="text-lg font-medium">{article.title}</h3>
         </div>
         <p
-          className={`w-full max-h-48 text-ellipsis overflow-scroll  text-start`}
+          className={`w-full max-h-48 text-ellipsis overflow-hidden  text-start`}
         >{article.description}</p>
         <button
           className="bg-akimbo-dark-900 px-3 py-2 text-akimbo-light"
           onClick={() => {
-            navigate(`/articles/${article.cat}/${article.id}`);
+            navigate(article.type === TYPE_ARTICLE ? `/articles/${article.cat}/${article.id}` : `/diary/${article.id}`);
           }}
         >
           Further reading

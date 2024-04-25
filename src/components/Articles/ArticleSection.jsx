@@ -34,7 +34,7 @@ const ArticleSection = ({ article, idx }) => {
           <h3 className="text-lg font-medium">{article.title}</h3>
         </div>
         <p
-          className={`w-full h-2/3 overflow-scroll text-ellipsis text-center lg:text-${
+          className={`w-full h-2/3 overflow-hidden text-ellipsis text-center lg:text-${
             idx % 2 === 0 ? "start" : "end"
           }`}
           dangerouslySetInnerHTML={{ __html: article.description }}

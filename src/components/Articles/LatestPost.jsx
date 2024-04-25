@@ -9,7 +9,7 @@ const LatestPost = ({ article }) => {
           <h3 className="text-lg font-medium">Latest: {article.title}</h3>
         </div>
         <p
-          className="text-end overflow-scroll text-ellipsis"
+          className="text-end overflow-hidden text-ellipsis"
           dangerouslySetInnerHTML={{ __html: article.description }}
         ></p>
         <Link
