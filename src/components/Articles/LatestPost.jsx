@@ -5,8 +5,9 @@ const LatestPost = ({ article }) => {
   return (
     <div className="w-full md:w-10/12 mx-auto flex gap-6">
       <div className="flex absolute z-10 my-48 mx-5 max-h-72 md:mx-24 w-4/6 md:w-3/6 lg:w-2/6 h-auto p-5 flex-col gap-3 items-start bg-akimbo-light bg-opacity-70">
-        <div className="flex gap-2">
+        <div className="flex flex-col gap">
           <h3 className="text-lg font-medium">Latest: {article.title}</h3>
+          <p className="text-sm font-light">{article.author}</p>
         </div>
         <p
           className="text-end overflow-hidden text-ellipsis"
