@@ -34,11 +34,16 @@ const getDocData = async (querySnap) => {
 }
 
 const GetAllArticles = async () => {    
-    const qeurySnapshot = await getDocs(collection(db, collection_name));
+    try{
+        const qeurySnapshot = await getDocs(collection(db, collection_name));
 
-    const data = await getDocData(qeurySnapshot);
+        const data = await getDocData(qeurySnapshot);
 
-    return data;
+        return data;
+    } catch(error) {
+        console.log(error);
+        throw new Error(error)
+    }
 }
 
 const GetArticleWithId = async (articleId) => {
