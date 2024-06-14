@@ -32,6 +32,7 @@ const ArticleSection = ({ article, idx }) => {
             ))}
           </div>
           <h3 className="text-lg font-medium">{article.title}</h3>
+          <p className="text-sm font-light">{article.author}</p>
         </div>
         <p
           className={`w-full h-2/3 overflow-hidden text-ellipsis text-center lg:text-${
