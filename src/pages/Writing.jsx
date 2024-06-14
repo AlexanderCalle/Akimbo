@@ -6,6 +6,7 @@ import Select from "react-select";
 import { PostArticle } from "../services/Articles";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import SwitchButton from "../components/ui/switchButton";
 
 const Writing = ({
   updateTitle = "",
@@ -17,6 +18,7 @@ const Writing = ({
   updateImage = null,
   updateImageTitle = "",
   updateImageAuthor = "",
+  updateIsPublished = false
 }) => {
   const [title, setTitle] = useState(updateTitle);
   const [content, setContent] = useState(updateContent);
@@ -27,6 +29,7 @@ const Writing = ({
   const [image, setImage] = useState(updateImage);
   const [imageTitle, setImageTitle] = useState(updateImageTitle);
   const [imageAuthor, setImageAuthor] = useState(updateImageAuthor);
+  const [isPublished, setIsPublished] = useState(updateIsPublished);
 
   const navigate = useNavigate();
 
@@ -55,6 +58,7 @@ const Writing = ({
         image,
         imageTitle,
         imageAuthor,
+        isPublished
       }).then((result) => {
         navigate("/dashboard/overview");
       }),
@@ -176,7 +180,7 @@ const Writing = ({
           onChange={(e) => setImageAuthor(e.target.value)}
           required
         />
-
+        <SwitchButton name={"Publish?"} value={isPublished} setValue={setIsPublished} />
         <button
           type="submit"
           className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"
