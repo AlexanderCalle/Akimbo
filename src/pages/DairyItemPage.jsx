@@ -2,7 +2,7 @@ import MainLayout from '../layouts/MainLayout'
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetDairyItemById } from "../services/Posts";
-import contrast from "../services/Contrast";
+import contrast from "../utils/Contrast";
 
 const DiaryItemPage = () => {
 

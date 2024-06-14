@@ -2,6 +2,9 @@ import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateD
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getTag } from "./Tags";
+import { getEnv } from "../utils/getEnv";
+
+const collection_name = "articles" + getEnv();
 
 const GetTagsArticle = async (article) => {
     let tags = article.tags.map(async (tag) => {
@@ -31,7 +34,7 @@ const getDocData = async (querySnap) => {
 }
 
 const GetAllArticles = async () => {    
-    const qeurySnapshot = await getDocs(collection(db, "articles"));
+    const qeurySnapshot = await getDocs(collection(db, collection_name));
 
     const data = await getDocData(qeurySnapshot);
 
@@ -39,7 +42,7 @@ const GetAllArticles = async () => {
 }
 
 const GetArticleWithId = async (articleId) => {
-    const docRef = doc(db, "articles", articleId);
+    const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
     const docData = snapshot.data();
 
@@ -50,7 +53,7 @@ const GetArticleWithId = async (articleId) => {
 }
 
 const GetArticleWithIdUpdate = async (articleId) => {
-    const docRef = doc(db, "articles", articleId);
+    const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
     const docData = snapshot.data();
 
@@ -79,7 +82,7 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
             created_date
         }
 
-        const docRef  = await addDoc(collection(db, "articles"), data)
+        const docRef  = await addDoc(collection(db, collection_name), data)
         
         return docRef.id
     
@@ -107,7 +110,7 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
             data = {...data, image: await getDownloadURL(snapshot.ref)}
         }
         
-        await updateDoc(doc(db, "articles", docId), data)
+        await updateDoc(doc(db, collection_name, docId), data)
     
     } catch(err) {
         console.log(err);
@@ -117,7 +120,7 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
 
 const DeleteArticle = async (articleId) => {
   try {
-      await deleteDoc(doc(db, "articles", articleId));
+      await deleteDoc(doc(db, collection_name, articleId));
       return "succes"
   } catch (err) {
       throw new Error("Something went wrong: " + err.message)
@@ -126,7 +129,7 @@ const DeleteArticle = async (articleId) => {
 
 const GetMostRecentPosts = async () => {
     try {
-        const qeurySnapshot = await getDocs(collection(db, "articles"));
+        const qeurySnapshot = await getDocs(collection(db, collection_name));
         const data = await getDocData(qeurySnapshot);
         return data.sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3) 
     } catch(err) {
@@ -137,7 +140,7 @@ const GetMostRecentPosts = async () => {
 const GetAllPostsFromCat = async (category) => {
     try {
         let data = [];
-        const qeurySnapshot = await getDocs(collection(db, "articles"));
+        const qeurySnapshot = await getDocs(collection(db, collection_name));
 
         data = await getDocData(qeurySnapshot);
 

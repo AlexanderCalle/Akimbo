@@ -2,6 +2,9 @@ import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "./Firebase";
 import toast from "react-hot-toast";
+import { getEnv } from "../utils/getEnv";
+
+const collection_name = "users" + getEnv();
 
 const GetUser = async () => {
     let userId;
@@ -11,7 +14,7 @@ const GetUser = async () => {
         userId = user.uid;
       }
     });
-    const userRef = doc(db, "users", userId);
+    const userRef = doc(db, collection_name, userId);
     const userSnap = await getDoc(userRef);
 
     if(userSnap.exists()) return await userSnap.data();
@@ -29,7 +32,7 @@ const GetUsers = async () => {
   try {
     const data = [];
     
-    const qeurySnapshot = await getDocs(collection(db, "users"));
+    const qeurySnapshot = await getDocs(collection(db, collection_name));
 
     qeurySnapshot.forEach((doc) => {
       const docData = doc.data();

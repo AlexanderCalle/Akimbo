@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
+import { getEnv } from "../utils/getEnv";
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -54,7 +55,9 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
   
 
-  useEffect(() => console.log(translateX), [translateX])
+  useEffect(() => {
+    console.log(getEnv())
+  }, [])
 
   return (
     <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
