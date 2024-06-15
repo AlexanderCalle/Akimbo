@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import SwitchButton from "../components/ui/switchButton";
 import DatePicker from "../components/ui/DatePicker";
+import SelectItems from "../components/ui/SelectItems";
 
 const Writing = ({
   updateTitle = "",
@@ -136,20 +137,7 @@ const Writing = ({
           ))}
         </select>
         <label htmlFor="tags">Tags</label>
-        <Select
-          classNames={{
-            control: () => "border border-solid bg-akimbo-light rounded-sm",
-            container: () => "border border-solid bg-akimbo-light rounded-sm",
-          }}
-          isMulti
-          options={tags}
-          name="tags"
-          onChange={(value) =>
-            setSelectedTags(value.map((value) => value.value))
-          }
-          required
-        />
-
+        <SelectItems options={tags} setSelected={setSelectedTags} />
         <label htmlFor="file_input">Upload image</label>
         <input
           className="block w-full text-sm text-akimbo-dark-900 border border-akimbo-dark-900 cursor-pointer bg-gray-50"

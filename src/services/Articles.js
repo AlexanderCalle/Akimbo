@@ -62,8 +62,14 @@ const GetArticleWithIdUpdate = async (articleId) => {
     const snapshot = await getDoc(docRef);
     const docData = snapshot.data();
 
+    let tags = []
+
+    docData.tags.forEach(async tag => {
+        tags.push(getTag(tag))
+    });
+
     let article = {id: doc.id, ...docData}
-    
+    article.tags = Promise.all(tags)
     return article
 }
 
