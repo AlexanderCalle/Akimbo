@@ -53,11 +53,6 @@ const HeroSection = () => {
   )
   const scale = useTransform(scrollYProgress, [0.2, .8], [1, .05]);
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
-  
-
-  useEffect(() => {
-    console.log(getEnv())
-  }, [])
 
   return (
     <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>

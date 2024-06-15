@@ -130,6 +130,7 @@ const OverviewArticles = () => {
                         </div>
                     </th>
                     <th scope="col" className="px-6 py-5">Description</th>
+                    <th scope="col" className="px-6 py-5">Published</th>
                     <th scope="col" className="px-6 py-5"></th>
                     </tr>
                 </thead>

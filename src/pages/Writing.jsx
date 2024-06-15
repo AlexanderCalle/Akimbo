@@ -6,6 +6,8 @@ import Select from "react-select";
 import { PostArticle } from "../services/Articles";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import SwitchButton from "../components/ui/switchButton";
+import DatePicker from "../components/ui/DatePicker";
 
 const Writing = ({
   updateTitle = "",
@@ -17,6 +19,8 @@ const Writing = ({
   updateImage = null,
   updateImageTitle = "",
   updateImageAuthor = "",
+  updateIsPublished = false,
+  updateStartDate = ""
 }) => {
   const [title, setTitle] = useState(updateTitle);
   const [content, setContent] = useState(updateContent);
@@ -27,6 +31,8 @@ const Writing = ({
   const [image, setImage] = useState(updateImage);
   const [imageTitle, setImageTitle] = useState(updateImageTitle);
   const [imageAuthor, setImageAuthor] = useState(updateImageAuthor);
+  const [isPublished, setIsPublished] = useState(updateIsPublished);
+  const [startDate, setStartDate] = useState()
 
   const navigate = useNavigate();
 
@@ -55,6 +61,8 @@ const Writing = ({
         image,
         imageTitle,
         imageAuthor,
+        isPublished,
+        start_date: startDate ? startDate : null
       }).then((result) => {
         navigate("/dashboard/overview");
       }),
@@ -176,7 +184,9 @@ const Writing = ({
           onChange={(e) => setImageAuthor(e.target.value)}
           required
         />
-
+        <label htmlFor="start_date">Start date <span className="text-akimbo-dark-500 text-sm">(not required)</span></label>
+        <DatePicker setValue={setStartDate} />
+        <SwitchButton name={"Publish?"} value={isPublished} setValue={setIsPublished} />
         <button
           type="submit"
           className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"
