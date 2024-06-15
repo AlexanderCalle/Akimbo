@@ -6,6 +6,8 @@ import Select from "react-select";
 import { GetAllTags, getTag } from "../services/Tags";
 import { GetAllCategories } from "../services/Categories";
 import toast from "react-hot-toast";
+import SwitchButton from "../components/ui/switchButton";
+import DatePicker from "../components/ui/DatePicker";
 
 const UpdatePost = () => {
   const params = useParams();
@@ -19,6 +21,8 @@ const UpdatePost = () => {
   const [image, setImage] = useState(null);
   const [imageTitle, setImageTitle] = useState("");
   const [imageAuthor, setImageAuthor] = useState("");
+  const [isPublished, setIsPublished] = useState(false);
+  const [startDate, setStartDate] = useState()
 
   const navigate = useNavigate();
 
@@ -54,6 +58,8 @@ const UpdatePost = () => {
       
       setImageAuthor(result.imageAuthor);
       setImageTitle(result.imageTitle);
+      setStartDate(result.start_date?.toDate())
+      setIsPublished(result.isPublished);
     });
 
   }, [params.id]);
@@ -72,6 +78,8 @@ const UpdatePost = () => {
         image,
         imageTitle,
         imageAuthor,
+        isPublished,
+        start_date: startDate ? startDate : null,
         docId,
       })
         .then((result) => {
@@ -203,6 +211,9 @@ const UpdatePost = () => {
           onChange={(e) => setImageAuthor(e.target.value)}
           required
         />
+        <label htmlFor="start_date">Start date <span className="text-akimbo-dark-500 text-sm">(not required)</span></label>
+        <DatePicker value={startDate} setValue={setStartDate} />
+        <SwitchButton name={"Publish?"} value={isPublished} setValue={setIsPublished} />
         <button
           type="submit"
           className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"

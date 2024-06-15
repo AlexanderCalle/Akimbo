@@ -1,4 +1,4 @@
-import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateDoc, query, where, orderBy, limit } from "firebase/firestore";
+import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateDoc, query, where, orderBy, limit, or, and } from "firebase/firestore";
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getTag } from "./Tags";
@@ -35,7 +35,7 @@ const getDocData = async (querySnap) => {
 
 const GetAllArticles = async () => {    
     try{
-        const qeurySnapshot = await getDocs(collection(db, collection_name));
+        const qeurySnapshot = await getDocs(query(collection(db, collection_name), orderBy("isPublished", "asc"), orderBy("created_date", "desc")));
 
         const data = await getDocData(qeurySnapshot);
 
@@ -67,7 +67,7 @@ const GetArticleWithIdUpdate = async (articleId) => {
     return article
 }
 
-const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished}) => {
+const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished, start_date}) => {
     try {
         const storageRef = ref(storage, "articlesImages/" + image.name)
 
@@ -85,7 +85,8 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
             imageTitle,
             imageAuthor,
             created_date,
-            isPublished
+            isPublished,
+            start_date
         }
 
         const docRef  = await addDoc(collection(db, collection_name), data)
@@ -97,7 +98,7 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
     }
 }
 
-const UpdateArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished, docId}) => {
+const UpdateArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished, start_date, docId}) => {
     try {
         
         let data = {
@@ -109,7 +110,8 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
             tags,
             imageTitle,
             imageAuthor,
-            isPublished
+            isPublished,
+            start_date
         }
         if(image != null) {
             const storageRef = ref(storage, "articlesImages/" + image.name)
@@ -149,8 +151,15 @@ const GetMostRecentPosts = async () => {
     try {
         const qeurySnapshot = await getDocs(query(
             collection(db, collection_name), 
-            where("isPublished", "==", true), 
-            orderBy("created_date", "desc"), 
+            and(
+                where("isPublished", "==", true),
+                or(
+                    where("start_date" , "<=", Timestamp.now()),
+                    where("start_date", "==", null)
+                ),
+            ),
+            orderBy("start_date", "desc"),
+            orderBy("created_date", "desc"),
             limit(3)
         ));
         const data = await getDocData(qeurySnapshot);
@@ -168,8 +177,14 @@ const GetAllPostsFromCat = async (category) => {
         const qeurySnapshot = await getDocs(
             query(
                 collection(db, collection_name), 
-                where("cat", "==", category), 
-                where("isPublished", "==", true),
+                and(
+                    where("isPublished", "==", true),
+                    or(
+                        where("start_date", "<=", Timestamp.now()),
+                        where("start_date", "==", null)
+                    ),
+                ),
+                orderBy("start_date", "desc"),
                 orderBy("created_date", "desc")
             )
         );
@@ -183,4 +198,14 @@ const GetAllPostsFromCat = async (category) => {
      }
 }
 
-export {GetAllArticles, GetArticleWithId, PostArticle, UpdateArticle, DeleteArticle, GetMostRecentPosts, GetAllPostsFromCat, GetArticleWithIdUpdate}
+export {
+    GetAllArticles, 
+    GetArticleWithId, 
+    PostArticle, 
+    UpdateArticle, 
+    UpdatePublishStateArticle,
+    DeleteArticle, 
+    GetMostRecentPosts, 
+    GetAllPostsFromCat, 
+    GetArticleWithIdUpdate
+}
