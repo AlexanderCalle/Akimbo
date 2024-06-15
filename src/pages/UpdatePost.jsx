@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GetArticleWithIdUpdate, UpdateArticle } from "../services/Articles";
 import Editor from "../components/Editor";
-import Select from "react-select";
-import { GetAllTags, getTag } from "../services/Tags";
+import { GetAllTags } from "../services/Tags";
 import { GetAllCategories } from "../services/Categories";
 import toast from "react-hot-toast";
 import SwitchButton from "../components/ui/switchButton";
 import DatePicker from "../components/ui/DatePicker";
+import SelectItems from "../components/ui/SelectItems";
 
 const UpdatePost = () => {
   const params = useParams();
@@ -46,15 +46,13 @@ const UpdatePost = () => {
       setAuthor(result.author);
       setSelectedCat(result.cat);
       //setSelectedTags(result.tags);
+
       const setDef = async (tagsSel) => {
-        await tagsSel.forEach(async (tag) => {
-          const tagResult = await getTag(tag);
-          let newTags = [ ...tagsDef, tagResult ];
-          setTagsDef(newTags);
-        });
-        setSelectedTags(tagsSel)
+        setTagsDef(tagsSel);
+        setSelectedTags(tagsSel.map(tag => tag.value))
       };
-      await setDef(result.tags);
+
+      setDef(await result.tags);
       
       setImageAuthor(result.imageAuthor);
       setImageTitle(result.imageTitle);
@@ -162,20 +160,11 @@ const UpdatePost = () => {
         {tagsDef.length < 1 ? (
           "Loading..."
         ) : (
-          <Select
-            defaultValue={tagsDef}
-            classNames={{
-              control: () => "border border-solid bg-akimbo-light rounded-sm",
-              container: () => "border border-solid bg-akimbo-light rounded-sm",
-            }}
-            isMulti
-            options={tags}
-            name="tags"
-            onChange={(value) =>
-              setSelectedTags(value.map((value) => value.value))
-            }
-            required
-          />
+         <SelectItems
+          options={tags}
+          selectedValues={tagsDef}
+          setSelected={setSelectedTags}
+         />
         )}
 
         <label htmlFor="file_input">Upload image</label>
@@ -191,7 +180,8 @@ const UpdatePost = () => {
           class="-mt-1 text-sm text-gray-500 dark:text-gray-300"
           id="file_input_help"
         >
-          SVG, PNG, JPG or GIF (MAX. 800x400px).
+          SVG, PNG, JPG or GIF (MAX. 800x400px). <br />
+          (Not required when updating, image will be old image)
         </p>
         <label htmlFor="image_title">Image title</label>
         <input
