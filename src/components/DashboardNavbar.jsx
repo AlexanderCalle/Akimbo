@@ -2,13 +2,25 @@ import React, { useEffect, useState } from "react";
 import { GetUser } from "../services/Users";
 import { logout } from "../services/Authentication";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const DashboardNavbar = () => {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
     async function fetchData() {
-      setUserData(await GetUser());
+      GetUser().then(result => {
+
+        if(result) {
+          setUserData(result);
+        }
+        else {
+          toast.error('No user found')
+        }
+
+      }).catch(err => {
+        toast.error(`Something went wrong while fetching user data`)
+      })
     }
     fetchData();
   }, []);
@@ -20,16 +32,18 @@ const DashboardNavbar = () => {
         <Link to={"/dashboard/overview"} className="hover:underline">
           Overview
         </Link>
-        <Link to={"/dashboard/writing"} className="hover:underline">
+        <Link to={"/dashboard/articles"}>
+          Articles
+        </Link>
+        {/* <Link to={"/dashboard/writing"} className="hover:underline">
           Writing
-        </Link >
+        </Link > */}
         <Link to={"/dashboard/diary"} className="hover:underline">
           Dear Digital Dairy
         </Link>
         {userData.is_admin && (
           <>
             <Link className="hover:underline">Users</Link>
-            <Link className="hover:underline">Aproval</Link>
           </>
         )}
       </section>

@@ -1,32 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { GetArticleWithIdUpdate, UpdateArticle } from "../services/Articles";
-import Editor from "../components/Editor";
-import { GetAllTags } from "../services/Tags";
-import { GetAllCategories } from "../services/Categories";
+import Editor from "../../../components/Editor";
+import { GetAllTags } from "../../../services/Tags";
+import { GetAllCategories } from "../../../services/Categories";
+import Select from "react-select";
+import { PostArticle } from "../../../services/Articles";
 import toast from "react-hot-toast";
-import SwitchButton from "../components/ui/switchButton";
-import DatePicker from "../components/ui/DatePicker";
-import SelectItems from "../components/ui/SelectItems";
+import { useNavigate } from "react-router-dom";
+import SwitchButton from "../../../components/ui/switchButton";
+import DatePicker from "../../../components/ui/DatePicker";
+import SelectItems from "../../../components/ui/SelectItems";
 
-const UpdatePost = () => {
-  const params = useParams();
-
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [description, setDescription] = useState("");
-  const [author, setAuthor] = useState("");
-  const [selectedCat, setSelectedCat] = useState("");
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [image, setImage] = useState(null);
-  const [imageTitle, setImageTitle] = useState("");
-  const [imageAuthor, setImageAuthor] = useState("");
-  const [isPublished, setIsPublished] = useState(false);
+const Writing = ({
+  updateTitle = "",
+  updateContent = "",
+  updateDescription = "",
+  updateAuthor = "",
+  updateSelectedCat = "",
+  updateSelectedTags = [],
+  updateImage = null,
+  updateImageTitle = "",
+  updateImageAuthor = "",
+  updateIsPublished = false,
+  updateStartDate = ""
+}) => {
+  const [title, setTitle] = useState(updateTitle);
+  const [content, setContent] = useState(updateContent);
+  const [description, setDescription] = useState(updateDescription);
+  const [author, setAuthor] = useState(updateAuthor);
+  const [selectedCat, setSelectedCat] = useState(updateSelectedCat);
+  const [selectedTags, setSelectedTags] = useState(updateSelectedTags);
+  const [image, setImage] = useState(updateImage);
+  const [imageTitle, setImageTitle] = useState(updateImageTitle);
+  const [imageAuthor, setImageAuthor] = useState(updateImageAuthor);
+  const [isPublished, setIsPublished] = useState(updateIsPublished);
   const [startDate, setStartDate] = useState()
 
   const navigate = useNavigate();
 
-  const [tagsDef, setTagsDef] = useState([]);
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -38,35 +48,11 @@ const UpdatePost = () => {
     GetAllCategories().then((result) => {
       setCategories(result);
     });
-
-    GetArticleWithIdUpdate(params.id).then(async (result) => {
-      setTitle(result.title);
-      setContent(result.content);
-      setDescription(result.description);
-      setAuthor(result.author);
-      setSelectedCat(result.cat);
-      //setSelectedTags(result.tags);
-
-      const setDef = async (tagsSel) => {
-        setTagsDef(tagsSel);
-        setSelectedTags(tagsSel.map(tag => tag.value))
-      };
-
-      setDef(await result.tags);
-      
-      setImageAuthor(result.imageAuthor);
-      setImageTitle(result.imageTitle);
-      setStartDate(result.start_date?.toDate())
-      setIsPublished(result.isPublished);
-    });
-
-  }, [params.id]);
+  }, []);
 
   async function handleSubmit() {
-    const docId = params.id;
-
     toast.promise(
-      UpdateArticle({
+      PostArticle({
         title,
         content,
         description,
@@ -77,15 +63,10 @@ const UpdatePost = () => {
         imageTitle,
         imageAuthor,
         isPublished,
-        start_date: startDate ? startDate : null,
-        docId,
-      })
-        .then((result) => {
-          navigate("/dashboard/overview");
-        })
-        .catch((err) => {
-          console.log(err);
-        }),
+        start_date: startDate ? startDate : null
+      }).then((result) => {
+        navigate("/dashboard/overview");
+      }),
       {
         loading: "Posting ...",
         success: <b>Article posted!</b>,
@@ -147,26 +128,16 @@ const UpdatePost = () => {
         <select
           name="categories"
           id="categories"
-          value={selectedCat}
           onChange={(e) => setSelectedCat(e.target.value)}
           className="py-1 px-2 rounded-sm border bg-right border-akimbo-dark-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full"
         >
-          <option defaultChecked>-- Select category --</option>
-          {categories.map((category) => (
-            <option value={category.name}>{category.name}</option>
+          <option selected>-- Select category --</option>
+          {categories.map((category, idx) => (
+            <option key={idx} value={category.name}>{category.name}</option>
           ))}
         </select>
         <label htmlFor="tags">Tags</label>
-        {tagsDef.length < 1 ? (
-          "Loading..."
-        ) : (
-         <SelectItems
-          options={tags}
-          selectedValues={tagsDef}
-          setSelected={setSelectedTags}
-         />
-        )}
-
+        <SelectItems options={tags} setSelected={setSelectedTags} />
         <label htmlFor="file_input">Upload image</label>
         <input
           className="block w-full text-sm text-akimbo-dark-900 border border-akimbo-dark-900 cursor-pointer bg-gray-50"
@@ -175,13 +146,13 @@ const UpdatePost = () => {
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
+          required
         />
         <p
           class="-mt-1 text-sm text-gray-500 dark:text-gray-300"
           id="file_input_help"
         >
-          SVG, PNG, JPG or GIF (MAX. 800x400px). <br />
-          (Not required when updating, image will be old image)
+          SVG, PNG, JPG or GIF (MAX. 800x400px).
         </p>
         <label htmlFor="image_title">Image title</label>
         <input
@@ -202,17 +173,17 @@ const UpdatePost = () => {
           required
         />
         <label htmlFor="start_date">Start date <span className="text-akimbo-dark-500 text-sm">(not required)</span></label>
-        <DatePicker value={startDate} setValue={setStartDate} />
+        <DatePicker setValue={setStartDate} />
         <SwitchButton name={"Publish?"} value={isPublished} setValue={setIsPublished} />
         <button
           type="submit"
           className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"
         >
-          Update article
+          Post article
         </button>
       </form>
     </div>
   );
 };
 
-export default UpdatePost;
+export default Writing;
