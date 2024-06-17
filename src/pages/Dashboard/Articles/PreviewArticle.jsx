@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GetArticleWithId } from "../services/Articles";
+import { GetArticleWithId } from "../../../services/Articles";
 
 export const PreviewArticle = () => {
   const params = useParams();

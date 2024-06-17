@@ -11,14 +11,17 @@ const GetUser = async () => {
     const auth = getAuth();
     await onAuthStateChanged(auth, (user) => {
       if (user) {
+
         userId = user.uid;
       }
     });
+
     const userRef = doc(db, collection_name, userId);
     const userSnap = await getDoc(userRef);
 
-    if(userSnap.exists()) return await userSnap.data();
-    else return "No such user!"
+    if(userSnap.exists()) 
+      return await userSnap.data();
+    return null
 }
 
 const GetAuthor = async (userRef) => {

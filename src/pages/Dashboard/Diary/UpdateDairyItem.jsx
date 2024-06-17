@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Editor from "../components/Editor";
+import Editor from "../../../components/Editor";
 import toast from "react-hot-toast";
 import { ChromePicker} from 'react-color';
-import { GetDairyItemById, UpdateDairyPostById } from "../services/Posts";
+import { GetDairyItemById, UpdateDairyPostById } from "../../../services/Posts";
 
 const UpdateDairyItem = () => {
     const params = useParams();
