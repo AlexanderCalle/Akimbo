@@ -91,10 +91,10 @@ const OverviewArticles = () => {
             <div className="mb-5">
                 <Table>
                   <TableHead>
-                    <TableHeadItem name="Title" isSortable={true} />
-                    <TableHeadItem name="Category" isSortable={true} />
-                    <TableHeadItem name="Author" isSortable={true} />
-                    <TableHeadItem name="Description" />
+                    <TableHeadItem name="Title" isSortable />
+                    <TableHeadItem name="Category" isSortable />
+                    <TableHeadItem name="Author" isSortable />
+                    <TableHeadItem name="Start date" isSortable />
                     <TableHeadItem name="Published" />
                     <TableHeadItem />
                 </TableHead>

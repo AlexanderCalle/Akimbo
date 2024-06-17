@@ -1,10 +1,11 @@
+import PlannedArticles from "../../components/Articles/PlannedArticles";
 import OverviewDairyItems from "../../components/Dairy/OverviewDairyItems";
 
 const OverviewPosts = () => {
 
   return (
     <div>
-      <h2>Planned Articles</h2>
+      <PlannedArticles />
       {/* <OverviewArticles /> */}
       {/* <OverviewDairyItems /> */}
     </div>

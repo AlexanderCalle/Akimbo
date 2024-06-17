@@ -46,6 +46,26 @@ const GetAllArticles = async () => {
     }
 }
 
+const GetPlannedArticles = async () => {
+    try {
+        const qeurySnapshot = await getDocs(
+            query(
+                collection(db, collection_name),
+                or(
+                    where("start_date", ">", Timestamp.now()),
+                    where("isPublished", "==", false)
+                ),
+                orderBy("start_date", "asc"),
+                orderBy("created_date", "asc")
+            )
+        )
+
+        return await getDocData(qeurySnapshot);
+    } catch(err) {
+        throw new Error(err);
+    }
+}
+
 const GetArticleWithId = async (articleId) => {
     const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
@@ -206,6 +226,7 @@ const GetAllPostsFromCat = async (category) => {
 
 export {
     GetAllArticles, 
+    GetPlannedArticles,
     GetArticleWithId, 
     PostArticle, 
     UpdateArticle, 

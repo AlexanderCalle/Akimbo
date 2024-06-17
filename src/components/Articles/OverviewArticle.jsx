@@ -48,7 +48,7 @@ const OverviewArticle = ({article, onDelete}) => {
             <TableCell>{article.title}</TableCell>
             <TableCell>{article.cat}</TableCell>
             <TableCell>{article.author}</TableCell>
-            <TableCell>{article.description}</TableCell>
+            <TableCell>{article.start_date?.toDate().toDateString()}</TableCell>
             <td className="px-6 py-3">
                 <Button handleClick={handleUpdatePublish}>
                     {isPublished ? "Deactivate" : "Activate"}
