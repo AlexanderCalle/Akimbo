@@ -17,7 +17,7 @@ const GetTagsArticle = async (article) => {
     return tags;
 }
 
-const getDocData = async (querySnap) => {
+export const getDocData = async (querySnap) => {
     try {
         let data = querySnap.docs.map(async (doc) => {
             const docData = doc.data();

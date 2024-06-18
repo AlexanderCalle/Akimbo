@@ -15,13 +15,13 @@ const GetUser = async () => {
         userId = user.uid;
       }
     });
-
+    
     const userRef = doc(db, collection_name, userId);
     const userSnap = await getDoc(userRef);
 
     if(userSnap.exists()) 
       return await userSnap.data();
-    return null
+    return "No such user!"
 }
 
 const GetAuthor = async (userRef) => {

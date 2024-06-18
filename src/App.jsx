@@ -19,6 +19,7 @@ import DearDigitalDairy from "./pages/DearDigitalDairy";
 import DairyItemPage from "./pages/DairyItemPage";
 import OverviewArticles from "./pages/Dashboard/Articles/OverviewArticles";
 import OverviewDiary from "./pages/Dashboard/Diary/OverviewDiary";
+import UsersPage from "./pages/Dashboard/Users/UsersPage";
 
 const App = () => {
   return (
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="diary/create" Component={DearDigitalDairyForm} />
           <Route path="diary/preview/:id" Component={PreviewDairyItem} />
           <Route path="diary/update/:id" Component={UpdateDairyItem} />
+          <Route path="users" Component={UsersPage} />
         </Route>
         <Route path="*" Component={NotFound} />
       </Routes>

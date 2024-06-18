@@ -43,7 +43,7 @@ const DashboardNavbar = () => {
         </Link>
         {userData.is_admin && (
           <>
-            <Link className="hover:underline">Users</Link>
+            <Link to={"/dashboard/users"} className="hover:underline">Users</Link>
           </>
         )}
       </section>
