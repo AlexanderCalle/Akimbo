@@ -5,7 +5,7 @@ import LabelTextArea from '../ui/LabelTextArea';
 import ColorPicker from '../ui/ColorPicker';
 import Button from '../ui/Button';
 import PlaceholderImage from '../../assets/Placeholder 600x400.png'
-import { CreateUser } from '../../services/Users';
+import { CreateUser, UpdateUser } from '../../services/Users';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,6 +18,7 @@ const UserForm = ({
   rol = "",
   image = "",
   bio = "",
+  id = ""
 }) => {
 
   const isNewUser = firstname === "" ? true : false;
@@ -67,13 +68,27 @@ const UserForm = ({
         }
       );
     } else {
-      return;
+      toast.promise(
+        UpdateUser({...data, image: imageData, id})
+          .then(() => navigate('/dashboard/users'))
+          .catch(err => {
+            toast.error('Something went wrong updating user \n details: ' + err);
+            methods.reset();
+            setImageUrl(PlaceholderImage)
+          }), 
+        {
+          loading: 'Updating user...',
+          success: <b>User updated!</b>,
+          error: <b>Problem updating user</b>
+        }
+      );;
     }
   }
 
   return (
     <div className="w-4/6 mx-auto flex flex-col gap-5">
-      <h2 className="text-2xl underline font-semibold">Create user</h2>
+      <p>{isNewUser ? "Yes" : "No"}</p>
+      <h2 className="text-2xl underline font-semibold">{isNewUser ? "Create" : "Update"} user</h2>
       <FormProvider {...methods}>
         <form className="flex flex-col gap-3" onSubmit={methods.handleSubmit(onSubmit)}>
           <LabelTextField 
@@ -110,6 +125,7 @@ const UserForm = ({
           <ColorPicker
             name="borderColor"
             label="Color"
+            currentColor={borderColor}
             validationRules={validationRules.borderColor}
           />
           <LabelTextField
@@ -127,13 +143,13 @@ const UserForm = ({
             <label htmlFor="image">Profile picture</label>
             <img className='w-2/3' src={imageUrl} alt="" />
             <input 
-              {...methods.register("image", validationRules.image)}
+              {...methods.register("image", isNewUser ? validationRules.image : undefined)}
               onChange={handleImage}
               type="file" name="image" id="image/*" accept='image' 
             />
           </div>
           <Button type="submit">
-            Create
+            {isNewUser ? "Create" : "Update"}
           </Button>
         </form>
       </FormProvider>

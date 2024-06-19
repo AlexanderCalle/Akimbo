@@ -3,8 +3,16 @@ import TableRow from '../ui/TableComponent/TableRow'
 import TableCell from '../ui/TableComponent/TableCell'
 import ButtonEdit from '../ui/ButtonEdit'
 import ButtonDelete from '../ui/ButtonDelete'
+import { useNavigate } from 'react-router-dom'
 
 const UserItem = ({ user }) => {
+
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/dashboard/users/update/${user.id}`)
+  }
+
   return (
     <TableRow>
       <TableCell>{user.firstname + " " + user.lastname}</TableCell>
@@ -13,7 +21,7 @@ const UserItem = ({ user }) => {
       <TableCell>{user.description}</TableCell>
       <TableCell>
         <div className="flex items-center justify-center">
-          <ButtonEdit />
+          <ButtonEdit handleUpdate={handleEdit} />
           <ButtonDelete />
         </div>
       </TableCell>

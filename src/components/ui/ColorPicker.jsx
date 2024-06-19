@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ChromePicker} from 'react-color';
 import { useFormContext } from 'react-hook-form';
 
-const ColorPicker = ({ label, name, validationRules, ...rest }) => {
+const ColorPicker = ({ label, name, validationRules, currentColor = "#000", ...rest }) => {
 
   const [color, setColor] = useState({
     r: "0",
@@ -10,7 +10,7 @@ const ColorPicker = ({ label, name, validationRules, ...rest }) => {
     b: "153",
     a: "1"
   });
-  const [changeColor, setChangeColor] = useState("#000")
+  const [changeColor, setChangeColor] = useState(currentColor)
   const [displayPicker, setDisplayPicker] = useState(false);
 
   const {

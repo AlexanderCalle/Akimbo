@@ -21,6 +21,7 @@ import OverviewArticles from "./pages/Dashboard/Articles/OverviewArticles";
 import OverviewDiary from "./pages/Dashboard/Diary/OverviewDiary";
 import UsersPage from "./pages/Dashboard/Users/UsersPage";
 import CreateUserPage from "./pages/Dashboard/Users/CreateUserPage";
+import UpdateUserPage from "./pages/Dashboard/Users/UpdateUserPage";
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="diary/update/:id" Component={UpdateDairyItem} />
           <Route path="users" Component={UsersPage} />
           <Route path="users/create" Component={CreateUserPage} />
+          <Route path="users/update/:id" Component={UpdateUserPage} />
         </Route>
         <Route path="*" Component={NotFound} />
       </Routes>

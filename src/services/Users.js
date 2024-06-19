@@ -1,4 +1,4 @@
-import { doc, getDoc, getDocs, collection, Timestamp, addDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection, Timestamp, addDoc, setDoc, updateDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { db, secondaryAuth, storage } from "./Firebase";
 import toast from "react-hot-toast";
@@ -17,6 +17,17 @@ const GetUser = async () => {
     });
     
     const userRef = doc(db, collection_name, userId);
+    const userSnap = await getDoc(userRef);
+
+    if(userSnap.exists()) {
+      let data = await userSnap.data()
+      return {...data, id: userId}
+    }
+    return "No such user!"
+}
+
+const GetUserById = async (id) => {
+  const userRef = doc(db, collection_name, id);
     const userSnap = await getDoc(userRef);
 
     if(userSnap.exists()) 
@@ -86,4 +97,34 @@ const CreateUser = async ({
   }
 }
 
-export {GetUser, GetAuthor, GetUsers, CreateUser}
+const UpdateUser = async ({
+  id,
+  firstname,
+  lastname,
+  email,
+  description,
+  borderColor,
+  rol,
+  bio,
+  image
+}) => {
+  let data = {
+    firstname,
+    lastname,
+    email,
+    description,
+    rol,
+    bio,
+    borderColor,
+  }
+  
+  if(image != null) {
+      const storageRef = ref(storage, "profilePics/" + image.name)
+      const snapshot = await uploadBytes(storageRef, image)
+      data = {...data, image: await getDownloadURL(snapshot.ref)}
+  }
+
+  await updateDoc(doc(db, collection_name, id), data)
+}
+
+export {GetUser, GetUserById, GetAuthor, GetUsers, CreateUser, UpdateUser}
