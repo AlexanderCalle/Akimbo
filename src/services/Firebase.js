@@ -18,9 +18,12 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const storage = getStorage(app)
+const storage = getStorage(app);
 
-export { app, analytics, db, auth, storage };
+const secondaryApp = initializeApp(firebaseConfig, "Secondary");
+const secondaryAuth = getAuth(secondaryApp)
+
+export { app, analytics, db, auth, storage, secondaryApp, secondaryAuth};
 
 // Get a list of cities from your database
 // async function getCities(db) {

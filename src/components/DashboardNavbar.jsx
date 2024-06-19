@@ -43,15 +43,15 @@ const DashboardNavbar = () => {
         </Link>
         {userData.is_admin && (
           <>
-            <Link className="hover:underline">Users</Link>
+            <Link to={"/dashboard/users"} className="hover:underline">Users</Link>
           </>
         )}
       </section>
       <section className="flex gap-2 items-center">
-        <p>
+        <Link className="hover:underline" to={`/dashboard/users/update/${userData.id}`}>
           {userData.firstname} {userData.lastname}
           {userData.is_admin && " (admin)"}
-        </p>
+        </Link>
         <button
           className="bg-akimbo-dark-900 text-akimbo-light px-2 py-1"
           onClick={logout}
