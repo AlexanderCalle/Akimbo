@@ -38,7 +38,7 @@ const UsersList = () => {
           Overview Articles
         </h2>
         <div className="flex gap-2">
-          <Link className='bg-akimbo-dark-900 px-3 py-1 text-akimbo-light hover:bg-akimbo-dark-500'>New user</Link>
+          <Link to={"/dashboard/users/create"} className='bg-akimbo-dark-900 px-3 py-1 text-akimbo-light hover:bg-akimbo-dark-500'>New user</Link>
         </div>
       </div>
       <div className='mb-5'>
