@@ -204,6 +204,7 @@ const GetAllPostsFromCat = async (category) => {
             query(
                 collection(db, collection_name), 
                 and(
+                    where("cat", "==", category),
                     where("isPublished", "==", true),
                     or(
                         where("start_date", "<=", Timestamp.now()),
