@@ -81,13 +81,12 @@ const UserForm = ({
           success: <b>User updated!</b>,
           error: <b>Problem updating user</b>
         }
-      );;
+      );
     }
   }
 
   return (
     <div className="w-4/6 mx-auto flex flex-col gap-5">
-      <p>{isNewUser ? "Yes" : "No"}</p>
       <h2 className="text-2xl underline font-semibold">{isNewUser ? "Create" : "Update"} user</h2>
       <FormProvider {...methods}>
         <form className="flex flex-col gap-3" onSubmit={methods.handleSubmit(onSubmit)}>

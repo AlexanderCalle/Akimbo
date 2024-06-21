@@ -108,7 +108,13 @@ const OverviewArticles = () => {
                   ))}
                 </TableBody>
               </Table>
-              {showModal ? <ModalDelete article={articleToDelete} setShowModal={setShowModal} handleDelete={handleDelete} /> : null}
+              {showModal && (
+                <ModalDelete name="article" setShowModal={setShowModal} handleDelete={handleDelete}>
+                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                    Are you sure you want to delete {articleToDelete.title}?
+                  </p>
+                </ModalDelete>
+              )}
             </div>
         </div>
     )

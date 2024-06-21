@@ -22,6 +22,9 @@ import OverviewDiary from "./pages/Dashboard/Diary/OverviewDiary";
 import UsersPage from "./pages/Dashboard/Users/UsersPage";
 import CreateUserPage from "./pages/Dashboard/Users/CreateUserPage";
 import UpdateUserPage from "./pages/Dashboard/Users/UpdateUserPage";
+import OverviewPageCTA from "./pages/Dashboard/CTA/OverviewPageCTA";
+import CreateCtaPage from "./pages/Dashboard/CTA/CreateCtaPage";
+import UpdateCtaPage from "./pages/Dashboard/CTA/UpdateCtaPage";
 
 const App = () => {
   return (
@@ -52,6 +55,9 @@ const App = () => {
           <Route path="users" Component={UsersPage} />
           <Route path="users/create" Component={CreateUserPage} />
           <Route path="users/update/:id" Component={UpdateUserPage} />
+          <Route path="cta" Component={OverviewPageCTA} />
+          <Route path="cta/create" Component={CreateCtaPage} />
+          <Route path="cta/update/:id" Component={UpdateCtaPage} />
         </Route>
         <Route path="*" Component={NotFound} />
       </Routes>
