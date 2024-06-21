@@ -3,6 +3,7 @@ import RecentPosts from "../components/Articles/RecentPosts";
 import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import CtaPosts from "../components/CTA/CtaPosts";
 
 const HomePage = () => {
   
@@ -14,6 +15,7 @@ const HomePage = () => {
       </div>
       <HeroSection />
       <main className="flex-grow flex flex-col p-5" >
+        <CtaPosts />
         <RecentPosts />
         <div className="w-full md:w-10/12 m-auto flex flex-col lg:flex-row items-start lg:items-start justify-start gap-6 my-4">
           <section className="w-full lg:w-3/6 flex flex-col items-start">

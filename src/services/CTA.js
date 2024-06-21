@@ -25,24 +25,33 @@ const GetById = async (id) => {
 
 
 const GetActiveCta = async () => {
-  const querySnap = await getDocs(
-    query(
-      collection(db, collection_name), 
-      and(
-        where("startdate", "<=", new Date()),
-        where("enddate", ">=", new Date())
-      ),
-      orderBy("start_date", "asc"),
-    )
-  );
+  try {
+    // Step 1: Query documents based on 'start_date'.
+    const querySnap = await getDocs(
+      query(
+        collection(db, collection_name),
+        where("start_date", "<=", Timestamp.now()),
+        orderBy("start_date", "desc") // Ensure you have an index for this query.
+      )
+    );
 
-  let data = querySnap.docs.map((doc) => {
-    const docData = doc.data();
-    return { id: doc.id, ...docData };
-  });
+    // Current timestamp for comparison
+    const now = Timestamp.now();
 
-  return data;
+    // Step 2: Filter the results based on 'end_date' in application logic.
+    let data = querySnap.docs
+      .map(doc => {
+        const docData = doc.data();
+        return { id: doc.id, ...docData };
+      })
+      .filter(doc => doc.end_date.toDate() >= now.toDate()); // Assuming 'end_date' is a Firestore Timestamp.
 
+    return data;
+  
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
 }
 
 const CreateCta = async ({title, description, start_date, end_date, backgroundColor, image}) => {
