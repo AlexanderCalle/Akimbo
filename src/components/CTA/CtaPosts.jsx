@@ -30,7 +30,6 @@ const CtaPosts = () => {
 
   return (
     <div className='w-full md:w-10/12 m-auto'>
-      <h2 className="text-2xl font-medium underline mb-4">News</h2>
       <div className="flex flex-col gap-4">
         {ctaList.map(cta => (
           <CtaPost key={cta.id} {...cta} /> 
