@@ -1,7 +1,10 @@
-import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateDoc, query, where, orderBy, limit, or, and } from "firebase/firestore";
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getTag } from "./Tags";
+import { getEnv } from "../utils/getEnv";
+
+const collection_name = "articles" + getEnv();
 
 const GetTagsArticle = async (article) => {
     let tags = article.tags.map(async (tag) => {
@@ -14,7 +17,7 @@ const GetTagsArticle = async (article) => {
     return tags;
 }
 
-const getDocData = async (querySnap) => {
+export const getDocData = async (querySnap) => {
     try {
         let data = querySnap.docs.map(async (doc) => {
             const docData = doc.data();
@@ -31,15 +34,40 @@ const getDocData = async (querySnap) => {
 }
 
 const GetAllArticles = async () => {    
-    const qeurySnapshot = await getDocs(collection(db, "articles"));
+    try{
+        const qeurySnapshot = await getDocs(query(collection(db, collection_name), orderBy("isPublished", "asc"), orderBy("created_date", "desc")));
 
-    const data = await getDocData(qeurySnapshot);
+        const data = await getDocData(qeurySnapshot);
 
-    return data;
+        return data;
+    } catch(error) {
+        console.log(error);
+        throw new Error(error)
+    }
+}
+
+const GetPlannedArticles = async () => {
+    try {
+        const qeurySnapshot = await getDocs(
+            query(
+                collection(db, collection_name),
+                or(
+                    where("start_date", ">", Timestamp.now()),
+                    where("isPublished", "==", false)
+                ),
+                orderBy("start_date", "asc"),
+                orderBy("created_date", "asc")
+            )
+        )
+
+        return await getDocData(qeurySnapshot);
+    } catch(err) {
+        throw new Error(err);
+    }
 }
 
 const GetArticleWithId = async (articleId) => {
-    const docRef = doc(db, "articles", articleId);
+    const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
     const docData = snapshot.data();
 
@@ -50,16 +78,22 @@ const GetArticleWithId = async (articleId) => {
 }
 
 const GetArticleWithIdUpdate = async (articleId) => {
-    const docRef = doc(db, "articles", articleId);
+    const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
     const docData = snapshot.data();
 
+    let tags = []
+
+    docData.tags.forEach(async tag => {
+        tags.push(getTag(tag))
+    });
+
     let article = {id: doc.id, ...docData}
-    
+    article.tags = Promise.all(tags)
     return article
 }
 
-const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor}) => {
+const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished, start_date}) => {
     try {
         const storageRef = ref(storage, "articlesImages/" + image.name)
 
@@ -76,10 +110,12 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
             image: await getDownloadURL(snapshot.ref),
             imageTitle,
             imageAuthor,
-            created_date
+            created_date,
+            isPublished,
+            start_date
         }
 
-        const docRef  = await addDoc(collection(db, "articles"), data)
+        const docRef  = await addDoc(collection(db, collection_name), data)
         
         return docRef.id
     
@@ -88,7 +124,7 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
     }
 }
 
-const UpdateArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, docId}) => {
+const UpdateArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished, start_date, docId}) => {
     try {
         
         let data = {
@@ -100,6 +136,8 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
             tags,
             imageTitle,
             imageAuthor,
+            isPublished,
+            start_date
         }
         if(image != null) {
             const storageRef = ref(storage, "articlesImages/" + image.name)
@@ -107,7 +145,7 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
             data = {...data, image: await getDownloadURL(snapshot.ref)}
         }
         
-        await updateDoc(doc(db, "articles", docId), data)
+        await updateDoc(doc(db, collection_name, docId), data)
     
     } catch(err) {
         console.log(err);
@@ -115,9 +153,20 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
     }
 }
 
+const UpdatePublishStateArticle = async ({ docId, isPublished }) => {
+    try {
+        await updateDoc(doc(db, collection_name, docId), {
+            isPublished
+        })
+    } catch (error) {
+        console.log(error);
+        throw new Error(`Something went wrong updating article with id ${docId}`)
+    }
+}
+
 const DeleteArticle = async (articleId) => {
   try {
-      await deleteDoc(doc(db, "articles", articleId));
+      await deleteDoc(doc(db, collection_name, articleId));
       return "succes"
   } catch (err) {
       throw new Error("Something went wrong: " + err.message)
@@ -126,10 +175,24 @@ const DeleteArticle = async (articleId) => {
 
 const GetMostRecentPosts = async () => {
     try {
-        const qeurySnapshot = await getDocs(collection(db, "articles"));
+        const qeurySnapshot = await getDocs(query(
+            collection(db, collection_name), 
+            and(
+                where("isPublished", "==", true),
+                or(
+                    where("start_date" , "<=", Timestamp.now()),
+                    where("start_date", "==", null)
+                ),
+            ),
+            orderBy("start_date", "desc"),
+            orderBy("created_date", "desc"),
+            limit(3)
+        ));
         const data = await getDocData(qeurySnapshot);
-        return data.sort((a, b) => (a.created_date > b.created_date) ? -1 : 1).slice(0, 3) 
+        return data;
     } catch(err) {
+        console.log(err);
+
         throw new Error("Something went wrong fetching data.")
     }
 }
@@ -137,15 +200,40 @@ const GetMostRecentPosts = async () => {
 const GetAllPostsFromCat = async (category) => {
     try {
         let data = [];
-        const qeurySnapshot = await getDocs(collection(db, "articles"));
+        const qeurySnapshot = await getDocs(
+            query(
+                collection(db, collection_name), 
+                and(
+                    where("cat", "==", category),
+                    where("isPublished", "==", true),
+                    or(
+                        where("start_date", "<=", Timestamp.now()),
+                        where("start_date", "==", null)
+                    ),
+                ),
+                orderBy("start_date", "desc"),
+                orderBy("created_date", "desc")
+            )
+        );
 
         data = await getDocData(qeurySnapshot);
 
-        return data.filter(article => article.cat === category).sort((a, b) => (a.created_date > b.created_date) ? -1 : 1)
+        return data;
      } catch(err) {
         console.log(err);
-         throw new Error("Something went wrong fetching data.")
+        throw new Error("Something went wrong fetching data.")
      }
 }
 
-export {GetAllArticles, GetArticleWithId, PostArticle, UpdateArticle, DeleteArticle, GetMostRecentPosts, GetAllPostsFromCat, GetArticleWithIdUpdate}
+export {
+    GetAllArticles, 
+    GetPlannedArticles,
+    GetArticleWithId, 
+    PostArticle, 
+    UpdateArticle, 
+    UpdatePublishStateArticle,
+    DeleteArticle, 
+    GetMostRecentPosts, 
+    GetAllPostsFromCat, 
+    GetArticleWithIdUpdate
+}

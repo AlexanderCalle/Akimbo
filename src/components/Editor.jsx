@@ -70,7 +70,12 @@ const formats = [
   "bullet",
   "indent",
   "link",
-  "image"
+  "image",
+  "alt",
+  "height",
+  "width",
+  "style",
+  "size"
 ];
 
 const Editor = ({ content, setContent, placeholder }) => {

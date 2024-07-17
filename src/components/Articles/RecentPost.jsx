@@ -38,6 +38,7 @@ const RecentPost = ({ article, idx }) => {
             )}
           </div>
           <h3 className="text-lg font-medium">{article.title}</h3>
+          <p className="text-sm font-light">{article.author}</p>
         </div>
         <p
           className={`w-full max-h-48 text-ellipsis overflow-hidden  text-start`}

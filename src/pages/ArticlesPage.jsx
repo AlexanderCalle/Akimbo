@@ -16,7 +16,6 @@ const ArticlesPage = () => {
   useEffect(() => {
     GetAllPostsFromCat(params.type).then((result) => {
       setArticles(result);
-      
     });
 
     GetAllTags().then(result => {

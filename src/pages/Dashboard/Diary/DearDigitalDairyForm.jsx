@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Editor from "../components/Editor";
+import Editor from "../../../components/Editor";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {ChromePicker} from 'react-color';
-import { PostDiaryItem } from "../services/Posts";
+import { PostDiaryItem } from "../../../services/Posts";
 
 const DearDigitalDairyForm = () => {
     const [title, setTitle] = useState('');

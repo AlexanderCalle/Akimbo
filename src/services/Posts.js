@@ -1,6 +1,9 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { db, storage } from "./Firebase"
 import { Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { getEnv } from "../utils/getEnv";
+
+const collection_name = "posts" + getEnv();
 
 const PostDiaryItem = async ({title, content, description, author, image, image_title, image_author, bg_color, rgb_color}) => {
 
@@ -33,7 +36,7 @@ const PostDiaryItem = async ({title, content, description, author, image, image_
             created_date
         }
 
-        const docRef = await addDoc(collection(db, "posts"), data)
+        const docRef = await addDoc(collection(db, collection_name), data)
         return docRef.id
 
     } catch (error) {
@@ -67,7 +70,7 @@ const UpdateDairyPostById = async ({title, content, description, author, image, 
             data = {...data, image: await getDownloadURL(snapshot.ref)}
         }
 
-        await updateDoc(doc(db, "posts", docId), data);
+        await updateDoc(doc(db, collection_name, docId), data);
 
     } catch (error) {
         console.log(error);
@@ -76,7 +79,7 @@ const UpdateDairyPostById = async ({title, content, description, author, image, 
 }
 
 const GetAllDiaryItems = async () => {
-    const querySnapshot = await getDocs(collection(db, "posts"));
+    const querySnapshot = await getDocs(collection(db, collection_name));
 
     const data = querySnapshot.docs.map((doc) => {
         return {id: doc.id, ...doc.data()}
@@ -87,7 +90,7 @@ const GetAllDiaryItems = async () => {
 
 const DeleteDairyItem = async (itemId) => {
     try {
-        await deleteDoc(doc(db, "posts", itemId));
+        await deleteDoc(doc(db, collection_name, itemId));
         return "succes"
     } catch (error) {
         throw new Error("Something went wrong: " + error.message)
@@ -95,7 +98,7 @@ const DeleteDairyItem = async (itemId) => {
 }
 
 const GetDairyItemById = async (articleId) => {
-    const docRef = doc(db, "posts", articleId);
+    const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
     const docData = snapshot.data();
 

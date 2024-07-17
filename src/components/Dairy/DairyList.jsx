@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { GetAllDiaryItems } from '../../services/Posts';
 import toast from 'react-hot-toast';
-import contrast from '../../services/Contrast';
+import contrast from '../../utils/Contrast';
 import DairyItem from './DairyItem';
 
 const DiaryList = () => {
