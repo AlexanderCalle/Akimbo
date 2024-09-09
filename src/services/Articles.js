@@ -212,11 +212,15 @@ const GetAllPostsFromCat = async (category) => {
                     ),
                 ),
                 orderBy("start_date", "desc"),
-                orderBy("created_date", "desc")
+                orderBy("created_date", "desc"),
             )
         );
 
         data = await getDocData(qeurySnapshot);
+
+        console.log(data)
+
+        data = data.sort( (a, b) => b.created_date - a.created_date )
 
         return data;
      } catch(err) {
