@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getTag } from "./Tags";
 import { getEnv } from "../utils/getEnv";
 
-const collection_name = "articles"
+const collection_name = "articles" + getEnv();
 
 const GetTagsArticle = async (article) => {
     let tags = article.tags.map(async (tag) => {
