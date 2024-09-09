@@ -55,7 +55,7 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
 
   return (
-    <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
+    <div className="w-full h-screen bg-[#418413] bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
         <motion.h1 style={{
           x: translateX,
           y: translate,

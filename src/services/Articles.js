@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getTag } from "./Tags";
 import { getEnv } from "../utils/getEnv";
 
-const collection_name = "articles" + getEnv();
+const collection_name = "articles"
 
 const GetTagsArticle = async (article) => {
     let tags = article.tags.map(async (tag) => {
@@ -212,11 +212,15 @@ const GetAllPostsFromCat = async (category) => {
                     ),
                 ),
                 orderBy("start_date", "desc"),
-                orderBy("created_date", "desc")
+                orderBy("created_date", "desc"),
             )
         );
 
         data = await getDocData(qeurySnapshot);
+
+        console.log(data)
+
+        data = data.sort( (a, b) => b.created_date - a.created_date )
 
         return data;
      } catch(err) {
