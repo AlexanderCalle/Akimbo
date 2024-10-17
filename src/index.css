@@ -3,11 +3,25 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
 
+@font-face {
+  font-family: "Paragon";
+  src: url(./assets/paragon/Paragon-Regular.otf);
+}
+
+@font-face {
+  font-family: "Helvetica Rounded";
+  src: url(./assets/helvetica/helvetica-rounded-bold.woff);
+}
+
 body {
   margin: 0;
-  font-family: "Oswald", "Courier New", Courier, monospace;
+  font-family: "Paragon", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica Rounded", sans-serif;
 }
 
 code {

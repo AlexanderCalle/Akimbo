@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "hero-image": "url('./assets/HeroImage.png')",
+        "hero-image": "url('./assets/GradientWit.png')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
@@ -28,8 +28,8 @@ module.exports = {
       "tag-purple": "#B81EBB",
     },
     fontFamily: {
-      sans: ["Oswald", ...defaultTheme.fontFamily.sans],
-      serif: [...defaultTheme.fontFamily.serif],
+      sans: ["Helvetica Rounded", ...defaultTheme.fontFamily.sans],
+      serif: ["Paragon", ...defaultTheme.fontFamily.serif],
       mono: [...defaultTheme.fontFamily.mono],
     },
   },

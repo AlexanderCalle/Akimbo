@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { getEnv } from "../utils/getEnv";
+import AkimboLogo from "../assets/akimbo_logo.png";
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -55,13 +55,13 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
 
   return (
-    <div className="w-full h-screen bg-[#418413] bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
-        <motion.h1 style={{
+    <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
+        <motion.img style={{
           x: translateX,
           y: translate,
           scale: scale,
           opacity: opacity          
-        }} className="absolute top-28 text-[200px] font-black">AKIMBO</motion.h1>
+        }} className="absolute top-0 font-black" src={AkimboLogo} alt="The logo of Akimbo" />
         <div className="mb-10 flex flex-col items-center gap-2">
           <p className="font-bold text-2xl">Discover</p>
           <button
