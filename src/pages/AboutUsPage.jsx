@@ -51,7 +51,7 @@ const AboutUsPage = () => {
     <MainLayout>
       <div className="w-10/12 mx-auto flex flex-col gap-14 items-center my-24">
         <div className="w-full lg:w-3/6 flex flex-col items-center gap-5">
-          <h2 className="text-2xl font-medium underline">What is Akimbo</h2>
+          <h2 className="text-2xl font-medium">what is akimbo</h2>
           <p className="text-center">
           Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
           <br /><br />
@@ -60,7 +60,7 @@ const AboutUsPage = () => {
           <br /><br />
           Akimbo is more than just an online publishing platform, it’s a vibrant community where <i>Art is theft, Art is armed robbery, Art is not pleasing your mother.</i> (Janet Malcolm)
           <br /><br />
-          <h3 className="my-2 text-xl font-medium">Our Mission</h3> 
+          <h3 className="my-2 text-xl font-medium">our mission</h3> 
           Topics are always approached from various disciplines within the arts and cultural studies, and placed in both historical and contemporary perspectives. <br />
           <i>Lock up your libraries if you like; but there is no gate, no lock, no bolt that you can set upon the freedom of your mind. So long as you write what you wish to write, that is all that matters; and who cares whether it matters for ages or only for hours.</i> (Virginia Woolf)
           <br /><br />
@@ -72,7 +72,7 @@ const AboutUsPage = () => {
           </p>
         </div>
         <div className="w-full lg:10/12 2xl:w-9/12 flex flex-col items-center gap-5 mb-5 lg:items-stretch">
-          <h2 className="text-2xl font-medium underline">Who are we</h2>
+          <h2 className="text-2xl font-medium">who are we</h2>
           {users.map((user, idx) => (
             <AboutProfile idx={idx} {...user} />
           ))} 
@@ -80,7 +80,7 @@ const AboutUsPage = () => {
             <AboutProfile idx={idx} {...user} />
           ))}
           <div className="w-full lg:w-4/6 mx-auto">
-            <h3 className="text-lg font-bold">Wildverband</h3>
+            <h3 className="text-lg font-bold">wildverband</h3>
             <p>Wildverband is a modular and temporary collaboration between Leonie Overmeire and Anouk Meurice. Within this context, they explore the boundaries of architecture. The interplay arises from intuitive absurdities that they translate into spatial compositions. Their hunger for making is rooted in phenomenology and poetic thinking. Wildverband grew out of a love of brick and an aversion to regularity. Despite their background in architecture, they draw a lot of inspiration from performance and scenography.</p>
           </div>
         </div>

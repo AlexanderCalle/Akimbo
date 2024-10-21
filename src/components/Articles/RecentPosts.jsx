@@ -59,11 +59,11 @@ const RecentPosts = () => {
     );
   }
   return (
-    <div className="w-full md:w-10/12 h-fit m-auto flex flex-col gap-2 my-4">
-      <h2 className="text-2xl self-center lg:self-start font-medium underline">
-        Recent Posts
+    <div className="w-full md:w-10/12 aspect-video m-auto flex flex-col gap-2 my-4">
+      <h2 className="text-2xl self-center lg:self-start font-medium">
+        recent posts
       </h2>
-      <div className="flex gap-2 w-full justify-between">
+      <div className="flex gap-2 w-full h-full justify-between">
         {items.map((article, idx) => (
           <RecentPost key={idx} article={article} idx={idx} />
         ))}

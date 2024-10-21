@@ -20,7 +20,7 @@ const DiaryItem = ({item}) => {
         <div className={`p-2  ${
             item.isInvert && "[&_*:not(image)]:invert"
         }`}>
-            <h3 className='font-bold underline text-xl'>{item.title}</h3>
+            <h3 className='font-bold text-lg'>{item.title}</h3>
             {item.description !== "" && <p>{item.description}</p>}
             {item.author !== "" && <p className='text-sm font-light'>{item.author}</p>}
         </div>

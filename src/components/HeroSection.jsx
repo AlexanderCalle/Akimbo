@@ -63,7 +63,7 @@ const HeroSection = () => {
           opacity: opacity          
         }} className="absolute top-0 font-black" src={AkimboLogo} alt="The logo of Akimbo" />
         <div className="mb-10 flex flex-col items-center gap-2">
-          <p className="font-bold text-2xl">Discover</p>
+          <p className="font-bold font-sans text-2xl">discover</p>
           <button
             onClick={() => window.scrollTo({ top: window.innerHeight - 72, behavior: "smooth" })}
           >

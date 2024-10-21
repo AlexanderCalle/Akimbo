@@ -13,27 +13,27 @@ const Navbar = () => {
           <img className="font-bold font-sans text-2xl max-h-14 object-cover" src={AkimboLogo} alt="The logo of akimbo" />
         </Link>
         
-        <div className="font-sans hidden lg:flex gap-4 lg:visible">
+        <div className="font-sans hidden lg:flex gap-10 lg:visible">
           <Link className="hover:underline active:underline" to="/">
-            Home
+            home
           </Link>
           <Link className="hover:underline active:underline" to="/articles/Features">
-            Features
+            features
           </Link>
           <Link className="hover:underline active:underline" to="/articles/Reviews">
-            Reviews
+            reviews
           </Link>
           <Link
             className="hover:underline active:underline"
             to="/diary"
           >
-            Dear Digital Diary
+            dear digital diary
           </Link>
           {/* <Link className="hover:underline" to="/">
             PODCAST
           </Link> */}
           <Link className="hover:underline active:underline" to="/aboutus">
-            About us
+            about us
           </Link>
         </div>
         <div className="flex gap-3">
