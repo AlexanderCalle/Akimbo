@@ -31,7 +31,7 @@ const ArticleSection = ({ article, idx }) => {
               </p>
             ))}
           </div>
-          <h3 className="text-lg font-medium">{article.title}</h3>
+          <h3 className="text-md font-medium">{article.title}</h3>
           <p className="text-sm font-light">{article.author}</p>
         </div>
         <p

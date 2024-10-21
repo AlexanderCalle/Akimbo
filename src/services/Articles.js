@@ -184,7 +184,7 @@ const GetMostRecentPosts = async () => {
                     where("start_date", "==", null)
                 ),
             ),
-            orderBy("start_date", "desc"),
+            orderBy("start_date", "asc"),
             orderBy("created_date", "desc"),
             limit(3)
         ));

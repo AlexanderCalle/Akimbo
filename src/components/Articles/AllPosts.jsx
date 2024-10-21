@@ -17,8 +17,8 @@ const AllPosts = ({ articles, tags }) => {
   return (
     <div className="w-full md:w-10/12 m-auto flex flex-col gap-4 px-4 my-4">
       <div className="w-full flex justify-between">
-        <h2 className="text-2xl self-center lg:self-start font-medium underline">
-          All Posts
+        <h2 className="text-2xl self-center lg:self-start font-medium">
+          all posts
         </h2>
         <SelectTag handleChange={handleChange} tags={tags} />
       </div>
