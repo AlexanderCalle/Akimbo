@@ -1,10 +1,11 @@
 import React from "react";
+import AkimboLogo from "../assets/akimbo_logo.png";
 
 const Footer = () => {
   return (
-    <div className="max-w-full flex flex-col items-start justify-between md:grid md:grid-cols-3 bg-akimbo-dark-900 text-akimbo-light p-5">
+    <div className="max-w-full font-sans text-sm flex flex-col items-center justify-between md:grid md:grid-cols-3 bg-akimbo-dark-900 text-akimbo-light p-5">
       <div className="flex flex-col gap-2">
-        <h3 className="font-bold">CONTACT</h3>
+        <h3 className="font-bold text-sm">CONTACT</h3>
         <div className="flex flex-col md:flex-row gap-2 items-start">
           <div className="flex flex-col">
             <a className="col-span-2" href="mailto:akimbo-mag@outlook.com">
@@ -14,8 +15,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex flex-col items-start md:items-center place-content-center">
-        <h2 className="font-bold text-2xl">AKIMBO</h2>
-        <p>An ABC of Art, Books & Culture</p>
+        <img className="font-bold text-2xl max-h-20 object-cover" src={AkimboLogo} alt="The logo of akimbo" />
       </div>
       <div className="flex flex-col gap-3 justify-self-end">
         <a

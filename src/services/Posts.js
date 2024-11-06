@@ -1,6 +1,6 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { db, storage } from "./Firebase"
-import { Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc } from "firebase/firestore";
 import { getEnv } from "../utils/getEnv";
 
 const collection_name = "posts" + getEnv();
@@ -79,7 +79,10 @@ const UpdateDairyPostById = async ({title, content, description, author, image, 
 }
 
 const GetAllDiaryItems = async () => {
-    const querySnapshot = await getDocs(collection(db, collection_name));
+    const querySnapshot = await getDocs(query(
+        collection(db, collection_name),
+        orderBy("created_date", "desc")
+    ));
 
     const data = querySnapshot.docs.map((doc) => {
         return {id: doc.id, ...doc.data()}

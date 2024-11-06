@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../assets/Navbar.css";
+import AkimboLogo from "../assets/akimbo_logo.png";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -8,31 +9,31 @@ const Navbar = () => {
   return (
     <>
       <div className="w-full flex flex-row justify-between p-5 items-center text-lg">
-        <Link className="hover:underline active:underline" to="/">
-          <h1 className="font-bold font-sans text-2xl">AKIMBO</h1>
+        <Link className="font hover:underline active:underline" to="/">
+          <img className="font-bold font-sans text-2xl max-h-14 object-cover" src={AkimboLogo} alt="The logo of akimbo" />
         </Link>
         
-        <div className="hidden lg:flex gap-4 lg:visible">
+        <div className="font-sans hidden lg:flex gap-10 lg:visible">
           <Link className="hover:underline active:underline" to="/">
-            Home
+            home
           </Link>
           <Link className="hover:underline active:underline" to="/articles/Features">
-            Features
+            features
           </Link>
           <Link className="hover:underline active:underline" to="/articles/Reviews">
-            Reviews
+            reviews
           </Link>
           <Link
             className="hover:underline active:underline"
             to="/diary"
           >
-            Dear Digital Diary
+            dear digital diary
           </Link>
           {/* <Link className="hover:underline" to="/">
             PODCAST
           </Link> */}
           <Link className="hover:underline active:underline" to="/aboutus">
-            About us
+            about us
           </Link>
         </div>
         <div className="flex gap-3">

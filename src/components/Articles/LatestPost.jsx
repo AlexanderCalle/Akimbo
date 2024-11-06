@@ -14,7 +14,7 @@ const LatestPost = ({ article }) => {
           dangerouslySetInnerHTML={{ __html: article.description }}
         ></p>
         <Link
-          className="px-3 py-2 bg-akimbo-dark-900 text-akimbo-light"
+          className="px-3 py-2 bg-akimbo-dark-900 font-sans text-akimbo-light"
           to={`/articles/${article.cat}/${article.id}`}
         >
           Further reading
