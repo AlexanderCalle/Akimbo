@@ -112,7 +112,7 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
             imageAuthor,
             created_date,
             isPublished,
-            start_date
+            start_date: start_date ?? t.toDate()
         }
 
         const docRef  = await addDoc(collection(db, collection_name), data)
@@ -184,7 +184,7 @@ const GetMostRecentPosts = async () => {
                     where("start_date", "==", null)
                 ),
             ),
-            orderBy("start_date", "asc"),
+            orderBy("start_date", "desc"),
             orderBy("created_date", "desc"),
             limit(3)
         ));
