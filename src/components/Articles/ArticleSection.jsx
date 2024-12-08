@@ -5,12 +5,12 @@ const ArticleSection = ({ article, idx }) => {
 
   return (
     <section
-      className={`w-full h-[34rem] lg:h-80 flex flex-col-reverse lg:${
+      className={`w-full h-[40rem] lg:h-80 flex flex-col-reverse lg:${
         idx % 2 === 0 ? "flex-row-reverse" : "flex-row"
       } gap-4 items-center justify-center`}
     >
       <article
-        className={`w-full lg:w-4/6 h-2/5 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-${
+        className={`w-full lg:w-4/6 h-2/3 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-${
           idx % 2 === 0 ? "start" : "end"
         } gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
       >
@@ -35,7 +35,7 @@ const ArticleSection = ({ article, idx }) => {
           <p className="text-sm font-light">{article.author}</p>
         </div>
         <p
-          className={`w-full h-2/3 overflow-hidden text-ellipsis text-center lg:text-${
+          className={`w-full h-40 overflow-hidden text-ellipsis text-center lg:text-${
             idx % 2 === 0 ? "start" : "end"
           }`}
           dangerouslySetInnerHTML={{ __html: article.description }}
@@ -52,7 +52,7 @@ const ArticleSection = ({ article, idx }) => {
       <img
         src={article.image}
         alt={article.imageTitle}
-        className="w-4/6 lg:w-2/6 h-full object-cover"
+        className="w-4/6 lg:w-2/6 h-2/3 lg:h-full object-cover"
       />
     </section>
   );

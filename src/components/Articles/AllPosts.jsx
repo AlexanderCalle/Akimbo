@@ -22,7 +22,7 @@ const AllPosts = ({ articles, tags }) => {
         </h2>
         <SelectTag handleChange={handleChange} tags={tags} />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-8">
         {filteredArticles.map((article, idx) => (
           <ArticleSection key={idx} article={article} idx={idx} />
         ))}

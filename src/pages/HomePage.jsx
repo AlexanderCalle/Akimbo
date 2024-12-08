@@ -14,10 +14,10 @@ const HomePage = () => {
         <Navbar />
       </div>
       <HeroSection />
-      <main className="flex-grow flex flex-col p-5" >
+      <div className="flex-grow flex flex-col gap-10 p-5 md:w-10/12 mx-auto" >
         <CtaPosts />
         <RecentPosts />
-        <div className="w-full md:w-10/12 m-auto flex flex-col lg:flex-row items-start lg:items-start justify-start gap-6 my-4">
+        <div className="w-full flex flex-col lg:flex-row items-start justify-start gap-6 my-4">
           <section className="w-full lg:w-3/6 flex flex-col items-start">
             <h2 className="text-2xl font-medium mb-4">community</h2>
             <p className="mb-2 lg:text-start">
@@ -44,7 +44,7 @@ const HomePage = () => {
             </p>
           </section>
         </div>
-      </main>
+      </div>
       <Footer />
     </div>
   );
