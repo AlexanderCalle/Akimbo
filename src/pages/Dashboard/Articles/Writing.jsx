@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Editor from "../../../components/Editor";
-import { GetAllTags } from "../../../services/Tags";
+import { createTag, GetAllTags } from "../../../services/Tags";
 import { GetAllCategories } from "../../../services/Categories";
-import Select from "react-select";
 import { PostArticle } from "../../../services/Articles";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +32,12 @@ const Writing = ({
   const [imageTitle, setImageTitle] = useState(updateImageTitle);
   const [imageAuthor, setImageAuthor] = useState(updateImageAuthor);
   const [isPublished, setIsPublished] = useState(updateIsPublished);
-  const [startDate, setStartDate] = useState()
+  const [startDate, setStartDate] = useState();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newTag, setNewTag] = useState("");
+  const [color, setColor] = useState("#999");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -73,6 +77,18 @@ const Writing = ({
         error: <b>Problem posting article</b>,
       }
     );
+  };
+
+  const handleCreate = async () => {
+    try {
+      await createTag(newTag, color);
+      setIsModalOpen(false);
+      GetAllTags().then((result) => {
+        setTags(result);
+      });
+    } catch(error) {
+      setErrorMessage(error.message)
+    }
   }
 
   return (
@@ -137,7 +153,17 @@ const Writing = ({
           ))}
         </select>
         <label htmlFor="tags">Tags</label>
-        <SelectItems options={tags} setSelected={setSelectedTags} />
+        <SelectItems 
+          options={tags} 
+          setSelected={setSelectedTags}
+          handleCreate={handleCreate}
+          setIsOpen={setIsModalOpen}
+          isOpen={isModalOpen}
+          color={color}
+          setColor={setColor}
+          newTag={newTag}
+          setNewTag={setNewTag}
+         />
         <label htmlFor="file_input">Upload image</label>
         <input
           className="block w-full text-sm text-akimbo-dark-900 border border-akimbo-dark-900 cursor-pointer bg-gray-50"
