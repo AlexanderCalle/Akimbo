@@ -3,6 +3,7 @@ import { GetUser } from "../services/Users";
 import { logout } from "../services/Authentication";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { HiCog6Tooth } from "react-icons/hi2";
 
 const DashboardNavbar = () => {
   const [userData, setUserData] = useState({});
