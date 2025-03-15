@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Editor from "../../../components/Editor";
+import Editor from "../../../components/React-Quill-Editor/Editor";
 import { createTag, GetAllTags } from "../../../services/Tags";
 import { GetAllCategories } from "../../../services/Categories";
 import { PostArticle } from "../../../services/Articles";

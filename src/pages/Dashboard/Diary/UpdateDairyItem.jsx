@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Editor from "../../../components/Editor";
+import Editor from "../../../components/React-Quill-Editor/Editor";
 import toast from "react-hot-toast";
 import { ChromePicker} from 'react-color';
 import { GetDairyItemById, UpdateDairyPostById } from "../../../services/Posts";
