@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GetArticleWithIdUpdate, UpdateArticle } from "../../../services/Articles";
-import Editor from "../../../components/Editor";
+import Editor from "../../../components/React-Quill-Editor/Editor";
 import { GetAllTags } from "../../../services/Tags";
 import { GetAllCategories } from "../../../services/Categories";
 import toast from "react-hot-toast";
