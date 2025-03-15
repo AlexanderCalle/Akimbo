@@ -9,32 +9,9 @@ import VideoUploadDialog from "./video-upload-dialog";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../services/Firebase";
 import toast from "react-hot-toast";
+import CustomVideo from "./extensions/custom-video";
 
 var Image = Quill.import('formats/image');
-var Video = Quill.import('formats/video');
-var Link = Quill.import('formats/link');
-// #2 custom video
-class CustomVideo extends Video {
-  static create(value) {
-    const node = super.create(value);
-
-    const video = document.createElement('video');
-    video.setAttribute('controls', true);
-    video.setAttribute('type', 'video/mp4');
-    video.setAttribute('style', 'width: 100%');
-    video.setAttribute('src', this.sanitize(value));
-    node.appendChild(video);
-
-    return node;
-  }
-
-  static sanitize(url) {
-    return Link.sanitize(url);
-  }
-}
-CustomVideo.blotName = 'video';
-CustomVideo.className = 'ql-video';
-CustomVideo.tagName = 'DIV';
 
 // #2 register module
 Quill.register("modules/imageUploader", ImageUploader);
