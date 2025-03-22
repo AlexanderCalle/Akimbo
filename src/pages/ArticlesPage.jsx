@@ -60,7 +60,7 @@ const ArticlesPage = () => {
           <AllPosts articles={articles} tags={tags} />
         </>
       ) : (
-        <p className="text-center">There are no yet posts available :(</p>
+        <p className="text-center">There are posts available yet :(</p>
       )}
     </MainLayout>
   );

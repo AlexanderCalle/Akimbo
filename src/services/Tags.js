@@ -1,6 +1,8 @@
-import { collection, getDoc, getDocs } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore"
 import { db } from "./Firebase"
 import { getEnv } from "../utils/getEnv";
+import { Tag } from "../utils/Tag";
+import { InvalidError } from "../utils/InvalidError";
 
 const collection_name = "tags" + getEnv();
 
@@ -23,4 +25,27 @@ const getTag = async (docRef) => {
     return tag;
 }
 
-export {GetAllTags, getTag}
+const createTag = async (name, color) => {
+    try {
+        if(name.length === 0) throw new InvalidError("Name cannot be empty?.")
+        if(color.length === 0) throw new InvalidError("Color cannot be empty.")
+    
+        const tag = new Tag(name, color)
+    
+        const docData = { 
+            name: tag.name,
+            color: tag.color
+        }
+        await addDoc(collection(db, collection_name), docData)
+
+        return tag;
+    } catch(error) {
+        if(error instanceof InvalidError) {
+            return error;
+        }
+
+        throw new Error("Something went wrong: " + error.message)
+    }
+}
+
+export { GetAllTags, getTag, createTag }

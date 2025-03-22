@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Editor from "../../../components/Editor";
+import Editor from "../../../components/React-Quill-Editor/Editor";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {ChromePicker} from 'react-color';

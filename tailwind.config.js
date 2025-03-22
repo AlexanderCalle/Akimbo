@@ -1,10 +1,13 @@
+const {heroui} = require('@heroui/theme');
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: [
     "./src/**/*.{html,js,jsx}",
-    "./node_modules/tailwind-datepicker-react/dist/**/*.js", // <--- Add this line
+    "./node_modules/tailwind-datepicker-react/dist/**/*.js",
+    "// <--- Add this line",
+    "./node_modules/@heroui/theme/dist/components/modal.js"
   ],
   theme: {
     extend: {
@@ -33,5 +36,5 @@ module.exports = {
       mono: [...defaultTheme.fontFamily.mono],
     },
   },
-  plugins: [],
+  plugins: [heroui()],
 };
