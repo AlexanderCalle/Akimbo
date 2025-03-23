@@ -14,14 +14,12 @@ const ArticleSection = ({ article, idx }) => {
           idx % 2 === 0 ? "start" : "end"
         } gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
       >
-        <div className={`flex flex-col gap-2`}>
-          <div className={`flex gap-2 self-${
-          idx % 2 === 0 ? "start" : "end"
-        }`}>
+        <div className={`flex flex-col gap-2 w-full text-center lg:text-${idx % 2 === 0 ? 'start' : 'end'}`}>
+          <div className={`flex gap-2 self-center lg:self-${idx % 2 === 0 ? 'start' : 'end'}`}>
             {article.tags.map((tag, idx) => (
               <p
                 style={{
-                  backgroundColor: tag.color + "10",
+                  backgroundColor: tag.color + '10',
                   color: tag.color,
                 }}
                 key={idx}
