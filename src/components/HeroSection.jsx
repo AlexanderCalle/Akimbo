@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import AkimboLogo from "../assets/akimbo_logo.png";
 import AkimboLogoMobile from "../assets/akimbo_logo_mobile.png";
+import { useScreenDetector } from "../hooks/useScreenDetector";
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -52,11 +53,11 @@ const HeroSection = () => {
         clamp: false,
     }
   )
-  const isMobileView = getWindowDimensions().width < 768;
-  const scale = useTransform(scrollYProgress, [0.2, (isMobileView ? 4 : 0.8)], [1, .05]);
+  const { isMobile } = useScreenDetector();
+  const scale = useTransform(scrollYProgress, [0.2, (isMobile ? 4 : 0.8)], [1, .05]);
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
   const getHeroImage = () => {
-    if (isMobileView) {
+    if (isMobile) {
       return AkimboLogoMobile;
     }
     return AkimboLogo;
