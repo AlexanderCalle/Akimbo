@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import AkimboLogo from "../assets/akimbo_logo.png";
+import AkimboLogoMobile from "../assets/akimbo_logo_mobile.png";
+import { useScreenDetector } from "../hooks/useScreenDetector";
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -51,8 +53,15 @@ const HeroSection = () => {
         clamp: false,
     }
   )
-  const scale = useTransform(scrollYProgress, [0.2, .8], [1, .05]);
+  const { isMobile } = useScreenDetector();
+  const scale = useTransform(scrollYProgress, [0.2, (isMobile ? 4 : 0.8)], [1, .05]);
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
+  const getHeroImage = () => {
+    if (isMobile) {
+      return AkimboLogoMobile;
+    }
+    return AkimboLogo;
+  };
 
   return (
     <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
@@ -61,7 +70,7 @@ const HeroSection = () => {
           y: translate,
           scale: scale,
           opacity: opacity          
-        }} className="absolute top-0 font-black" src={AkimboLogo} alt="The logo of Akimbo" />
+        }} className="absolute top-0 font-black w-full" src={getHeroImage()} alt="The logo of Akimbo" />
         <div className="mb-10 flex flex-col items-center gap-2">
           <p className="font-bold font-sans text-2xl">discover</p>
           <button
