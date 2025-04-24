@@ -1,5 +1,6 @@
 import React from "react";
 import AkimboLogo from "../assets/akimbo_logo.png";
+import Newsletter from "./Newsletter";
 
 const Footer = () => {
   return (

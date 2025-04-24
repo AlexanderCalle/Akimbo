@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CtaPosts from "../components/CTA/CtaPosts";
+import Newsletter from "../components/Newsletter";
 
 const HomePage = () => {
   
@@ -44,6 +45,7 @@ const HomePage = () => {
             </p>
           </section>
         </div>
+       <Newsletter />
       </div>
       <Footer />
     </div>

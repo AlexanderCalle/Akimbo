@@ -72,7 +72,7 @@ const Navbar = () => {
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </div>
-          <ul className="flex flex-col gap-5 items-end list-none justify-between min-h-[250px] text-akimbo-dark-900 text-lg">
+          <ul className="flex flex-col gap-5 items-end list-none justify-between min-h-[250px] text-akimbo-dark-900 text-lg font-sans">
             <li className="hover:underline">
               <Link to="/">Home</Link>
             </li>
