@@ -54,7 +54,7 @@ const HeroSection = () => {
     }
   )
   const { isMobile } = useScreenDetector();
-  const scale = useTransform(scrollYProgress, [0.2, (isMobile ? 4 : 0.8)], [1, .05]);
+  const scale = useTransform(scrollYProgress, [0.2, 0.8], [(isMobile ? 3 : 1), .05]);
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
   const getHeroImage = () => {
     if (isMobile) {
