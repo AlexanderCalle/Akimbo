@@ -23,7 +23,7 @@ const AboutUsPage = () => {
   if (loading) {
     return (
       <div
-        className="w-full md:w-10/12 my-20 flex flex-col items-center gap-2"
+        className="flex flex-col items-center w-full gap-2 my-20 md:w-10/12"
         role="status"
       >
         <svg
@@ -49,8 +49,8 @@ const AboutUsPage = () => {
 
   return (
     <MainLayout>
-      <div className="w-10/12 mx-auto flex flex-col gap-14 items-center my-24">
-        <div className="w-full lg:w-3/6 flex flex-col items-center gap-5">
+      <div className="flex flex-col items-center w-10/12 mx-auto my-24 gap-14">
+        <div className="flex flex-col items-center w-full gap-5 lg:w-3/6">
           <h2 className="text-2xl font-medium">what is akimbo</h2>
           <p className="text-center">
           Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
@@ -71,15 +71,15 @@ const AboutUsPage = () => {
           Come in and take a seat. 
           </p>
         </div>
-        <div className="w-full lg:10/12 2xl:w-9/12 flex flex-col items-center gap-5 mb-5 lg:items-stretch">
-          <h2 className="text-2xl font-medium">who are we</h2>
+        <div className="flex flex-col items-center w-full gap-5 mb-5 lg:10/12 2xl:w-9/12 lg:items-stretch">
+          <h2 className="text-2xl font-medium">team</h2>
           {users.map((user, idx) => (
             <AboutProfile idx={idx} {...user} />
           ))} 
           {usersWildverband.map((user, idx) => (
             <AboutProfile idx={idx} {...user} />
           ))}
-          <div className="w-full lg:w-4/6 mx-auto">
+          <div className="w-full mx-auto lg:w-4/6">
             <h3 className="text-lg font-bold">wildverband</h3>
             <p>Wildverband is a modular and temporary collaboration between Leonie Overmeire and Anouk Meurice. Within this context, they explore the boundaries of architecture. The interplay arises from intuitive absurdities that they translate into spatial compositions. Their hunger for making is rooted in phenomenology and poetic thinking. Wildverband grew out of a love of brick and an aversion to regularity. Despite their background in architecture, they draw a lot of inspiration from performance and scenography.</p>
           </div>

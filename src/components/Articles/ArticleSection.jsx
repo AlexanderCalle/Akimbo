@@ -29,7 +29,7 @@ const ArticleSection = ({ article, idx }) => {
               </p>
             ))}
           </div>
-          <h3 className="text-md font-medium">{article.title}</h3>
+          <h3 className="font-medium text-md">{article.title}</h3>
           <p className="text-sm font-light">{article.author}</p>
         </div>
         <p
@@ -39,7 +39,7 @@ const ArticleSection = ({ article, idx }) => {
           dangerouslySetInnerHTML={{ __html: article.description }}
         ></p>
         <button
-          className="bg-akimbo-dark-900 px-3 py-2 text-akimbo-light"
+          className="px-3 py-2 bg-akimbo-dark-900 hover:bg-akimbo-dark-500 text-akimbo-light"
           onClick={() => {
             navigate(`/articles/${article.cat}/${article.id}`);
           }}
@@ -50,7 +50,7 @@ const ArticleSection = ({ article, idx }) => {
       <img
         src={article.image}
         alt={article.imageTitle}
-        className="w-4/6 lg:w-2/6 h-2/3 lg:h-full object-cover"
+        className="object-cover w-4/6 lg:w-2/6 h-2/3 lg:h-full"
       />
     </section>
   );
