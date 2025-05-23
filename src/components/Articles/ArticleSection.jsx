@@ -1,3 +1,4 @@
+import { cn } from "@heroui/theme";
 import { useNavigate } from "react-router-dom";
 
 const ArticleSection = ({ article, idx }) => {
@@ -10,9 +11,9 @@ const ArticleSection = ({ article, idx }) => {
       } gap-4 items-center justify-center`}
     >
       <article
-        className={`w-full lg:w-4/6 h-2/3 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-${
-          idx % 2 === 0 ? "start" : "end"
-        } gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
+        className={cn(`w-full lg:w-4/6 h-2/3 lg:h-4/5 flex flex-col p-2 z-10 items-center  gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`, 
+          idx % 2 === 0 ? "lg:items-start" : "lg:items-end"
+        )}
       >
         <div className={`flex flex-col gap-2 w-full text-center lg:text-${idx % 2 === 0 ? 'start' : 'end'}`}>
           <div className={`flex gap-2 self-center lg:self-${idx % 2 === 0 ? 'start' : 'end'}`}>
