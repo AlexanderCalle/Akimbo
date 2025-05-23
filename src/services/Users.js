@@ -2,10 +2,9 @@ import { doc, getDoc, getDocs, collection, Timestamp, addDoc, setDoc, updateDoc 
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { db, secondaryAuth, storage } from "./Firebase";
 import toast from "react-hot-toast";
-import { getEnv } from "../utils/getEnv";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-const collection_name = "users" + getEnv();
+const collection_name = "users"
 
 const GetUser = async () => {
     let userId;

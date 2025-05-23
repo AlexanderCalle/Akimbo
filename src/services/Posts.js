@@ -1,9 +1,8 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { db, storage } from "./Firebase"
 import { Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc } from "firebase/firestore";
-import { getEnv } from "../utils/getEnv";
 
-const collection_name = "posts" + getEnv();
+const collection_name = "posts"
 
 const PostDiaryItem = async ({title, content, description, author, image, image_title, image_author, bg_color, rgb_color}) => {
 

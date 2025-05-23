@@ -1,10 +1,9 @@
 import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore"
 import { db } from "./Firebase"
-import { getEnv } from "../utils/getEnv";
 import { Tag } from "../utils/Tag";
 import { InvalidError } from "../utils/InvalidError";
 
-const collection_name = "tags" + getEnv();
+const collection_name = "tags"
 
 const GetAllTags = async () => {
     const querySnapshot = await getDocs(collection(db, collection_name));

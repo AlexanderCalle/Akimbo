@@ -2,9 +2,8 @@ import { Timestamp, addDoc, collection, getDocs, deleteDoc, doc, getDoc, updateD
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getTag } from "./Tags";
-import { getEnv } from "../utils/getEnv";
 
-const collection_name = "articles" + getEnv();
+const collection_name = "articles";
 
 const GetTagsArticle = async (article) => {
     let tags = article.tags.map(async (tag) => {
