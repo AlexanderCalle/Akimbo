@@ -1,8 +1,7 @@
 import { collection, getDocs } from "firebase/firestore"
 import { db } from "./Firebase"
-import { getEnv } from "../utils/getEnv";
 
-const collection_name = "categories" + getEnv();
+const collection_name = "categories"
 
 const GetAllCategories = async () => {
     const querySnapshot = await getDocs(collection(db, collection_name));

@@ -1,9 +1,8 @@
 import { Timestamp, addDoc, and, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc, where } from "firebase/firestore";
-import { getEnv } from "../utils/getEnv";
 import { db, storage } from "./Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-const collection_name = "cta" + getEnv();
+const collection_name = "cta"
 
 const GetAll = async () => {
   const querySnap = await getDocs(query(collection(db, collection_name), orderBy("created_date", "desc")));

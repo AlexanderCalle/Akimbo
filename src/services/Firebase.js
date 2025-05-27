@@ -5,13 +5,13 @@ import { getStorage } from "firebase/storage"
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNdZkY8Y-s3hGExVox45Q5B6OWYonuUj4",
-  authDomain: "akimbo-20159.firebaseapp.com",
-  projectId: "akimbo-20159",
-  storageBucket: "akimbo-20159.appspot.com",
-  messagingSenderId: "967780287122",
-  appId: "1:967780287122:web:d174533ca3bd4807f09c4b",
-  measurementId: "G-848QML9JK4",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -22,6 +22,8 @@ const storage = getStorage(app);
 
 const secondaryApp = initializeApp(firebaseConfig, "Secondary");
 const secondaryAuth = getAuth(secondaryApp)
+
+
 
 export { app, analytics, db, auth, storage, secondaryApp, secondaryAuth};
 

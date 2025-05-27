@@ -35,7 +35,7 @@ const RecentPosts = () => {
   if (loading) {
     return (
       <div
-        className="w-full md:w-10/12 my-20 flex flex-col items-center gap-2"
+        className="flex flex-col items-center w-full gap-2 my-20 md:w-10/12"
         role="status"
       >
         <svg
@@ -60,10 +60,10 @@ const RecentPosts = () => {
   }
   return (
     <div className="w-full gap-2 my-4">
-      <h2 className="text-2xl lg:self-start font-medium">
+      <h2 className="text-2xl font-medium lg:self-start">
         recent posts
       </h2>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between align-center gap-8 my-8 mx-auto pt-4">
+      <div className="grid justify-between w-full grid-cols-1 gap-8 pt-4 mx-auto h-min md:grid-cols-2 lg:grid-cols-3 align-center">
         {items.map((article, idx) => (
           <RecentPost key={idx} article={article} idx={idx} />
         ))}

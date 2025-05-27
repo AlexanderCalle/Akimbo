@@ -1,3 +1,4 @@
+import { cn } from "@heroui/theme";
 import { useNavigate } from "react-router-dom";
 
 const ArticleSection = ({ article, idx }) => {
@@ -10,9 +11,9 @@ const ArticleSection = ({ article, idx }) => {
       } gap-4 items-center justify-center`}
     >
       <article
-        className={`w-full lg:w-4/6 h-2/3 lg:h-4/5 flex flex-col p-2 z-10 items-center lg:items-${
-          idx % 2 === 0 ? "start" : "end"
-        } gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`}
+        className={cn(`w-full lg:w-4/6 h-2/3 lg:h-4/5 flex flex-col p-2 z-10 items-center  gap-2 bg-akimbo-light bg-opacity-80 backdrop-blur-sm`, 
+          idx % 2 === 0 ? "lg:items-start" : "lg:items-end"
+        )}
       >
         <div className={`flex flex-col gap-2 w-full text-center lg:text-${idx % 2 === 0 ? 'start' : 'end'}`}>
           <div className={`flex gap-2 self-center lg:self-${idx % 2 === 0 ? 'start' : 'end'}`}>
@@ -29,7 +30,7 @@ const ArticleSection = ({ article, idx }) => {
               </p>
             ))}
           </div>
-          <h3 className="text-md font-medium">{article.title}</h3>
+          <h3 className="font-medium text-md">{article.title}</h3>
           <p className="text-sm font-light">{article.author}</p>
         </div>
         <p
@@ -39,7 +40,7 @@ const ArticleSection = ({ article, idx }) => {
           dangerouslySetInnerHTML={{ __html: article.description }}
         ></p>
         <button
-          className="bg-akimbo-dark-900 px-3 py-2 text-akimbo-light"
+          className="px-3 py-2 bg-akimbo-dark-900 hover:bg-akimbo-dark-500 text-akimbo-light"
           onClick={() => {
             navigate(`/articles/${article.cat}/${article.id}`);
           }}
@@ -50,7 +51,7 @@ const ArticleSection = ({ article, idx }) => {
       <img
         src={article.image}
         alt={article.imageTitle}
-        className="w-4/6 lg:w-2/6 h-2/3 lg:h-full object-cover"
+        className="object-cover w-4/6 lg:w-2/6 h-2/3 lg:h-full"
       />
     </section>
   );

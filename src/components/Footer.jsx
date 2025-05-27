@@ -4,10 +4,10 @@ import Newsletter from "./Newsletter";
 
 const Footer = () => {
   return (
-    <div className="max-w-full font-sans text-sm flex flex-col items-center justify-between md:grid md:grid-cols-3 bg-akimbo-dark-900 text-akimbo-light p-5">
+    <div className="flex flex-col items-start justify-start max-w-full gap-4 p-5 font-sans text-sm md:items-center md:justify-between md:grid md:grid-cols-3 bg-akimbo-dark-900 text-akimbo-light">
       <div className="flex flex-col gap-2">
-        <h3 className="font-bold text-sm">CONTACT</h3>
-        <div className="flex flex-col md:flex-row gap-2 items-start">
+        <h3 className="text-sm font-bold">CONTACT</h3>
+        <div className="flex flex-col items-start gap-2 md:flex-row">
           <div className="flex flex-col">
             <a className="col-span-2" href="mailto:akimbo-mag@outlook.com">
               akimbo-mag@outlook.com
@@ -16,15 +16,15 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex flex-col items-start md:items-center place-content-center">
-        <img className="font-bold text-2xl max-h-20 object-cover" src={AkimboLogo} alt="The logo of akimbo" />
+        <img className="object-cover text-2xl font-bold max-h-14" src={AkimboLogo} alt="The logo of akimbo" />
       </div>
       <div className="flex flex-col gap-3 justify-self-end">
         <a
         href="https://www.instagram.com/akimbo.mag?igsh=MTAwMXB1NnY2Mzk1bA==" target="_blank" rel="noreferrer">
-          <button className="flex gap-2 items-center">
+          <button className="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
+              className="w-5 h-5"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
