@@ -3,32 +3,39 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import toast from "react-hot-toast";
 import { Quill } from "react-quill";
 
-export const modules = (showModel) => {
+export const modules = (showModel, quillRef) => {
+  const toolbarOptions = [
+    [{ header: "1" }, { header: "2" }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["link", "image", "video"],
+    ["clean"],
+  ];
+
   return {
     toolbar: {
-      container: [
-        [{ header: "1" }, { header: "2" }],
-        [{ size: [] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        [
-          { list: "ordered" },
-          { list: "bullet" },
-          { indent: "-1" },
-          { indent: "+1" },
-        ],
-        ["link", "image", "video"],
-        ["clean"],
-      ],
+      container: toolbarOptions,
       handlers: {
         video: () => {
           showModel()
-        }
+        },
       }
     },
    
     clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
       matchVisual: false,
+    },
+
+    keyboard: {
+      bindings: {
+        tab: false
+      }
     },
   
     imageUploader: {
@@ -46,7 +53,8 @@ export const modules = (showModel) => {
               resolve(url)
             }).catch(err => toast.error("Error: " + err.message));
           });
-      })}
+        })
+      }
     },
     imageResize: {
       parchment: Quill.import('parchment'),
