@@ -6,16 +6,16 @@ const DearDigitalDairy = () => {
   return (
     <MainLayout>
         <div className='flex md:flex-col lg:flex-row w-full h-[500px]'>
-            <div className='absolute w-48 mt-24 ml-10 md:ml-20 md:w-64 lg:w-80 h-fit bg-akimbo-dark-200'>
+            <div className='absolute mt-24 ml-10 w-48 md:ml-20 md:w-64 lg:w-80 h-fit bg-akimbo-dark-200'>
                 <img
                 className='object-cover w-80' 
-                src="https://firebasestorage.googleapis.com/v0/b/akimbo-20159.appspot.com/o/profilePics%2Femmavranken%20kopie.png?alt=media&token=cc99fa2f-8cc0-4f39-9417-ed3c47c0d8b0" alt="Emma Vranken" />
+                src="https://firebasestorage.googleapis.com/v0/b/akimbo-20159.appspot.com/o/profilePics%2Femma_vranken.jpeg?alt=media&token=9d8de91e-1f65-499d-9da5-dbc21cf0eb0b" alt="Emma Vranken" />
             </div>
-            <img className='object-cover object-center w-full ml-auto mr-0 lg:w-5/6 justify-self-end' src={DDDMood} alt="Dairy mood board" />
+            <img className='object-cover object-center justify-self-end mr-0 ml-auto w-full lg:w-5/6' src={DDDMood} alt="Dairy mood board" />
         </div>
 
-        <div className='flex flex-col w-full gap-5 p-5 mt-14 lg:mt-5 lg:flex-row'>
-            <section className='flex flex-col w-5/6 gap-5 mx-auto lg:w-1/6 md:flex-row lg:flex-col h-fit justify-evenly'>
+        <div className='flex flex-col gap-5 p-5 mt-14 w-full lg:mt-5 lg:flex-row'>
+            <section className='flex flex-col gap-5 justify-evenly mx-auto w-5/6 lg:w-1/6 md:flex-row lg:flex-col h-fit'>
                 <div className='h-fit'>
                     Hi
                     <br /><br />

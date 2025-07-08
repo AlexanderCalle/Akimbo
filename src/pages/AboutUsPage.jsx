@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { GetUsers } from "../services/Users";
 import AboutProfile from "../components/AboutProfile";
+import { ContributersList } from "../components/contributers/contributers-list";
 
 const AboutUsPage = () => {
 
@@ -23,12 +24,12 @@ const AboutUsPage = () => {
   if (loading) {
     return (
       <div
-        className="flex flex-col items-center w-full gap-2 my-20 md:w-10/12"
+        className="flex flex-col gap-2 items-center my-20 w-full md:w-10/12"
         role="status"
       >
         <svg
           aria-hidden="true"
-          class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
+          class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +50,8 @@ const AboutUsPage = () => {
 
   return (
     <MainLayout>
-      <div className="flex flex-col items-center w-10/12 mx-auto my-24 gap-14">
-        <div className="flex flex-col items-center w-full gap-5 lg:w-3/6">
+      <div className="flex flex-col gap-14 items-center mx-auto my-24 w-10/12">
+        <div className="flex flex-col gap-5 items-center w-full lg:w-3/6">
           <h2 className="text-2xl font-medium">what is akimbo</h2>
           <p className="text-center">
           Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
@@ -71,17 +72,21 @@ const AboutUsPage = () => {
           Come in and take a seat. 
           </p>
         </div>
-        <div className="flex flex-col items-center w-full gap-5 mb-5 lg:10/12 2xl:w-9/12 lg:items-stretch">
+        <div className="flex flex-col gap-5 items-center mb-5 w-full lg:10/12 2xl:w-9/12 lg:items-stretch">
           <h2 className="text-2xl font-medium">team</h2>
           {users.map((user, idx) => (
             <AboutProfile idx={idx} {...user} />
           ))} 
-          {usersWildverband.map((user, idx) => (
-            <AboutProfile idx={idx} {...user} />
-          ))}
-          <div className="w-full mx-auto lg:w-4/6">
+          {/* <div className="mx-auto w-full lg:w-4/6">
             <h3 className="text-lg font-bold">wildverband</h3>
             <p>Wildverband is a modular and temporary collaboration between Leonie Overmeire and Anouk Meurice. Within this context, they explore the boundaries of architecture. The interplay arises from intuitive absurdities that they translate into spatial compositions. Their hunger for making is rooted in phenomenology and poetic thinking. Wildverband grew out of a love of brick and an aversion to regularity. Despite their background in architecture, they draw a lot of inspiration from performance and scenography.</p>
+          </div> */}
+          {usersWildverband.map((user, idx) => (
+            <AboutProfile idx={idx-1} {...user} />
+          ))}
+          <div className="mx-auto mt-20 w-full lg:10/12 2xl:w-9/12">
+            <h2 className="text-2xl font-bold">contributors</h2>
+            <ContributersList />
           </div>
         </div>
       </div>
