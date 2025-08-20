@@ -6,4 +6,4 @@ status = 200
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "script-src 'self' https://plausible.ksarooyghem.be"
+    Content-Security-Policy = "script-src 'self' https://plausible.ksarooyghem.be 'unsafe-inline'"
