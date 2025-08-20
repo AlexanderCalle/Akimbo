@@ -3,7 +3,25 @@ from = "/*"
 to = "/index.html"
 status = 200
 
+# netlify.toml
+
+# --- Proxy Plausible JS through your domain ---
+[[redirects]]
+  from = "/js/plausible.js"
+  to   = "https://plausible.ksarooyghem.be/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
+  status = 200
+  force  = true
+
+# --- Proxy the events endpoint as well ---
+[[redirects]]
+  from = "/api/event"
+  to   = "https://plausible.ksarooyghem.be/api/event"
+  status = 200
+  force  = true
+
+# --- Strict CSP that allows only your own origin (because we proxy) ---
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "script-src 'self' https://plausible.ksarooyghem.be 'unsafe-inline'"
+    # keep it on one line if you prefer; newlines here are just for readability
+    Content-Security-Policy = "default-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self'; connect-src 'self'; script-src 'self'"
