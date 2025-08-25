@@ -1,17 +1,16 @@
-import React from "react";
 import RecentPosts from "../components/Articles/RecentPosts";
-import HeroSection from "../components/HeroSection";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import CtaPosts from "../components/CTA/CtaPosts";
+import Footer from "../components/Footer";
+import HeroSection from "../components/HeroSection";
+import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 
 const HomePage = () => {
-  
+
   return (
     <div className="max-w-screen flex flex-col min-h-screen text-akimbo-dark-900">
-      <div 
-      className="fixed z-20 top-0 h-fit w-full bg-akimbo-light bg-opacity-80">
+      <div
+        className="fixed z-20 top-0 h-fit w-full bg-akimbo-light bg-opacity-80">
         <Navbar />
       </div>
       <HeroSection />
@@ -41,11 +40,11 @@ const HomePage = () => {
             </p>
             <h3 className="my-2 text-lg font-medium">our mission</h3>
             <p>
-              Through an interdisciplinary and transhistorical approach we are committed to open up conversations on literature, contemporary art and popular culture, which should remain accessible to everybody regardless of their education and background. 
+              Through an interdisciplinary and transhistorical approach we are committed to open up conversations on literature, contemporary art and popular culture, which should remain accessible to everybody regardless of their education and background.
             </p>
           </section>
         </div>
-       <Newsletter />
+        <Newsletter />
       </div>
       <Footer />
     </div>
