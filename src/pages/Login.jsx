@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { auth } from "../services/Firebase";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logIn } from "../services/Authentication";
 
 const Login = () => {
@@ -11,12 +10,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (loading) {
-    //   return (
-    //     <p className="flex items-center justify-center text-2xl">Loading...</p>
-    //   );
-    // }
-    // if (error) return <p>Something went wrong, refresh and try again</p>;
     if (user) navigate("/dashboard/overview");
   }, [user, loading, error, navigate]);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { GetUsers } from "../services/Users";
 import AboutProfile from "../components/AboutProfile";
@@ -16,7 +16,7 @@ const AboutUsPage = () => {
       const wildverband = result.filter(user => user.rol === "wildverband");
       setUsersWildVerband(wildverband)
 
-      setUsers(result.filter(user => user.rol !== "wildverband").sort((a, b) => a.rol === "editor-in-chief" ? -1 : 1))
+      setUsers(result.filter(user => user.rol !== "wildverband").sort((a) => a.rol === "editor-in-chief" ? -1 : 1))
       setLoading(false)
     })
   }, []);
@@ -54,35 +54,35 @@ const AboutUsPage = () => {
         <div className="flex flex-col gap-5 items-center w-full lg:w-3/6">
           <h2 className="text-2xl font-medium">what is akimbo</h2>
           <p className="text-center">
-          Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
-          <br /><br />
-          We are a small group of passionate readers, writers, critics, practitioners and artists based in Brussels who wanted to create a humble, open space for young creatives to meet and exchange ideas. In the spirit of Virginia Woolf, we searched for <i>a room of one’s own</i> after the working hours. Pub talks, text chains, coffee breaks and unhinged dinner parties craved for a common place..
-          Akimbo makes it possible to gather and publish texts and projects, making words and voices matter. We focus on contemporary complexities, riveting essays, aesthetic inspirations, the internal turmoil of 20-year-olds and other stories waiting to be told. 
-          <br /><br />
-          Akimbo is more than just an online publishing platform, it’s a vibrant community where <i>Art is theft, Art is armed robbery, Art is not pleasing your mother.</i> (Janet Malcolm)
-          <br /><br />
-          <h3 className="my-2 text-xl font-medium">our mission</h3> 
-          Topics are always approached from various disciplines within the arts and cultural studies, and placed in both historical and contemporary perspectives. <br />
-          <i>Lock up your libraries if you like; but there is no gate, no lock, no bolt that you can set upon the freedom of your mind. So long as you write what you wish to write, that is all that matters; and who cares whether it matters for ages or only for hours.</i> (Virginia Woolf)
-          <br /><br />
-          We are committed to opening up conversations on literature, contemporary art and popular culture, which should remain accessible to everybody regardless of their education and background. 
-          <br /><br />
-          Long live the unapologetic embrace of bad taste, grey zones, works in progress, web-weaving, and doodling. 
-          <br /><br />
-          Come in and take a seat. 
+            Akimbo is an online magazine and platform aiming to bring together <b>A</b>rt, <b>B</b>ooks, and <b>C</b>ulture.
+            <br /><br />
+            We are a small group of passionate readers, writers, critics, practitioners and artists based in Brussels who wanted to create a humble, open space for young creatives to meet and exchange ideas. In the spirit of Virginia Woolf, we searched for <i>a room of one’s own</i> after the working hours. Pub talks, text chains, coffee breaks and unhinged dinner parties craved for a common place..
+            Akimbo makes it possible to gather and publish texts and projects, making words and voices matter. We focus on contemporary complexities, riveting essays, aesthetic inspirations, the internal turmoil of 20-year-olds and other stories waiting to be told.
+            <br /><br />
+            Akimbo is more than just an online publishing platform, it’s a vibrant community where <i>Art is theft, Art is armed robbery, Art is not pleasing your mother.</i> (Janet Malcolm)
+            <br /><br />
+            <h3 className="my-2 text-xl font-medium">our mission</h3>
+            Topics are always approached from various disciplines within the arts and cultural studies, and placed in both historical and contemporary perspectives. <br />
+            <i>Lock up your libraries if you like; but there is no gate, no lock, no bolt that you can set upon the freedom of your mind. So long as you write what you wish to write, that is all that matters; and who cares whether it matters for ages or only for hours.</i> (Virginia Woolf)
+            <br /><br />
+            We are committed to opening up conversations on literature, contemporary art and popular culture, which should remain accessible to everybody regardless of their education and background.
+            <br /><br />
+            Long live the unapologetic embrace of bad taste, grey zones, works in progress, web-weaving, and doodling.
+            <br /><br />
+            Come in and take a seat.
           </p>
         </div>
         <div className="flex flex-col gap-5 items-center mb-5 w-full lg:10/12 2xl:w-9/12 lg:items-stretch">
           <h2 className="text-2xl font-medium">team</h2>
           {users.map((user, idx) => (
             <AboutProfile idx={idx} {...user} />
-          ))} 
+          ))}
           {/* <div className="mx-auto w-full lg:w-4/6">
             <h3 className="text-lg font-bold">wildverband</h3>
             <p>Wildverband is a modular and temporary collaboration between Leonie Overmeire and Anouk Meurice. Within this context, they explore the boundaries of architecture. The interplay arises from intuitive absurdities that they translate into spatial compositions. Their hunger for making is rooted in phenomenology and poetic thinking. Wildverband grew out of a love of brick and an aversion to regularity. Despite their background in architecture, they draw a lot of inspiration from performance and scenography.</p>
           </div> */}
           {usersWildverband.map((user, idx) => (
-            <AboutProfile idx={idx-1} {...user} />
+            <AboutProfile idx={idx - 1} {...user} />
           ))}
           <div className="mx-auto mt-20 w-full lg:10/12 2xl:w-9/12">
             <h2 className="text-2xl font-bold">contributors</h2>
