@@ -1,10 +1,10 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { db, storage } from "./Firebase"
-import { Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc } from "firebase/firestore";
+import { Timestamp, addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc, where } from "firebase/firestore";
 
 const collection_name = "posts"
 
-const PostDiaryItem = async ({title, content, description, author, image, image_title, image_author, bg_color, rgb_color}) => {
+const PostDiaryItem = async ({title, content, slug, description, author, image, image_title, image_author, bg_color, rgb_color}) => {
 
     try {
         var filename = image.name;  
@@ -25,6 +25,7 @@ const PostDiaryItem = async ({title, content, description, author, image, image_
         const data = {
             title,
             content,
+            slug,
             description,
             author,
             image: imageUrl,
@@ -45,11 +46,12 @@ const PostDiaryItem = async ({title, content, description, author, image, image_
 
 }
 
-const UpdateDairyPostById = async ({title, content, description, author, image, image_title, image_author, bg_color, rgb_color, docId}) => {
+const UpdateDairyPostById = async ({title, content, slug, description, author, image, image_title, image_author, bg_color, rgb_color, docId}) => {
     try {
         let data = {
             title,
             content,
+            slug,
             description,
             author,
             image_title,
@@ -77,6 +79,12 @@ const UpdateDairyPostById = async ({title, content, description, author, image, 
     }
 }
 
+const isDairySlugUnique = async (slug) => {
+    const q = query(collection(db, collection_name), where("slug", "==", slug));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.length === 0;
+}
+
 const GetAllDiaryItems = async () => {
     const querySnapshot = await getDocs(query(
         collection(db, collection_name),
@@ -99,6 +107,17 @@ const DeleteDairyItem = async (itemId) => {
     }
 }
 
+const GetDairyItem = async (slug) => {
+    const docRef = collection(db, collection_name);
+    const q = query(docRef, where("slug", "==", slug));
+    const snapshot = await getDocs(q);
+    const docData = snapshot.docs.length > 0 ? snapshot.docs[0].data() : null;
+    if(docData == null) {
+        return await GetDairyItemById(slug);
+    }
+    return {id: snapshot.docs[0].id, ...docData}
+}
+
 const GetDairyItemById = async (articleId) => {
     const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
@@ -118,4 +137,4 @@ const GetMostRecentDairyItem = async () => {
     }
 }
 
-export {PostDiaryItem, GetAllDiaryItems, DeleteDairyItem, GetDairyItemById, UpdateDairyPostById, GetMostRecentDairyItem}
+export {PostDiaryItem, GetAllDiaryItems, DeleteDairyItem, GetDairyItemById, UpdateDairyPostById, GetMostRecentDairyItem, GetDairyItem, isDairySlugUnique}

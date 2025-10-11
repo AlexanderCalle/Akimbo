@@ -1,5 +1,6 @@
 import { cn } from "@heroui/theme";
 import { useNavigate } from "react-router-dom";
+import { category } from "../../utils/Article";
 
 const ArticleSection = ({ article, idx }) => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const ArticleSection = ({ article, idx }) => {
                   color: tag.color,
                 }}
                 key={idx}
-                className={`w-fit px-3 py-1 text-sm bg-opacity-10`}
+                className={`px-3 py-1 text-sm bg-opacity-10 w-fit`}
               >
                 {tag.name}
               </p>
@@ -42,7 +43,7 @@ const ArticleSection = ({ article, idx }) => {
         <button
           className="px-3 py-2 bg-akimbo-dark-900 hover:bg-akimbo-dark-500 text-akimbo-light"
           onClick={() => {
-            navigate(`/articles/${article.cat}/${article.id}`);
+            navigate(`/articles/${category(article.cat)}/${article.slug}`);
           }}
         >
           Further reading
@@ -51,7 +52,7 @@ const ArticleSection = ({ article, idx }) => {
       <img
         src={article.image}
         alt={article.imageTitle}
-        className="object-cover w-4/6 lg:w-2/6 h-2/3 lg:h-full"
+        className="object-cover w-4/6 h-2/3 lg:w-2/6 lg:h-full"
       />
     </section>
   );

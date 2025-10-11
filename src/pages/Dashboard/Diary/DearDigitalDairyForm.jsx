@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "../../../components/React-Quill-Editor/Editor";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {ChromePicker} from 'react-color';
-import { PostDiaryItem } from "../../../services/Posts";
+import { isDairySlugUnique, PostDiaryItem } from "../../../services/Posts";
+import { slugify } from "../../../utils/Article";
 
 const DearDigitalDairyForm = () => {
     const [title, setTitle] = useState('');
+    const [slug, setSlug] = useState('');
     const [content, setContent] = useState('');
     const [description, setDescription] = useState('');
     const [author, setAuthor] = useState('');
@@ -25,16 +27,27 @@ const DearDigitalDairyForm = () => {
     
     const navigate = useNavigate();
 
+    useEffect(() => {
+      setSlug(slugify(title));
+    }, [title]);
+
     const onChangeColorPicker = color => {
         setColor(color.rgb);
         setChangeColor(color.hex);
     }
   
     async function handleSubmit() {
+      const isSlugUnique = await isDairySlugUnique(slug);
+
+      if (!isSlugUnique) {
+        toast.error("Slug already exists");
+        return;
+      }
       toast.promise(
         PostDiaryItem({
           title,
           content,
+          slug,
           description: description || "",
           author: author || "",
           image,
@@ -54,8 +67,8 @@ const DearDigitalDairyForm = () => {
     }
 
     return (
-      <div className="w-4/6 mx-auto flex flex-col gap-5">
-        <h2 className="text-2xl underline font-semibold">Post article</h2>
+      <div className="flex flex-col gap-5 mx-auto w-4/6">
+        <h2 className="text-2xl font-semibold underline">Post article</h2>
         <form
           className="flex flex-col gap-3"
           onSubmit={(e) => {
@@ -71,7 +84,18 @@ const DearDigitalDairyForm = () => {
             placeholder="Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="border border-akimbo-dark-900 px-3 py-1"
+            className="px-3 py-1 border border-akimbo-dark-900"
+            required
+          />
+          <label htmlFor="slug">Slug</label>
+          <input
+            id="slug"
+            type="text"
+            name="slug"
+            placeholder="Slug..."
+            value={slug}
+            onChange={(e) => setSlug(e.target.value)}
+            className="px-3 py-1 border border-akimbo-dark-900"
             required
           />
           <label htmlFor="editor">Content <span className="text-tag-red">*</span></label>
@@ -86,7 +110,7 @@ const DearDigitalDairyForm = () => {
             name="desc"
             id="desc"
             placeholder="Description..."
-            className="border border-akimbo-dark-900 px-3 py-1"
+            className="px-3 py-1 border border-akimbo-dark-900"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -96,13 +120,13 @@ const DearDigitalDairyForm = () => {
             name="author"
             id="author"
             placeholder="Author fullname..."
-            className="border border-akimbo-dark-900 px-3 py-1"
+            className="px-3 py-1 border border-akimbo-dark-900"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />   
           <label htmlFor="file_input">Upload image</label>
           <input
-            className="block w-full text-sm text-akimbo-dark-900 border border-akimbo-dark-900 cursor-pointer bg-gray-50"
+            className="block w-full text-sm bg-gray-50 border cursor-pointer text-akimbo-dark-900 border-akimbo-dark-900"
             aria-describedby="file_input_help"
             id="file_input"
             type="file"
@@ -147,7 +171,7 @@ const DearDigitalDairyForm = () => {
             <div>
                 {displayPicker && (
                     <div className="absolute z-50">
-                        <div className="fixed top-0 left-0 right-0 bottom-0"  onClick={() => setDisplayPicker(false)}/>
+                        <div className="fixed top-0 right-0 bottom-0 left-0"  onClick={() => setDisplayPicker(false)}/>
                         <ChromePicker color={color} onChange={onChangeColorPicker} />
                     </div>
                 )}
@@ -160,7 +184,7 @@ const DearDigitalDairyForm = () => {
             </p>
           <button
             type="submit"
-            className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"
+            className="px-3 py-2 w-fit bg-akimbo-dark-900 text-akimbo-light"
           >
             Post article
           </button>

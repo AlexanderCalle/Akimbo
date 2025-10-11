@@ -65,6 +65,22 @@ const GetPlannedArticles = async () => {
     }
 }
 
+const GetArticle = async (slug) => {
+    const q = query(
+      collection(db, collection_name),
+      where("slug", "==", slug)
+    );
+    const snapshotQuery = await getDocs(q);
+    const snapshot = snapshotQuery.docs.length > 0 ? snapshotQuery.docs[0] : null;
+
+    if (snapshot == null) {
+        return await GetArticleWithId(slug);
+    }
+
+    const docData = snapshot.data();
+    return { id: snapshot.id, ...docData };
+}
+
 const GetArticleWithId = async (articleId) => {
     const docRef = doc(db, collection_name, articleId);
     const snapshot = await getDoc(docRef);
@@ -92,7 +108,7 @@ const GetArticleWithIdUpdate = async (articleId) => {
     return article
 }
 
-const PostArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished, start_date}) => {
+const PostArticle = async ({title, content, description, author, cat, tags, image, slug, imageTitle, imageAuthor, isPublished, start_date}) => {
     try {
         const storageRef = ref(storage, "articlesImages/" + image.name)
 
@@ -107,6 +123,7 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
             cat,
             tags,
             image: await getDownloadURL(snapshot.ref),
+            slug,
             imageTitle,
             imageAuthor,
             created_date,
@@ -123,7 +140,7 @@ const PostArticle = async ({title, content, description, author, cat, tags, imag
     }
 }
 
-const UpdateArticle = async ({title, content, description, author, cat, tags, image, imageTitle, imageAuthor, isPublished, start_date, docId}) => {
+const UpdateArticle = async ({title, content, description, author, cat, tags, image, slug, imageTitle, imageAuthor, isPublished, start_date, docId}) => {
     try {
         
         let data = {
@@ -133,6 +150,7 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
             author,
             cat,
             tags,
+            slug,
             imageTitle,
             imageAuthor,
             isPublished,
@@ -150,6 +168,12 @@ const UpdateArticle = async ({title, content, description, author, cat, tags, im
         console.log(err);
         throw new Error(`Something went wrong uploading file: ${err.message}`)
     }
+}
+
+const isArticleSlugUnique = async (slug) => {
+    const q = query(collection(db, collection_name), where("slug", "==", slug));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.length === 0;
 }
 
 const UpdatePublishStateArticle = async ({ docId, isPublished }) => {
@@ -232,6 +256,8 @@ export {
     GetAllArticles, 
     GetPlannedArticles,
     GetArticleWithId, 
+    isArticleSlugUnique,
+    GetArticle,
     PostArticle, 
     UpdateArticle, 
     UpdatePublishStateArticle,

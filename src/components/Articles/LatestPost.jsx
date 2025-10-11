@@ -1,21 +1,22 @@
 import { Link } from "react-router-dom";
+import { category } from "../../utils/Article";
 
 const LatestPost = ({ article }) => {
 
   return (
-    <div className="w-full md:w-10/12 mx-auto flex gap-6">
-      <div className="flex absolute z-10 my-48 mx-5 max-h-72 md:mx-24 w-4/6 md:w-3/6 lg:w-2/6 h-auto p-5 flex-col gap-3 items-start bg-akimbo-light bg-opacity-70">
+    <div className="flex gap-6 mx-auto w-full md:w-10/12">
+      <div className="flex absolute z-10 flex-col gap-3 items-start p-5 mx-5 my-48 w-4/6 h-auto max-h-72 bg-opacity-70 md:mx-24 md:w-3/6 lg:w-2/6 bg-akimbo-light">
         <div className="flex flex-col gap">
           <h3 className="text-lg font-medium">Latest: {article.title}</h3>
           <p className="text-sm font-light">{article.author}</p>
         </div>
         <p
-          className="text-end overflow-hidden text-ellipsis"
+          className="overflow-hidden text-end text-ellipsis"
           dangerouslySetInnerHTML={{ __html: article.description }}
         ></p>
         <Link
-          className="px-3 py-2 bg-akimbo-dark-900 font-sans text-akimbo-light"
-          to={`/articles/${article.cat}/${article.id}`}
+          className="px-3 py-2 font-sans bg-akimbo-dark-900 text-akimbo-light"
+          to={`/articles/${category(article.cat)}/${article.slug}`}
         >
           Further reading
         </Link>

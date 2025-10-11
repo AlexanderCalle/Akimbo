@@ -1,3 +1,18 @@
+const category = (cat) => cat.toLowerCase();
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const slugify = (str) => {
+    return str
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+        .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+}
+
+export { category, capitalize, slugify };
+
 export class Article {
     title;
     content;
