@@ -8,19 +8,19 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full flex flex-row justify-between p-5 items-center text-lg">
+      <div className="flex flex-row justify-between items-center p-5 w-full text-lg">
         <Link className="font hover:underline active:underline" to="/">
-          <img className="font-bold font-sans text-2xl max-h-10 object-cover" src={AkimboLogo} alt="The logo of akimbo" />
+          <img className="object-cover max-h-10 font-sans text-2xl font-bold" src={AkimboLogo} alt="The logo of akimbo" />
         </Link>
         
-        <div className="font-sans hidden lg:flex gap-10 lg:visible">
+        <div className="hidden gap-10 font-sans lg:flex lg:visible">
           <Link className="hover:underline active:underline" to="/">
             home
           </Link>
-          <Link className="hover:underline active:underline" to="/articles/Features">
+          <Link className="hover:underline active:underline" to="/articles/features">
             features
           </Link>
-          <Link className="hover:underline active:underline" to="/articles/Reviews">
+          <Link className="hover:underline active:underline" to="/articles/reviews">
             reviews
           </Link>
           <Link
@@ -56,11 +56,11 @@ const Navbar = () => {
         </div>
         <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
           <div
-            className="absolute top-0 right-0 px-5 py-5 text-akimbo-dark-900 cursor-pointer"
+            className="absolute top-0 right-0 px-5 py-5 cursor-pointer text-akimbo-dark-900"
             onClick={() => setIsNavOpen(false)}
           >
             <svg
-              className="h-10 w-10 text-gray-600"
+              className="w-10 h-10 text-gray-600"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -77,10 +77,10 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="hover:underline">
-              <Link to="/articles/Features">Features</Link>
+              <Link to="/articles/features">Features</Link>
             </li>
             <li className="hover:underline">
-              <Link to="/articles/Reviews">Reviews</Link>
+              <Link to="/articles/reviews">Reviews</Link>
             </li>
             <li className="hover:underline">
               <Link to="/diary">Dear Digital Diary</Link>

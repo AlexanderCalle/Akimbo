@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { TYPE_ARTICLE } from "./RecentPosts";
+import { category } from "../../utils/Article";
 
 const RecentPost = ({ article, idx }) => {
   const navigate = useNavigate();
 
   return (
-    <div className='relative w-full max-w-sm overflow-hidden'>
-      <div className='absolute z-10 px-2 py-1 text-sm font-medium lowercase top-2 left-2 bg-akimbo-light bg-opacity-80'>
+    <div className='overflow-hidden relative w-full max-w-sm'>
+      <div className='absolute top-2 left-2 z-10 px-2 py-1 text-sm font-medium lowercase bg-opacity-80 bg-akimbo-light'>
         {article.type === TYPE_ARTICLE ? article.cat : article.type}
       </div>
       
@@ -62,8 +63,8 @@ const RecentPost = ({ article, idx }) => {
           onClick={() => {
             navigate(
               article.type === TYPE_ARTICLE 
-                ? `/articles/${article.cat}/${article.id}` 
-                : `/diary/${article.id}`
+                ? `/articles/${category(article.cat)}/${article.slug}` 
+                : `/diary/${article.slug}`
             );
           }}
           className='px-4 py-2 mt-auto text-sm font-medium text-white transition-colors w-fit bg-akimbo-dark-900 hover:bg-akimbo-dark-500'

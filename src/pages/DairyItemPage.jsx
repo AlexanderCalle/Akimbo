@@ -1,7 +1,7 @@
 import MainLayout from '../layouts/MainLayout'
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GetDairyItemById } from "../services/Posts";
+import { GetDairyItem } from "../services/Posts";
 import contrast from "../utils/Contrast";
 
 const DiaryItemPage = () => {
@@ -12,7 +12,7 @@ const DiaryItemPage = () => {
     const [isInverted, setIsInverted] = useState(false);
   
     useEffect(() => {
-      GetDairyItemById(params.id).then((result) => {
+      GetDairyItem(params.id).then((result) => {
         setItem(result);
         const rgb = [result.rgb_color.r, result.rgb_color.g, result.rgb_color.b];
         const contrastRatio = contrast(rgb);
@@ -28,7 +28,7 @@ const DiaryItemPage = () => {
         <div className="mx-auto" role="status">
           <svg
             aria-hidden="true"
-            class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -49,23 +49,23 @@ const DiaryItemPage = () => {
 
   return (
     <MainLayout>
-         <div className="w-full lg:w-10/12 mx-auto flex flex-col items-center gap-6">
+         <div className="flex flex-col gap-6 items-center mx-auto w-full lg:w-10/12">
             {item.image !== "" ? (
                 <>
                     <img
                         src={item.image}
                         alt="item"
-                        className="w-full h-96 object-cover"
+                        className="object-cover w-full h-96"
                     />
-                    <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 lg:ml-16 -mt-12">
+                    <h2 className="self-start px-3 py-2 -mt-12 ml-6 text-3xl bg-opacity-80 backdrop-blur-sm w-fit bg-akimbo-light lg:ml-16">
                         {item.title}
                     </h2>
                 </>
-            ): <h2 className="mt-24 w-fit bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2">
+            ): <h2 className="px-3 py-2 mt-24 text-3xl bg-opacity-80 backdrop-blur-sm w-fit bg-akimbo-light">
                     {item.title}
                 </h2>}
             
-            <div className="w-5/6 md:w-4/6 flex flex-col gap-4 p-2" style={{backgroundColor: item.bg_color}}>
+            <div className="flex flex-col gap-4 p-2 w-5/6 md:w-4/6" style={{backgroundColor: item.bg_color}}>
                 <p className={`text-sm font-light text-akimbo-dark-900 ${isInverted && "invert"}`}>
                     {item.created_date.toDate().toDateString()}
                 </p>

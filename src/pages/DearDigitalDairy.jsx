@@ -23,7 +23,6 @@ const DearDigitalDairy = () => {
                 <div className='h-fit'>
                     Maar deze pagina hoeft niet alleen van mij te zijn: heb je een levensvraag, een opinie of een openbaring die gelanceerd zou moeten worden op het wereldwijde web? Stuur me een mailtje en dan we kunnen samen schrijven! 
                     <br /><br />
-                    {/* TODO: Href to mail */}
                     Liefs <br />
                     Emma
                 </div>

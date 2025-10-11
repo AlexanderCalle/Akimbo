@@ -5,6 +5,7 @@ import LatestPost from "../components/Articles/LatestPost";
 import AllPosts from "../components/Articles/AllPosts";
 import { GetAllPostsFromCat } from "../services/Articles";
 import { GetAllTags } from "../services/Tags";
+import { capitalize } from "../utils/Article";
 
 const ArticlesPage = () => {
   const params = useParams();
@@ -14,7 +15,7 @@ const ArticlesPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    GetAllPostsFromCat(params.type).then((result) => {
+    GetAllPostsFromCat(capitalize(params.type)).then((result) => {
       setArticles(result);
     });
 
@@ -28,12 +29,12 @@ const ArticlesPage = () => {
   if (loading) {
     return (
       <div
-        className="w-full md:w-10/12 my-20 flex flex-col items-center gap-2"
+        className="flex flex-col gap-2 items-center my-20 w-full md:w-10/12"
         role="status"
       >
         <svg
           aria-hidden="true"
-          class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
+          class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

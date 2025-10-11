@@ -48,11 +48,20 @@ const addSlugFields = async () => {
     // Get all articles
     const articlesRef = collection(db, 'articles');
     const snapshot = await getDocs(articlesRef);
+
+    const postsRef = collection(db, 'posts');
+    const postsSnapshot = await getDocs(postsRef);
     
     console.log(`📄 Found ${snapshot.docs.length} articles to process`);
+    console.log(`📄 Found ${postsSnapshot.docs.length} posts to process`);
     
     if (snapshot.empty) {
       console.log('✅ No articles found. Migration complete.');
+      return;
+    }
+
+    if (postsSnapshot.empty) {
+      console.log('✅ No posts found. Migration complete.');
       return;
     }
     
@@ -62,14 +71,14 @@ const addSlugFields = async () => {
     let errorCount = 0;
     const batchSize = 500; // Firestore batch limit
     
-    for (const docSnapshot of snapshot.docs) {
+    for (const docSnapshot of snapshot.docs.concat(postsSnapshot.docs)) {
       try {
         const docData = docSnapshot.data();
         const docId = docSnapshot.id;
         
         // Skip if slug already exists
         if (docData.slug) {
-          console.log(`⏭️  Skipping article "${docData.title}" - slug already exists`);
+          console.log(`⏭️  Skipping "${docData.title}" - slug already exists`);
           skippedCount++;
           continue;
         }
@@ -78,16 +87,16 @@ const addSlugFields = async () => {
         const slug = generateSlug(docData.title);
         
         if (!slug) {
-          console.log(`⚠️  Warning: Could not generate slug for article "${docData.title}" (ID: ${docId})`);
+          console.log(`⚠️  Warning: Could not generate slug for "${docData.title}" (ID: ${docId})`);
           errorCount++;
           continue;
         }
         
         // Add to batch
-        const docRef = doc(db, 'articles', docId);
+        const docRef = doc(db, docSnapshot.ref.parent.id, docId);
         batch.update(docRef, { slug });
         
-        console.log(`✅ Generated slug "${slug}" for article "${docData.title}"`);
+        console.log(`✅ Generated slug "${slug}" for "${docData.title}"`);
         processedCount++;
         
         // Execute batch if it reaches the limit
@@ -97,7 +106,7 @@ const addSlugFields = async () => {
         }
         
       } catch (error) {
-        console.error(`❌ Error processing article ${docSnapshot.id}:`, error.message);
+        console.error(`❌ Error processing ${docSnapshot.id}:`, error.message);
         errorCount++;
       }
     }
@@ -110,10 +119,10 @@ const addSlugFields = async () => {
     
     // Summary
     console.log('\n📊 Migration Summary:');
-    console.log(`✅ Successfully processed: ${processedCount} articles`);
-    console.log(`⏭️  Skipped (already had slug): ${skippedCount} articles`);
-    console.log(`❌ Errors: ${errorCount} articles`);
-    console.log(`📄 Total articles: ${snapshot.docs.length}`);
+    console.log(`✅ Successfully processed: ${processedCount} items`);
+    console.log(`⏭️  Skipped (already had slug): ${skippedCount} items`);
+    console.log(`❌ Errors: ${errorCount} items`);
+    console.log(`📄 Total items: ${snapshot.docs.length + postsSnapshot.docs.length}`);
     
     if (errorCount === 0) {
       console.log('\n🎉 Migration completed successfully!');

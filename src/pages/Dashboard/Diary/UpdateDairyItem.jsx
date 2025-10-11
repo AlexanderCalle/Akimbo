@@ -3,12 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import Editor from "../../../components/React-Quill-Editor/Editor";
 import toast from "react-hot-toast";
 import { ChromePicker} from 'react-color';
-import { GetDairyItemById, UpdateDairyPostById } from "../../../services/Posts";
+import { GetDairyItemById, isDairySlugUnique, UpdateDairyPostById } from "../../../services/Posts";
+import { slugify } from "../../../utils/Article";
 
 const UpdateDairyItem = () => {
     const params = useParams();
 
     const [title, setTitle] = useState('');
+    const [slug, setSlug] = useState('');
     const [content, setContent] = useState('');
     const [description, setDescription] = useState('');
     const [author, setAuthor] = useState('');
@@ -30,9 +32,14 @@ const UpdateDairyItem = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+      setSlug(slugify(title));
+    }, [title]);
+
+    useEffect(() => {
       GetDairyItemById(params.id)
         .then(item =>  {
           setTitle(item.title);
+          setSlug(item.slug);
           setContent(item.content);
           setDescription(item.description || '');
           setAuthor(item.author || '');
@@ -56,10 +63,18 @@ const UpdateDairyItem = () => {
     const handleSubmit = async () => {
       const docId = params.id;
 
+      const isSlugUnique = await isDairySlugUnique(slug);
+
+      if (!isSlugUnique) {
+        toast.error("Slug already exists");
+        return;
+      }
+
       toast.promise(
         UpdateDairyPostById({
           title,
           content,
+          slug,
           description,
           author: author,
           image,
@@ -85,12 +100,12 @@ const UpdateDairyItem = () => {
     if (isLoading) {
         return (
           <div
-            className="w-full my-20 flex flex-col items-center gap-2"
+            className="flex flex-col gap-2 items-center my-20 w-full"
             role="status"
           >
             <svg
               aria-hidden="true"
-              class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
+              class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -110,8 +125,8 @@ const UpdateDairyItem = () => {
     }
   
     return (
-      <div className="w-4/6 mx-auto flex flex-col gap-5">
-        <h2 className="text-2xl underline font-semibold">Post article</h2>
+      <div className="flex flex-col gap-5 mx-auto w-4/6">
+        <h2 className="text-2xl font-semibold underline">Post article</h2>
         <form
           className="flex flex-col gap-3"
           onSubmit={(e) => {
@@ -127,7 +142,18 @@ const UpdateDairyItem = () => {
             placeholder="Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="border border-akimbo-dark-900 px-3 py-1"
+            className="px-3 py-1 border border-akimbo-dark-900"
+            required
+          />
+          <label htmlFor="slug">Slug</label>
+          <input
+            id="slug"
+            type="text"
+            name="slug"
+            placeholder="Slug..."
+            value={slug}
+            onChange={(e) => setSlug(e.target.value)}
+            className="px-3 py-1 border border-akimbo-dark-900"
             required
           />
           <label htmlFor="editor">Content <span className="text-tag-red">*</span></label>
@@ -142,7 +168,7 @@ const UpdateDairyItem = () => {
             name="desc"
             id="desc"
             placeholder="Description..."
-            className="border border-akimbo-dark-900 px-3 py-1"
+            className="px-3 py-1 border border-akimbo-dark-900"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -152,13 +178,13 @@ const UpdateDairyItem = () => {
             name="author"
             id="author"
             placeholder="Author fullname..."
-            className="border border-akimbo-dark-900 px-3 py-1"
+            className="px-3 py-1 border border-akimbo-dark-900"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />   
           <label htmlFor="file_input">Upload image</label>
           <input
-            className="block w-full text-sm text-akimbo-dark-900 border border-akimbo-dark-900 cursor-pointer bg-gray-50"
+            className="block w-full text-sm bg-gray-50 border cursor-pointer text-akimbo-dark-900 border-akimbo-dark-900"
             aria-describedby="file_input_help"
             id="file_input"
             type="file"
@@ -203,7 +229,7 @@ const UpdateDairyItem = () => {
             <div>
               {displayPicker && (
                 <div className="absolute z-50">
-                  <div className="fixed top-0 left-0 right-0 bottom-0"  onClick={() => setDisplayPicker(false)}/>
+                  <div className="fixed top-0 right-0 bottom-0 left-0"  onClick={() => setDisplayPicker(false)}/>
                   <ChromePicker color={color} onChange={onChangeColorPicker} />
                 </div>
               )}
@@ -216,7 +242,7 @@ const UpdateDairyItem = () => {
             </p>
           <button
             type="submit"
-            className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"
+            className="px-3 py-2 w-fit bg-akimbo-dark-900 text-akimbo-light"
           >
             Update Dairy item
           </button>
