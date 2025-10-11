@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GetArticleWithIdUpdate, UpdateArticle } from "../../../services/Articles";
+import { GetArticleWithIdUpdate, isArticleSlugUnique, UpdateArticle } from "../../../services/Articles";
 import Editor from "../../../components/React-Quill-Editor/Editor";
 import { GetAllTags } from "../../../services/Tags";
 import { GetAllCategories } from "../../../services/Categories";
@@ -8,11 +8,13 @@ import toast from "react-hot-toast";
 import SwitchButton from "../../../components/ui/switchButton";
 import DatePicker from "../../../components/ui/DatePicker";
 import SelectItems from "../../../components/ui/SelectItems";
+import { slugify } from "../../../utils/Article";
 
 const UpdatePost = () => {
   const params = useParams();
 
   const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
   const [content, setContent] = useState("");
   const [description, setDescription] = useState("");
   const [author, setAuthor] = useState("");
@@ -31,6 +33,10 @@ const UpdatePost = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    setSlug(slugify(title));
+  }, [title]);
+
+  useEffect(() => {
     GetAllTags().then((result) => {
       setTags(result);
     });
@@ -45,6 +51,7 @@ const UpdatePost = () => {
       setDescription(result.description);
       setAuthor(result.author);
       setSelectedCat(result.cat);
+      setSlug(result.slug);
       //setSelectedTags(result.tags);
 
       const setDef = async (tagsSel) => {
@@ -65,6 +72,13 @@ const UpdatePost = () => {
   async function handleSubmit() {
     const docId = params.id;
 
+    const isSlugUnique = await isArticleSlugUnique(slug);
+
+    if (!isSlugUnique) {
+      toast.error("Slug already exists");
+      return;
+    }
+
     toast.promise(
       UpdateArticle({
         title,
@@ -74,6 +88,7 @@ const UpdatePost = () => {
         cat: selectedCat,
         tags: selectedTags,
         image,
+        slug,
         imageTitle,
         imageAuthor,
         isPublished,
@@ -95,8 +110,8 @@ const UpdatePost = () => {
   }
 
   return (
-    <div className="w-4/6 mx-auto flex flex-col gap-5">
-      <h2 className="text-2xl underline font-semibold">Post article</h2>
+    <div className="flex flex-col gap-5 mx-auto w-4/6">
+      <h2 className="text-2xl font-semibold underline">Post article</h2>
       <form
         className="flex flex-col gap-3"
         onSubmit={(e) => {
@@ -112,7 +127,18 @@ const UpdatePost = () => {
           placeholder="Title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="border border-akimbo-dark-900 px-3 py-1"
+          className="px-3 py-1 border border-akimbo-dark-900"
+          required
+        />
+        <label htmlFor="slug">Slug</label>
+        <input
+          id="slug"
+          type="text"
+          name="slug"
+          placeholder="Slug..."
+          value={slug}
+          onChange={(e) => setSlug(e.target.value)}
+          className="px-3 py-1 border border-akimbo-dark-900"
           required
         />
         <label htmlFor="editor">Content</label>
@@ -127,7 +153,7 @@ const UpdatePost = () => {
           name="desc"
           id="desc"
           placeholder="Description..."
-          className="border border-akimbo-dark-900 px-3 py-1"
+          className="px-3 py-1 border border-akimbo-dark-900"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
@@ -138,7 +164,7 @@ const UpdatePost = () => {
           name="author"
           id="author"
           placeholder="Author fullname..."
-          className="border border-akimbo-dark-900 px-3 py-1"
+          className="px-3 py-1 border border-akimbo-dark-900"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
@@ -149,7 +175,7 @@ const UpdatePost = () => {
           id="categories"
           value={selectedCat}
           onChange={(e) => setSelectedCat(e.target.value)}
-          className="py-1 px-2 rounded-sm border bg-right border-akimbo-dark-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full"
+          className="block px-2 py-1 w-full text-sm bg-right rounded-sm border border-akimbo-dark-900 focus:ring-blue-500 focus:border-blue-500"
         >
           <option defaultChecked>-- Select category --</option>
           {categories.map((category) => (
@@ -169,7 +195,7 @@ const UpdatePost = () => {
 
         <label htmlFor="file_input">Upload image</label>
         <input
-          className="block w-full text-sm text-akimbo-dark-900 border border-akimbo-dark-900 cursor-pointer bg-gray-50"
+          className="block w-full text-sm bg-gray-50 border cursor-pointer text-akimbo-dark-900 border-akimbo-dark-900"
           aria-describedby="file_input_help"
           id="file_input"
           type="file"
@@ -201,12 +227,12 @@ const UpdatePost = () => {
           onChange={(e) => setImageAuthor(e.target.value)}
           required
         />
-        <label htmlFor="start_date">Start date <span className="text-akimbo-dark-500 text-sm">(not required)</span></label>
+        <label htmlFor="start_date">Start date <span className="text-sm text-akimbo-dark-500">(not required)</span></label>
         <DatePicker value={startDate} setValue={setStartDate} />
         <SwitchButton name={"Publish?"} value={isPublished} setValue={setIsPublished} />
         <button
           type="submit"
-          className="w-fit bg-akimbo-dark-900 text-akimbo-light px-3 py-2"
+          className="px-3 py-2 w-fit bg-akimbo-dark-900 text-akimbo-light"
         >
           Update article
         </button>

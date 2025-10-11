@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
-import { GetArticleWithId } from "../services/Articles";
+import { GetArticle } from "../services/Articles";
 import { useParams } from "react-router-dom";
 
 const ArticlePage = () => {
@@ -10,21 +10,21 @@ const ArticlePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    GetArticleWithId(params.articleId).then((result) => {
+    GetArticle(params.articleId).then((result) => {
       setArticle(result);
       setLoading(false)
     });
-  }, []);
+  }, [params.articleId]);
 
   if (loading) {
     return (
       <div
-        className="w-full my-20 flex flex-col items-center gap-2"
+        className="flex flex-col gap-2 items-center my-20 w-full"
         role="status"
       >
         <svg
           aria-hidden="true"
-          class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
+          class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -45,21 +45,21 @@ const ArticlePage = () => {
 
   return (
     <MainLayout>
-      <div className="w-full lg:w-10/12 mx-auto flex flex-col items-center gap-6">
+      <div className="flex flex-col gap-6 items-center mx-auto w-full lg:w-10/12">
         <div className="group w-full h-[450px] text-right">
           <img
             src={article.image}
             alt={article.imageAuthor + ' - ' + article.imageTitle}
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
           />
-          <span className="w-full font-light text-xs opacity-0 group-hover:opacity-100 text-right">{article.imageTitle}
+          <span className="w-full text-xs font-light text-right opacity-0 group-hover:opacity-100">{article.imageTitle}
           <br />
            {article.imageAuthor}</span>
         </div>
-        <h2 className="w-fit self-start bg-akimbo-light bg-opacity-80 backdrop-blur-sm text-3xl px-3 py-2 ml-6 lg:ml-16 -mt-12">
+        <h2 className="self-start px-3 py-2 -mt-12 ml-6 text-3xl bg-opacity-80 backdrop-blur-sm w-fit bg-akimbo-light lg:ml-16">
           {article.title}
         </h2>
-        <div className="w-5/6 md:w-4/6 -mt-3 flex flex-col gap-4">
+        <div className="flex flex-col gap-4 -mt-3 w-5/6 md:w-4/6">
           <div className="flex gap-2">
             {article.tags.map((tag, idx) => (
               <p
@@ -68,7 +68,7 @@ const ArticlePage = () => {
                   backgroundColor: tag.color + "10",
                   color: tag.color,
                 }}
-                className={`w-fit px-3 py-1 text-sm bg-opacity-10  `}
+                className={`px-3 py-1 text-sm bg-opacity-10 w-fit`}
               >
                 {tag.name}
               </p>

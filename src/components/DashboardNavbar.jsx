@@ -3,7 +3,6 @@ import { GetUser } from "../services/Users";
 import { logout } from "../services/Authentication";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { HiCog6Tooth } from "react-icons/hi2";
 
 const DashboardNavbar = () => {
   const [userData, setUserData] = useState({});
@@ -27,8 +26,8 @@ const DashboardNavbar = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-between items-center px-8 py-5">
-      <h1 className="font-bold font-sans text-2xl">AKIMBO</h1>
+    <div className="flex justify-between items-center px-8 py-5 w-full">
+      <h1 className="font-sans text-2xl font-bold">AKIMBO</h1>
       <section className="flex gap-4">
         <Link to={"/dashboard/overview"} className="hover:underline">
           Overview
@@ -57,7 +56,7 @@ const DashboardNavbar = () => {
           {userData.is_admin && " (admin)"}
         </Link>
         <button
-          className="bg-akimbo-dark-900 text-akimbo-light px-2 py-1"
+          className="px-2 py-1 bg-akimbo-dark-900 text-akimbo-light"
           onClick={logout}
         >
           sign out
