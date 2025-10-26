@@ -1,19 +1,31 @@
-import React, { useRef } from "react";
+'use client'
+import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
-import AkimboLogo from "../assets/akimbo_logo.png";
-import AkimboLogoMobile from "../assets/akimbo_logo_mobile.png";
-import { useScreenDetector } from "../hooks/useScreenDetector";
-
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  };
-}
+import AkimboLogo from "@assets/akimbo_logo.png";
+import AkimboLogoMobile from "@assets/akimbo_logo_mobile.png";
+import { useScreenDetector } from "@hooks/useScreenDetector";
 
 const HeroSection = () => {
   const targetRef = useRef(null);
+  
+  // Default values that will work for SSR
+  const [windowDimensions, setWindowDimensions] = useState({ width: 1200, height: 800 });
+  
+  useEffect(() => {
+    // Update dimensions after component mounts (client-side only)
+    const updateDimensions = () => {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+    
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+  
   const {scrollYProgress} = useScroll({
     target: targetRef,
     offset: ["center end", "end center"]
@@ -21,11 +33,11 @@ const HeroSection = () => {
 
   const { scrollY } = useScroll()
 
-  const initialValue = getWindowDimensions().height/4
+  const initialValue = windowDimensions.height/4
   const finalValue = 0
 
-  const initValueX = getWindowDimensions().width;
-  const finalValueX = -getWindowDimensions().width;
+  const initValueX = windowDimensions.width;
+  const finalValueX = -windowDimensions.width;
 
   const speed = 1
   const scrollDistance = (initialValue - finalValue) / speed
@@ -58,26 +70,26 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0.8, 1], [100,0]);
   const getHeroImage = () => {
     if (isMobile) {
-      return AkimboLogoMobile;
+      return AkimboLogoMobile.src;
     }
-    return AkimboLogo;
+    return AkimboLogo.src;
   };
 
   return (
-    <div className="w-full h-screen bg-hero-image bg-cover bg-center bg-no-repeat flex items-end justify-center" ref={targetRef}>
+    <div className="flex justify-center items-end w-full h-screen bg-center bg-no-repeat bg-cover bg-hero-image" ref={targetRef}>
         <motion.img style={{
           x: translateX,
           y: translate,
           scale: scale,
           opacity: opacity          
-        }} className="absolute top-0 font-black w-full" src={getHeroImage()} alt="The logo of Akimbo" />
-        <div className="mb-10 flex flex-col items-center gap-2">
-          <p className="font-bold font-sans text-2xl">discover</p>
+        }} className="absolute top-0 w-full font-black" src={getHeroImage()} alt="The logo of Akimbo" />
+        <div className="flex flex-col gap-2 items-center mb-10">
+          <p className="font-sans text-2xl font-bold">discover</p>
           <button
             onClick={() => window.scrollTo({ top: window.innerHeight - 72, behavior: "smooth" })}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-10 h-10">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
             </svg>
 
         </button>

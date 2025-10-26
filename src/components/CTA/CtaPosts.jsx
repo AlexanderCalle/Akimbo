@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+'use client'
+import { useEffect, useState } from 'react'
 import Loader from '../ui/Loader';
 import { GetActiveCta } from '../../services/CTA';
 import toast from 'react-hot-toast';
@@ -29,7 +30,7 @@ const CtaPosts = () => {
   if(ctaList.length < 1) return;
 
   return (
-    <div className='w-full md:w-10/12 m-auto'>
+    <div className='m-auto w-full md:w-10/12'>
       <div className="flex flex-col gap-4">
         {ctaList.map(cta => (
           <CtaPost key={cta.id} {...cta} /> 

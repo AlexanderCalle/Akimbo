@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router-dom";
+'use client'
+
 import { TYPE_ARTICLE } from "./RecentPosts";
 import { category } from "../../utils/Article";
+import { useRouter } from "next/navigation";
 
 const RecentPost = ({ article, idx }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className='overflow-hidden relative w-full max-w-sm'>
@@ -61,7 +63,7 @@ const RecentPost = ({ article, idx }) => {
 
         <button
           onClick={() => {
-            navigate(
+            router.push(
               article.type === TYPE_ARTICLE 
                 ? `/articles/${category(article.cat)}/${article.slug}` 
                 : `/diary/${article.slug}`

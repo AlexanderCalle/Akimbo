@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+'use client'
+import { useEffect, useState } from "react";
 import { GetMostRecentPosts } from "../../services/Articles";
 import RecentPost from "./RecentPost";
 import { GetMostRecentDairyItem } from "../../services/Posts";
@@ -35,12 +36,12 @@ const RecentPosts = () => {
   if (loading) {
     return (
       <div
-        className="flex flex-col items-center w-full gap-2 my-20 md:w-10/12"
+        className="flex flex-col gap-2 items-center my-20 w-full md:w-10/12"
         role="status"
       >
         <svg
           aria-hidden="true"
-          class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
+          className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-akimbo-dark-900"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -54,16 +55,16 @@ const RecentPosts = () => {
             fill="currentFill"
           />
         </svg>
-        <span class="sr-only">Loading...</span>
+        <span className="sr-only">Loading...</span>
       </div>
     );
   }
   return (
-    <div className="w-full gap-2 my-4">
+    <div className="gap-2 my-4 w-full">
       <h2 className="text-2xl font-medium lg:self-start">
         recent posts
       </h2>
-      <div className="grid justify-between w-full grid-cols-1 gap-8 pt-4 mx-auto h-min md:grid-cols-2 lg:grid-cols-3 align-center">
+      <div className="grid grid-cols-1 gap-8 justify-between pt-4 mx-auto w-full h-min md:grid-cols-2 lg:grid-cols-3 align-center">
         {items.map((article, idx) => (
           <RecentPost key={idx} article={article} idx={idx} />
         ))}

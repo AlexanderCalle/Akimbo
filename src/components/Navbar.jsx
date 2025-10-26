@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "../assets/Navbar.css";
-import AkimboLogo from "../assets/akimbo_logo.png";
+'use client'
+import { useState } from "react";
+import "@assets/Navbar.css";
+import AkimboLogo from "@assets/akimbo_logo.png";
+import Link from "next/link";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -9,27 +11,33 @@ const Navbar = () => {
   return (
     <>
       <div className="flex flex-row justify-between items-center p-5 w-full text-lg">
-        <Link className="font hover:underline active:underline" to="/">
-          <img className="object-cover max-h-10 font-sans text-2xl font-bold" src={AkimboLogo} alt="The logo of akimbo" />
+        <Link className="font hover:underline active:underline" href="/">
+          <Image 
+            className="object-cover max-h-10 font-sans text-2xl font-bold" 
+            src={AkimboLogo} 
+            alt="The logo of akimbo" 
+            width={120}
+            height={100}
+          />
         </Link>
         
         <div className="hidden gap-10 font-sans lg:flex lg:visible">
-          <Link className="hover:underline active:underline" to="/">
+          <Link className="hover:underline active:underline" href="/">
             home
           </Link>
-          <Link className="hover:underline active:underline" to="/articles/features">
+          <Link className="hover:underline active:underline" href="/articles/features">
             features
           </Link>
-          <Link className="hover:underline active:underline" to="/articles/reviews">
+          <Link className="hover:underline active:underline" href="/articles/reviews">
             reviews
           </Link>
           <Link
             className="hover:underline active:underline"
-            to="/diary"
+            href="/diary"
           >
             dear digital diary
           </Link>
-          <Link className="hover:underline active:underline" to="/aboutus">
+          <Link className="hover:underline active:underline" href="/aboutus">
             about us
           </Link>
         </div>
@@ -74,19 +82,19 @@ const Navbar = () => {
           </div>
           <ul className="flex flex-col gap-5 items-end list-none justify-between min-h-[250px] text-akimbo-dark-900 text-lg font-sans">
             <li className="hover:underline">
-              <Link to="/">Home</Link>
+              <Link href="/">Home</Link>
             </li>
             <li className="hover:underline">
-              <Link to="/articles/features">Features</Link>
+              <Link href="/articles/features">Features</Link>
             </li>
             <li className="hover:underline">
-              <Link to="/articles/reviews">Reviews</Link>
+              <Link href="/articles/reviews">Reviews</Link>
             </li>
             <li className="hover:underline">
-              <Link to="/diary">Dear Digital Diary</Link>
+              <Link href="/diary">Dear Digital Diary</Link>
             </li>
             <li className="hover:underline">
-              <Link to="/aboutus">About us</Link>
+              <Link href="/aboutus">About us</Link>
             </li>
           </ul>
         </div>

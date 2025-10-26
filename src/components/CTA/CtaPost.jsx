@@ -1,11 +1,11 @@
-import React from 'react'
+'use client'
 
 const CtaPost = ({title, description, backgroundColor, image}) => {
   return (
     <div className='flex'>
-      {image && <img src={image} alt={title} className='max-h-60 object-cover aspect-square' />}
-      <div style={{backgroundColor: backgroundColor+"20"}} className='flex-1 px-5 py-3 flex flex-col gap-2 items-start justify-center'>
-        <h3 className='font-semibold text-lg  '>{title}</h3>
+      {image && <img src={image} alt={title} className='object-cover max-h-60 aspect-square' />}
+      <div style={{backgroundColor: backgroundColor+"20"}} className='flex flex-col flex-1 gap-2 justify-center items-start px-5 py-3'>
+        <h3 className='text-lg font-semibold'>{title}</h3>
         <p className='flex-1'>{description}</p>
       </div>
     </div>
