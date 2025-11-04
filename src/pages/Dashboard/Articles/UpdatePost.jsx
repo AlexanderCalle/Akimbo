@@ -15,6 +15,7 @@ const UpdatePost = () => {
 
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
+  const [prevSlug, setPrevSlug] = useState("");
   const [content, setContent] = useState("");
   const [description, setDescription] = useState("");
   const [author, setAuthor] = useState("");
@@ -52,6 +53,7 @@ const UpdatePost = () => {
       setAuthor(result.author);
       setSelectedCat(result.cat);
       setSlug(result.slug);
+      setPrevSlug(result.slug);
       //setSelectedTags(result.tags);
 
       const setDef = async (tagsSel) => {
@@ -74,7 +76,7 @@ const UpdatePost = () => {
 
     const isSlugUnique = await isArticleSlugUnique(slug);
 
-    if (!isSlugUnique) {
+    if (!isSlugUnique && slug !== prevSlug) {
       toast.error("Slug already exists");
       return;
     }
