@@ -11,6 +11,7 @@ const UpdateDairyItem = () => {
 
     const [title, setTitle] = useState('');
     const [slug, setSlug] = useState('');
+    const [prevSlug, setPrevSlug] = useState('');
     const [content, setContent] = useState('');
     const [description, setDescription] = useState('');
     const [author, setAuthor] = useState('');
@@ -40,6 +41,7 @@ const UpdateDairyItem = () => {
         .then(item =>  {
           setTitle(item.title);
           setSlug(item.slug);
+          setPrevSlug(item.slug);
           setContent(item.content);
           setDescription(item.description || '');
           setAuthor(item.author || '');
@@ -63,11 +65,12 @@ const UpdateDairyItem = () => {
     const handleSubmit = async () => {
       const docId = params.id;
 
-      const isSlugUnique = await isDairySlugUnique(slug);
-
-      if (!isSlugUnique) {
-        toast.error("Slug already exists");
-        return;
+      if (slug !== prevSlug) {
+        const isSlugUnique = await isDairySlugUnique(slug);
+        if (!isSlugUnique) {
+          toast.error("Slug already exists");
+          return;
+        }
       }
 
       toast.promise(

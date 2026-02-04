@@ -58,7 +58,7 @@ export const modules = (showModel, quillRef) => {
     },
     imageResize: {
       parchment: Quill.import('parchment'),
-      modules: ['Resize', 'DisplaySize']
+      modules: ['Resize', 'Toolbar']
     }
   }
 }

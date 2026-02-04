@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@enzedonline/quill-blot-formatter2": "^3.0.3",
     "@heroui/modal": "^2.2.8",
     "@heroui/system": "^2.4.7",
     "@heroui/theme": "^2.4.6",
@@ -16,6 +17,7 @@
     "firebase": "^10.4.0",
     "flowbite-react": "^0.6.0",
     "framer-motion": "^12.3.1",
+    "quill-blot-formatter": "^1.0.5",
     "quill-image-drop-and-paste": "^1.3.0",
     "quill-image-resize-module": "^3.0.0",
     "quill-image-resize-module-react": "^3.0.0",

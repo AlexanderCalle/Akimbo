@@ -1,17 +1,15 @@
+
 import React, { useMemo, useState, useEffect } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import ImageResize from 'quill-image-resize-module-react';
-// #1 import quill-image-uploader
 import ImageUploader from "quill-image-uploader";
 import { modules } from "./quill-modules";
 import VideoUploadDialog from "./video-upload-dialog";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../services/Firebase";
 import toast from "react-hot-toast";
-import CustomVideo from "./extensions/custom-video";
+import ImageResize from 'quill-image-resize-module-react';
 import "./formats"
-
 // Add custom toolbar icon styles
 const toolbarStyles = `
   .ql-editor {
@@ -24,9 +22,9 @@ const styleSheet = document.createElement("style");
 styleSheet.innerText = toolbarStyles;
 document.head.appendChild(styleSheet);
 
-var Image = Quill.import('formats/image');
 const Clipboard = Quill.import('modules/clipboard');
 const Delta = Quill.import('delta');
+// var Image = Quill.import('formats/image');
 
 // Custom clipboard handler
 class CustomClipboard extends Clipboard {
@@ -75,9 +73,8 @@ class CustomClipboard extends Clipboard {
 // #2 register module
 Quill.register("modules/imageUploader", ImageUploader);
 Quill.register('modules/imageResize', ImageResize);
+// Quill.register(Image, true);
 Quill.register('modules/clipboard', CustomClipboard, true);
-Quill.register(Image, true);
-
 
 const formats = [
   "header",
